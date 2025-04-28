@@ -1,0 +1,423 @@
+/* header start  */
+/* For the navbar links */
+.navbar-expand-lg .navbar-nav .nav-link {
+    color: #333 !important; /* Dark color for text visibility */
+    font-size: 14px;
+    padding: 0 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    line-height: 40px;
+    text-transform: uppercase;
+    background: transparent;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+  }
+  
+  /* For hover effect */
+  .navbar-expand-lg .navbar-nav li a:hover,
+  .navbar-expand-lg .navbar-nav li a:focus {
+    /* color: #fff !important; White color for text on hover */
+    background-image: linear-gradient(65deg, #07BEB8 0, #3DCCC7 100%) !important; /* Use your theme colors for hover */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    outline: none;
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+  }
+  
+  /* For active links */
+  .navbar-expand-lg .navbar-nav li.active a.nav-link,
+  .navbar-expand-lg .navbar-nav li.active a.nav-link:hover {
+    color: #07BEB8 !important; /* Active link color from your theme */
+    background-image: linear-gradient(65deg, #07BEB8 0, #3DCCC7 100%) !important; /* Active state gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text !important;
+  }
+/* Change the color of the active navbar underline/bar */
+.navbar-expand-lg .navbar-nav li > a:before {
+    content: '';
+    position: absolute;
+    top: 19px;
+    left: 5%;
+    margin-left: -10px;
+    width: 15px;
+    height: 2px;
+    background: #07BEB8; /* Update this color to your theme color */
+    -webkit-transform: scale3d(0, 1, 1);
+    -moz-transform: scale3d(0, 1, 1);
+    transform: scale3d(0, 1, 1);
+    -webkit-transition: -webkit-transform 0.1s;
+    -moz-transition: -webkit-transform 0.1s;
+    transition: transform 0.1s;
+  }
+  
+  /* For the active link, make the underline/bar visible */
+  .navbar-expand-lg .navbar-nav .active a:before {
+    -webkit-transform: scale3d(1, 1, 1);
+    -moz-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+    -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    -moz-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+  }
+  #hero-area {
+    background-color: #ffffff; /* White background for the hero area */
+  }
+  
+  #hero-area .banner-info,
+  #hero-area .head-title,
+  #hero-area .banner-desc {
+    color: #333 !important; /* Force the text color to #07BEB8 with !important */
+    
+  }
+  
+  #hero-area .btn-common {
+    background-color: #07BEB8; /* Set the button color to match the theme */
+    color: #fff; /* White text inside the button */
+  }
+  
+  #hero-area .btn-common:hover {
+    background-color: #3DCCC7; /* Lighter color on hover */
+  }
+/* header end  */
+
+/* counter start */
+  #count {
+    background: #F6F9F9;
+  }
+  
+  #count .count-wrapper {
+    background-image: linear-gradient(65deg, #3DCCC7 0, #68D8D6 100%);
+    border-radius: 4px;
+    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.08);
+    /* margin-bottom: -35px;
+    margin-top: -35px;
+    padding: 15px 0; */
+    position: relative;
+    top: -40px;
+    z-index: 999;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  .time-count div {
+    text-align: center;
+  }
+  
+  .time-entry {
+    display: inline-block;
+    margin: 15px 0;
+    width: 24%;
+    margin-right: 0;
+    border: none;
+    position: relative;
+    height: auto;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 400;
+    color: #fff !important;
+    font-size: 14px;
+    letter-spacing: 1px;
+    line-height: 22px;
+  }
+  
+  .time-entry span {
+    font-size: 60px;
+    line-height: 45px;
+    font-weight: 700;
+    letter-spacing: 0.3;
+    font-family: 'Roboto', sans-serif;
+    display: block;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  
+  .time-entry b {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    bottom: 0;
+    margin: auto;
+    font-size: 30px;
+    -webkit-transform: translateY(-18%);
+    -ms-transform: translateY(-18%);
+    transform: translateY(-18%);
+  }
+  
+  .time-entry:first-child {
+    border-left: none;
+  }
+  .flea-market-heading {
+    color: #ffffff;
+    font-size: 28px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-family: 'Roboto', sans-serif;
+  }
+  /* counter end  */
+  
+  /* info bar start */
+  /* Inforamation Bar */
+#information-bar {
+    background: #fff;
+    position: relative;
+  }
+  
+  #information-bar .inforation-wrapper {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 8px 24px #E2E8ED;
+    margin: 40px 0;
+    padding: 45px 0;
+    position: relative;
+    z-index: 10;
+  }
+  
+  #information-bar ul {
+    text-align: center;
+  }
+  
+  #information-bar ul li {
+    display: inline-block;
+  }
+  
+  #information-bar ul li i {
+    text-align: center;
+    padding: 0 12px;
+    font-size: 32px;
+    vertical-align: middle;
+    background-image: linear-gradient(45deg,  #07BEB8 , #3DCCC7, #68D8D6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  #information-bar ul li span {
+    font-size: 13px;
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+  }
+  
+  #information-bar ul li span b {
+    font-size: 20px;
+    color: #07BEB8;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  #information-bar .inforation-wrapper {
+    background: #f9ffff; /* light theme-blueish */
+    border: 2px solid #C4FFF9;
+    border-radius: 16px;
+    padding: 45px 20px;
+  }
+
+  /* product start  */
+  .product-section {
+    padding: 60px 0;
+    background: #F6F9F9;
+    position: relative;
+  }
+  
+  .section-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #3DCCC7;
+  }
+  
+  .product-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    margin-bottom: 30px;
+    opacity: 1;
+    filter: blur(0);
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .product-card.blur{
+    filter: blur(2px);
+    opacity: 0.7;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+  
+  .product-card img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .product-card h4 {
+    font-size: 18px;
+    color: #07BEB8;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+  .product-card p {
+    color: #555;
+    font-size: 15px;
+  }
+  .product-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .product-wrapper .product-card {
+    margin-bottom: 30px;
+    width: 30%;
+    margin-bottom: 30px;
+  }
+
+  .cta-button {
+    margin-top: 40px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease;
+    text-align: center;
+  }
+  
+  .cta-button.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .cta-button .btn {
+    background: #07BEB8;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+/* product end    */
+
+/* why us start  */
+.intro {
+    background: #fff;
+  }
+  
+  .single-intro-text {
+    padding: 45px 50px 40px 60px;
+    -webkit-box-shadow: 0 8px 24px #E2E8ED;
+    box-shadow: 0 8px 24px #E2E8ED;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -ms-border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    margin: 15px 0;
+    background: #fff;
+    z-index: 2;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80%;
+    min-height: 200px;
+  }
+  
+  .single-intro-text:hover {
+    box-shadow: 0 16px 48px #E2E8ED;
+  }
+  
+  .single-intro-text i {
+    position: absolute;
+    left: -10px;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+    top: 20px;
+    font-size: 55px;
+    color: #bababa;
+  }
+  
+  .single-intro-text h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  
+  .single-intro-text p {
+    margin-bottom: 0;
+  }
+  
+  .single-intro-text .count-number {
+    position: absolute;
+    right: -55px;
+    bottom: -55px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -ms-border-radius: 50%;
+    background-image: linear-gradient(0deg, #07BEB8 0%, #3DCCC7 100%);
+    color: #fff;
+    display: block;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 25px 30px;
+  }
+  
+  .single-intro-text:hover i {
+    background-image: linear-gradient(65deg, #68D8D6 0, #9CEAEF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* ScrollToTop */
+a.back-to-top {
+    display: none;
+    position: fixed;
+    bottom: 18px;
+    right: 15px;
+    text-decoration: none;
+  }
+  
+  a.back-to-top i {
+    display: block;
+    font-size: 22px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    background-image: linear-gradient(65deg, #3DCCC7 0, #68D8D6 100%);
+    border-radius: 30px;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+  }
+  
+  a.back-to-top:hover, a.back-to-top:focus {
+    text-decoration: none;
+  }
+  
+  
+  
+  
