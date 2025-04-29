@@ -19,22 +19,26 @@
 
     <!-- Sign Up Form -->
     <div class="form-container sign-up-container">
-      <form action="#">
+      <form action="#" method="POST">
         <h1>Create Account</h1>
         <input type="text" placeholder="Name" />
         <input type="email" placeholder="Email" />
         <input type="password" placeholder="Password" />
         <button>Sign Up</button>
+        <hr>
+        <button><a href="{{ route('google.redirect') }}" class="google">Use Google</a></button>
       </form>
     </div>
 
     <!-- Sign In Form -->
     <div class="form-container sign-in-container">
-      <form action="#">
+      <form action="#" method="#">
         <h1>Sign In</h1>
         <input type="email" placeholder="Email" />
         <input type="password" placeholder="Password" />
         <button>Sign In</button>
+        <hr>
+        <button><a href="{{ route('google.redirect') }}" class="google">Use Google</a></button>
       </form>
     </div>
 
@@ -47,7 +51,7 @@
           <button class="ghost" id="signIn">Sign In</button>
         </div>
         <div class="overlay-panel overlay-right">
-          <h1>Hello, Beautiful!</h1>
+          <h1>Welcome!</h1>
           <p>Enter your details and start your journey with us!</p>
           <button class="ghost" id="signUp">Sign Up</button>
         </div>
