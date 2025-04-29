@@ -42,7 +42,7 @@
             <li class="nav-item"><a class="nav-link" href="#schedules">Schedules</a></li>
             <!-- <li class="nav-item"><a class="nav-link" href="#google-map-area">Contact Us</a></li> -->
             <!-- <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li> -->
-            <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url('userlogin')}}">Login</a></li>
         </ul>
       </div>
      </div>

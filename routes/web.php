@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GoogleController;
 
 Route::get('/', function () {
     return view('landing');
@@ -8,6 +9,13 @@ Route::get('/', function () {
 Route::get('login', function () {
     return view('login-register');
 });
+
+Route::get('/userlogin', function () {
+    return view('userlogin');
+});
+
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.redirect');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
 
 Route::get('/vendor/dashboard', function() {
     return view('/vendor/dashboard');
