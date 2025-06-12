@@ -19,7 +19,7 @@
 
     <!-- Sign Up Form -->
     <div class="form-container sign-up-container">
-      <form action="#" method="POST">
+      <form action="#" method="">
         <h1>Create Account</h1>
         <input type="text" placeholder="Name" />
         <input type="email" placeholder="Email" />

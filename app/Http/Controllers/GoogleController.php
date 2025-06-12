@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
-use App\Models\User;
+use App\Models\Buyer;
 use Illuminate\Support\Facades\Auth;
 
 class GoogleController extends Controller
@@ -18,14 +19,13 @@ class GoogleController extends Controller
     {
         $googleUser = Socialite::driver('google')->user();
 
-        $user = User::updateOrCreate([
+        $buyer = Buyer::updateOrCreate([
             'email' => $googleUser->getEmail(),
         ], [
-            'name' => $googleUser->getName(),
-            'google_id' => $googleUser->getId(),
+            'full_name' => $googleUser->getName()
         ]);
 
-        Auth::login($user);
+        Auth::login($buyer);
 
         return redirect('/buyer/buyer-lp'); // or wherever you want to send them
     }
