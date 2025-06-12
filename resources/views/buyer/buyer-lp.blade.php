@@ -29,37 +29,36 @@
     <!-- Header Area wrapper Starts -->
     <header id="header-wrap">
      <!-- Navbar Start -->
-     <nav class="navbar navbar-expand-lg bg-inverse fixed-top scrolling-navbar custom-gradient-navbar">
-      <div class="container">
-      <a href="/" class="navbar-brand">Flea Market</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
-         <i class="lni-menu"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto w-100 justify-content-end">
-            <li class="nav-item active"><a class="nav-link" href="#header-wrap">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
-            <li class="nav-item"><a class="nav-link" href="#schedules">Products</a></li>
-            <!-- <li class="nav-item"><a class="nav-link" href="#google-map-area">Contact Us</a></li> -->
-            <!-- <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li> -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="lni-user"></i> Account
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdown">
-                <a class="dropdown-item" href="#">View Account</a>
-                <a class="dropdown-item" href="#">Wishlist</a>
-                <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Logout</a>
-                    <a class="dropdown-item" href="#">Become a Vendor</a>
-                </div>
-            </li>
-        
-            </ul>
-        </div>
-     </div>
-      </nav>
-     <!-- Navbar End -->
+<!-- Navbar -->
+ <nav class="navbar navbar-expand-lg bg-inverse fixed-top scrolling-navbar custom-gradient-navbar">
+  <div class="container">
+    <a href="/" class="navbar-brand">Flea Market</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+      <i class="lni-menu"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto w-100 justify-content-end">
+  <li class="nav-item active"><a class="nav-link" href="#header-wrap">Home</a></li>
+  <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+  <li class="nav-item"><a class="nav-link" href="#schedules">Products</a></li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="view-account.html">
+      <i class="lni-user"></i> Account
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="logout.php">
+      <i class="lni-exit"></i> Logout
+    </a>
+  </li>
+  </ul>
+
+    </div>
+  </div>
+</nav>
+<!-- Navbar End -->
 
      <!-- Hero Area Start -->
      <div id="hero-area" class="hero-area-bg">
@@ -138,65 +137,56 @@
 
 
     <!-- product Section Start -->
-    <section class="products-section section-padding">
-      <div class="container">
-        <div class="row">
-          <!-- Repeat this product card as needed -->
-          <div class="col-lg-4 col-md-6">
-            <div class="product-card">
-              <img src="/images/product1.jpg" alt="Product 1" class="img-fluid" />
-              <h3>Product Name</h3>
-              <p>Short description of the product.</p>
-              <div class="actions">
-                <button class="btn btn-primary">View Details</button>
-                <button class="btn btn-success">Pay Commitment Fee</button>
-                <button class="btn btn-danger">Cancel Reservation</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="product-card">
-              <img src="/images/product1.jpg" alt="Product 1" class="img-fluid" />
-              <h3>Product Name</h3>
-              <p>Short description of the product.</p>
-              <div class="actions">
-                <button class="btn btn-primary">View Details</button>
-                <button class="btn btn-success">Pay Commitment Fee</button>
-                <button class="btn btn-danger">Cancel Reservation</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="product-card">
-              <img src="/images/product1.jpg" alt="Product 1" class="img-fluid" />
-              <h3>Product Name</h3>
-              <p>Short description of the product.</p>
-              <div class="actions">
-                <button class="btn btn-primary">View Details</button>
-                <button class="btn btn-success">Pay Commitment Fee</button>
-                <button class="btn btn-danger">Cancel Reservation</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="product-card">
-              <img src="/images/product1.jpg" alt="Product 1" class="img-fluid" />
-              <h3>Product Name</h3>
-              <p>Short description of the product.</p>
-              <div class="actions">
-                <button class="btn btn-primary">View Details</button>
-                <button class="btn btn-success">Pay Commitment Fee</button>
-                <button class="btn btn-danger">Cancel Reservation</button>
-              </div>
-            </div>
-          </div>
-        </div>
+<section class="buyer-dashboard">
+  <h2 class="dashboard-title">Available Products</h2>
+  <div class="product-wrapper">
+    
+    <div class="product-card">
+      <img src="path/to/product1.jpg" alt="Product 1">
+      <h4>Product 1</h4>
+      <p class="price">KSh 1,500</p>
+      <p class="description">A beautiful handmade item perfect for gifting.</p>
+      
+      <div class="product-actions">
+        <button class="btn buy-btn">Buy Now</button>
+        <button class="btn wishlist-btn">Add to Wishlist</button>
       </div>
-    </section>
+    </div>
+
+    <div class="product-card">
+      <img src="path/to/product2.jpg" alt="Product 2">
+      <h4>Product 2</h4>
+      <p class="price">KSh 850</p>
+      <p class="description">Trendy accessory by Vendor X.</p>
+      
+      <div class="product-actions">
+        <button class="btn buy-btn">Buy Now</button>
+        <button class="btn wishlist-btn">Add to Wishlist</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="path/to/product3.jpg" alt="Product 3">
+      <h4>Product 3</h4>
+      <p class="price">KSh 2,000</p>
+      <p class="description">Stylish clothing item from Vendor Y.</p>
+      
+      <div class="product-actions">
+        <button class="btn buy-btn">Buy Now</button>
+        <button class="btn wishlist-btn">Add to Wishlist</button>
+      </div>
+    </div>
+    
+      
+
+    <!-- Add more product cards here -->
+    
+  </div>
+</section>
     <!-- product Section End -->
 
     <!-- Intro Section Start -->
-    <section id="intro" class="intro section-padding">
+    <!-- <section id="intro" class="intro section-padding">
       <div class="container">
      <div class="row">
       <div class="col-12">
@@ -258,7 +248,7 @@
       </div>
       </div>
      </div>
-    </section>
+    </section> -->
     <!-- Intro Section End -->
     
  <footer>
@@ -323,6 +313,14 @@
     <script src="../assets/js/video.js"></script>
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/custom.js"></script>  
+
+    <!-- <script>
+  $(document).ready(function () {
+    console.log("jQuery loaded!");
+    $('[data-toggle="dropdown"]').dropdown(); // manually activate dropdowns
+  });
+</script> -->
+
         
       
   </body>
