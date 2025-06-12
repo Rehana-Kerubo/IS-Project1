@@ -9,7 +9,9 @@ Route::get('/', function () {
 Route::get('/login-register', function () {
     return view('login-register');
 });
-
+Route::get('/buyer/buyer-lp', function () {
+    return view('buyer/buyer-lp');
+});
 // Route::get('/userlogin', function () {
 //     return view('userlogin');
 // });
