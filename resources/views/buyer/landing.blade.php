@@ -40,16 +40,16 @@
     <ul class="navbar-nav mr-auto w-100 justify-content-end">
   <li class="nav-item active"><a class="nav-link" href="#header-wrap">Home</a></li>
   <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
-  <li class="nav-item"><a class="nav-link" href="#schedules">Products</a></li>
+  <li class="nav-item"><a class="nav-link" href="#available products">Products</a></li>
 
   <li class="nav-item">
-    <a class="nav-link" href="view-account.html">
+    <a class="nav-link" href="{{ url('/buyer/view-acc') }}">
       <i class="lni-user"></i> Account
     </a>
   </li>
 
   <li class="nav-item">
-    <a class="nav-link" href="logout.php">
+    <a class="nav-link" href="{{ url('/login-register') }}">
       <i class="lni-exit"></i> Logout
     </a>
   </li>

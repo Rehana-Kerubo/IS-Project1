@@ -9,12 +9,18 @@ Route::get('/', function () {
 Route::get('/login-register', function () {
     return view('login-register');
 });
-Route::get('/buyer/buyer-lp', function () {
-    return view('buyer/buyer-lp');
+Route::get('/buyer/landing', function () {
+    return view('buyer/landing');
 });
-// Route::get('/userlogin', function () {
-//     return view('userlogin');
-// });
+Route::get('/buyer/view-acc', function () {
+    return view('buyer/view-acc');
+});
+Route::get('/buyer/b-products', function () {
+    return view('buyer/b-products');
+});
+Route::get('/buyer/be-vendor', function () {
+    return view('buyer/be-vendor');
+});
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.redirect');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
