@@ -27,6 +27,6 @@ class GoogleController extends Controller
 
         Auth::login($buyer);
 
-        return redirect('/buyer/buyer-lp'); // or wherever you want to send them
+        return redirect('/buyer/landing'); // or wherever you want to send them
     }
 }

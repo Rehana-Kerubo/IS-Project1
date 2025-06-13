@@ -6,8 +6,8 @@
     <h1 class="mb-4">Your Account Details</h1>
     <div class="account-card">
         <img src="path/to/profile-pic.jpg" alt="Profile Picture" class="profile-pic">
-        <h4>Name: Rehana</h4>
-        <p>Email: Rehana</p>
+        <input type="text" class="form-control" value="{{ Auth::user()->full_name }}" readonly>
+        <input type="text" class="form-control" value="{{ Auth::user()->email }}" readonly>
         <p>Status: Active</p>
         <button class="edit-btn">Edit Details</button>
     </div>
