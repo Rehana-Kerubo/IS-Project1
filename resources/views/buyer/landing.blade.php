@@ -49,7 +49,7 @@
   </li>
 
   <li class="nav-item">
-    <a class="nav-link" href="{{ url('/login-register') }}">
+    <a class="nav-link" href="{{ url('/') }}">
       <i class="lni-exit"></i> Logout
     </a>
   </li>

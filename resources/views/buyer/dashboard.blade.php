@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Buyer Dashboard')</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.lineicons.com/3.0/lineicons.css">
+
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -22,7 +24,7 @@
         }
 
         aside h2 {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             margin-bottom: 20px;
         }
 
@@ -115,12 +117,20 @@
 </head>
 <body>
 <aside>
-    <h2>Hey Customer</h2>
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+        <a href="{{ url('/buyer/landing') }}" style="color: white; text-decoration: none; font-size: 20px;" title="Back to Shop">
+        <i class="lni lni-arrow-left" style="margin-left: 10px;"></i>
+        </a>
+        <h2 style="margin: 0;">Hey {{ Auth::check() ? Auth::user()->full_name : 'Customer' }}🫶🏼</h2>
+    </div>
+
     <nav>
         <ul>
             <li><a href="{{ url('/buyer/view-acc') }}">View Account</a></li>
             <li><a href="{{ url('/buyer/b-products') }}">Booked Products</a></li>
             <li><a href="{{ url('/buyer/be-vendor') }}">Become a Vendor</a></li>
+            <li><a href="{{ url('/') }}">Log Out</a></li>
+
         </ul>
     </nav>
 </aside>
