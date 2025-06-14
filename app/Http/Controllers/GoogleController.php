@@ -22,11 +22,17 @@ class GoogleController extends Controller
         $buyer = Buyer::updateOrCreate([
             'email' => $googleUser->getEmail(),
         ], [
-            'full_name' => $googleUser->getName()
+            'full_name' => $googleUser->getName(),
+            'profile_pic' => $googleUser->getAvatar(),
+            'role' => 'buyer', // default role is buyer
         ]);
 
         Auth::login($buyer);
 
-        return redirect('/buyer/landing'); // or wherever you want to send them
+        if ($buyer->role === 'buyer') {
+            return redirect('/buyer/landing')->with('success', 'Logged in successfully!');
+        } else {
+            return redirect('/vendor/dashboard')->with('success', 'Logged in successfully as vendor!');
+        }
     }
 }
