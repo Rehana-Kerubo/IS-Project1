@@ -13,6 +13,7 @@ Route::get('/login-register', function () {
 Route::get('/buyer/landing', function () {
     return view('buyer/landing');
 });
+
 Route::get('/buyer/view-acc', function () {
     return view('buyer/view-acc');
 });
@@ -29,6 +30,18 @@ Route::get('/buyer/be-vendor', function () {
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.redirect');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
 Route::put('/buyer/update-profile', [BuyerController::class, 'updateProfile'])->name('buyer.update-profile');
+Route::get('/buyer/search', [BuyerController::class, 'search'])->name('buyer.search');
+// GET: to show the form
+Route::get('/buyer/checkout', [BuyerController::class, 'checkout'])->name('buyer.checkout');
+
+// POST: to handle the form submission
+Route::post('/buyer/checkout', [BuyerController::class, 'processCheckout'])->name('buyer.checkout.process');
+
+
+Route::get('/buyer/payment-loader', [BuyerController::class, 'paymentLoader'])->name('buyer.payment.loader');
+Route::get('/buyer/payment-success', [BuyerController::class, 'paymentSuccess'])->name('buyer.payment.success');
+
+
 
 
 Route::get('/vendor/dashboard', function() {

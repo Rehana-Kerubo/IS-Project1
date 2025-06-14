@@ -6,6 +6,8 @@
     <title>@yield('title', 'Buyer Dashboard')</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.lineicons.com/3.0/lineicons.css">
+    
+   
 
     <style>
         body {
@@ -138,5 +140,7 @@
 <main>
     @yield('content')
 </main>
+<script src="{{ asset('js/main.js') }}"></script>
+
 </body>
 </html>

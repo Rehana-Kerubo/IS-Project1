@@ -31,4 +31,75 @@ class BuyerController extends Controller
 
         return redirect('/buyer/view-acc')->with('success', 'Profile updated successfully!');
     }
+
+    public function search(Request $request)
+{
+    $query = strtolower($request->input('query'));
+
+    // Dummy product data (same as in your earlier example)
+    $allProducts = [
+        [
+            'name' => 'Red T-shirt',
+            'image' => 'https://via.placeholder.com/300x200.png?text=Red+T-shirt',
+            'price' => '500',
+        ],
+        [
+            'name' => 'Blue Jeans',
+            'image' => 'https://via.placeholder.com/300x200.png?text=Blue+Jeans',
+            'price' => '800',
+        ],
+        [
+            'name' => 'Green Hoodie',
+            'image' => 'https://via.placeholder.com/300x200.png?text=Green+Hoodie',
+            'price' => '950',
+        ],
+    ];
+
+    // Filter based on search query
+    $results = array_filter($allProducts, function ($product) use ($query) {
+        return str_contains(strtolower($product['name']), $query);
+    });
+
+    return view('buyer.search', ['results' => $results]);
+}
+// Show the form
+public function checkout(Request $request)
+{
+    $product = (object)[
+        'id' => $request->id,
+        'name' => $request->name,
+        'price' => $request->price,
+        'image' => $request->image,
+    ];
+
+    return view('buyer.checkout', compact('product'));
+}
+
+
+// Handle the form data and go to payment loader
+public function processCheckout(Request $request)
+{
+    session([
+        'product_name' => 'Dummy Product',
+        'quantity' => $request->quantity,
+        'total' => 1500 * $request->quantity, // Or your own logic
+        'pickup_date' => now()->addDays(2)->toDateString(),
+    ]);
+
+    return redirect()->route('buyer.payment-loader');
+}
+
+
+public function paymentLoader()
+{
+    // Simulate a small delay before redirecting to the success page
+    return view('buyer.payment-loader');
+}
+
+public function paymentSuccess()
+{
+    return view('buyer.payment-success');
+}
+
+
 }

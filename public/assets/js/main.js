@@ -93,3 +93,32 @@
   });      
 
 }(jQuery));
+
+document.addEventListener('DOMContentLoaded', () => {
+  const payBtn = document.getElementById('payNowBtn');
+  const confirmBtn = document.getElementById('confirmPinBtn');
+  const modal = document.getElementById('mpesaPrompt');
+
+  payBtn.addEventListener('click', () => {
+    modal.style.display = 'flex';
+  });
+
+  confirmBtn.addEventListener('click', () => {
+    const pin = document.getElementById('fakePin').value;
+    if (pin.length < 4) {
+      alert("Please enter a valid PIN");
+      return;
+    }
+
+    modal.innerHTML = `
+      <div style="color:white; font-size:18px;">
+        Processing Payment...<br><br>
+        <div class="loader"></div>
+      </div>
+    `;
+
+    setTimeout(() => {
+      document.getElementById('checkoutForm').submit();
+    }, 3000);
+  });
+});

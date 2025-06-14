@@ -30,34 +30,36 @@
     <header id="header-wrap">
      <!-- Navbar Start -->
 <!-- Navbar -->
- <nav class="navbar navbar-expand-lg bg-inverse fixed-top scrolling-navbar custom-gradient-navbar">
+<nav class="navbar navbar-expand-lg bg-inverse fixed-top scrolling-navbar custom-gradient-navbar">
   <div class="container">
     <a href="/" class="navbar-brand">Flea Market</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
       <i class="lni-menu"></i>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarCollapse">
-    <ul class="navbar-nav mr-auto w-100 justify-content-end">
-  <li class="nav-item active"><a class="nav-link" href="#header-wrap">Home</a></li>
-  <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
-  <li class="nav-item"><a class="nav-link" href="#available products">Products</a></li>
+      <form action="{{ url('/buyer/search') }}" method="GET" class="form-inline my-2 my-lg-0 mx-auto">
+        <input class="form-control mr-sm-2" type="search" name="query" placeholder="Search products..." aria-label="Search" required>
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+      </form>
 
-  <li class="nav-item">
-    <a class="nav-link" href="{{ url('/buyer/view-acc') }}">
-      <i class="lni-user"></i> Account
-    </a>
-  </li>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url('/buyer/view-acc') }}">
+            <i class="lni-user"></i> Account
+          </a>
+        </li>
 
-  <li class="nav-item">
-    <a class="nav-link" href="{{ url('/') }}">
-      <i class="lni-exit"></i> Logout
-    </a>
-  </li>
-  </ul>
-
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url('/') }}">
+            <i class="lni-exit"></i> Logout
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
+
 <!-- Navbar End -->
 
      <!-- Hero Area Start -->
