@@ -6,7 +6,7 @@
     <h1 class="mb-4">Become a Vendor</h1>
 
     <div class="card p-4 shadow-sm" style="max-width: 600px;">
-        <form action="" method="POST">
+        <form action="{{ route('buyer.be-vendor') }}" method="POST">
             @csrf
 
             <div class="form-group">

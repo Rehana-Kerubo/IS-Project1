@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\VendorController;
 
 Route::get('/', function () {
     return view('landing');
@@ -41,7 +42,10 @@ Route::post('/buyer/checkout', [BuyerController::class, 'processCheckout'])->nam
 Route::get('/buyer/payment-loader', [BuyerController::class, 'paymentLoader'])->name('buyer.payment.loader');
 Route::get('/buyer/payment-success', [BuyerController::class, 'paymentSuccess'])->name('buyer.payment.success');
 
-
+Route::middleware(['auth'])->group(function () {
+    Route::get('/buyer/be-vendor', [VendorController::class, 'create'])->name('buyer.be-vendor');
+    Route::post('/buyer/be-vendor', [VendorController::class, 'store'])->name('buyer.be-vendor.submit');
+});
 
 
 Route::get('/vendor/dashboard', function() {
