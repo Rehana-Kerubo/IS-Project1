@@ -22,4 +22,10 @@ class Buyer extends Authenticatable
     ];
 
     protected $table = 'buyers'; // Make sure Laravel knows which table
+
+    public function vendor()
+{
+    return $this->hasOne(Vendor::class, 'buyer_id');
+}
+
 }
