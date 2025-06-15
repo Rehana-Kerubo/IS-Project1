@@ -27,12 +27,12 @@ class GoogleController extends Controller
             'role' => 'buyer', // default role is buyer
         ]);
 
-        Auth::login($buyer);
+        Auth::guard('buyer')->login($buyer);
 
-        if ($buyer->role === 'buyer') {
+        
             return redirect('/buyer/landing')->with('success', 'Logged in successfully!');
-        } else {
-            return redirect('/vendor/dashboard')->with('success', 'Logged in successfully as vendor!');
-        }
+        
+            
+        
     }
 }
