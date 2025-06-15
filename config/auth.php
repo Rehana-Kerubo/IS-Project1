@@ -40,7 +40,16 @@ return [
             'driver' => 'session',
             'provider' => 'buyers',
         ],
+        'buyer' => [
+            'driver' => 'session',
+            'provider' => 'buyers',
+        ],
+            'vendor' => [
+            'driver' => 'session',
+            'provider' => 'vendors',
     ],
+    ],
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -63,6 +72,10 @@ return [
         'buyers' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\Buyer::class),
+        ],
+        'vendors' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_VENDOR_MODEL', App\Models\Vendor::class),
         ],
 
         // 'users' => [
