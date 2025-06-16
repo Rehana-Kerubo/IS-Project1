@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('landing');
@@ -63,4 +64,11 @@ Route::get('/vendor/booked', function() {
 Route::get('/vendor/analytics', function() {
     return view('/vendor/analytics');
 });
+Route::get('/vendor/add-product', function() {
+    return view('/vendor/add-product');
+});
 Route::put('/vendor/dashboard/update', [VendorController::class, 'update'])->name('vendor.update');
+Route::middleware(['auth:buyer'])->group(function () {
+    Route::get('/vendor/add-product', [ProductController::class, 'create'])->name('vendor.products.create');
+    Route::post('/vendor/add-product', [ProductController::class, 'store'])->name('vendor.products.store');
+});
