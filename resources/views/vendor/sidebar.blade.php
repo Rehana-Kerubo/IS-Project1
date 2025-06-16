@@ -121,6 +121,7 @@
         <h2>Vendor Panel</h2>
         <nav>
             <ul>
+                <li><a href="{{ url('/vendor/v-landing') }}">Home</a></li> 
                 <li><a href="{{ url('/vendor/dashboard') }}">Dashboard</a></li>
                 <li><a href="{{ url('/vendor/products') }}">Products</a></li>
                 <li><a href="{{ url('/vendor/booked') }}">Bookings</a></li>
