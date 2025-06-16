@@ -24,15 +24,17 @@ class GoogleController extends Controller
         ], [
             'full_name' => $googleUser->getName(),
             'profile_pic' => $googleUser->getAvatar(),
-            'role' => 'buyer', // default role is buyer
+            'role' => $buyer->role ?? 'buyer',
         ]);
 
         Auth::guard('buyer')->login($buyer);
 
-        
-            return redirect('/buyer/landing')->with('success', 'Logged in successfully!');
-        
-            
-        
+        // Redirect based on role
+        if ($buyer->role === 'vendor') {
+            return redirect('/vendor/dashboard')->with('success', 'Welcome back, Vendor!');
+        }
+
+        return redirect('/buyer/landing')->with('success', 'Logged in successfully!');
     }
+
 }
