@@ -21,6 +21,10 @@ class VendorController extends Controller
             'shop_name' => 'required|string|max:100',
             'shop_category' => 'required|string|max:100',
         ]);
+        
+        $user = Auth::guard('buyer')->user();
+        $user->role = 'vendor';
+        $user->save();
 
         // Check if the buyer is already registered as a vendor
         $existing = Vendor::where('buyer_id', Auth::id())->first();
@@ -40,5 +44,34 @@ class VendorController extends Controller
         return redirect('/vendor/dashboard')->with('success', 'Successfully registered as vendor!');
         
     }
+    //Update vendor details
+    public function update(Request $request)
+        {
+            $request->validate([
+                'shop_name' => 'required|string|max:100',
+                'shop_category' => 'required|string|max:100',
+            ]);
+
+            $user = Auth::guard('buyer')->user();
+
+
+            // Update buyer's role
+            $user->role = 'vendor';
+            $user->save();
+
+            // Update vendor details
+            $vendor = $user->vendor;
+            
+            if (!$vendor) {
+                return redirect()->back()->with('error', 'You are not registered as a vendor.');
+            }
+
+            $vendor->shop_name = $request->shop_name;
+            $vendor->shop_category = $request->shop_category;
+            $vendor->save();
+
+            return redirect()->back()->with('success', 'Shop details updated successfully!');
+        }
+
 }
 

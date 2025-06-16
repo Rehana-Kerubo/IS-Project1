@@ -42,7 +42,7 @@ Route::post('/buyer/checkout', [BuyerController::class, 'processCheckout'])->nam
 Route::get('/buyer/payment-loader', [BuyerController::class, 'paymentLoader'])->name('buyer.payment.loader');
 Route::get('/buyer/payment-success', [BuyerController::class, 'paymentSuccess'])->name('buyer.payment.success');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth:buyer'])->group(function () {
     Route::get('/buyer/be-vendor', [VendorController::class, 'create'])->name('buyer.be-vendor');
     Route::post('/buyer/be-vendor', [VendorController::class, 'store'])->name('buyer.be-vendor.submit');
 });
@@ -60,3 +60,4 @@ Route::get('/vendor/booked', function() {
 Route::get('/vendor/analytics', function() {
     return view('/vendor/analytics');
 });
+Route::put('/vendor/dashboard/update', [VendorController::class, 'update'])->name('vendor.update');

@@ -3,17 +3,17 @@
 @section('content')
 <h1 class="h3 mb-4">Shop Dashboard</h1>
 
-<form action="#" method=" " enctype="multipart/form-data" class="p-4 bg-white shadow rounded">
+<form action="{{ route('vendor.update') }}" method="POST" enctype="multipart/form-data" class="p-4 bg-white shadow rounded">
     @csrf
+    @method('PUT')
     <div>
         <label class="block">Shop Name</label>
-        <input type="text" name="shop_name" value="#" class="form-control">
+        <input type="text" name="shop_name" value="{{ Auth::guard('buyer')->user()->vendor->shop_name }}" class="form-control">
     </div>
 
     <div>
-        <label class="block">Shop Image</label><br>
-        <img src="#" alt="Shop Image" class="img-thumbnail mb-3" style="width: 120px;"><br>
-        <input type="file" name="shop_image">
+        <label class="block">Shop Category</label><br>
+        <input type="text" name="shop_category" value="{{ Auth::guard('buyer')->user()->vendor->shop_category }}">
     </div>
 
     <button type="submit" class="btn btn-primary">Update</button>
