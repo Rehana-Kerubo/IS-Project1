@@ -5,7 +5,7 @@
 <h1 class="h3 mb-4">My Products</h1>
 
 <!-- Add Product Button -->
-<a href="#" class="btn btn-primary mb-4">Add Product</a>
+<a href="/vendor/add-product" class="btn btn-primary mb-4">Add Product</a>
 
 @php
     $products = [
@@ -35,6 +35,12 @@
 
 <!-- Products Grid -->
 <div class="row">
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
     @forelse ($products as $product)
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm h-100">
