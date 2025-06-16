@@ -11,12 +11,12 @@
 
             <div class="form-group">
                 <label for="name">Your Name</label>
-                <input type="text" class="form-control" value="{{ Auth::user()->full_name }}" readonly>
+                <input type="text" class="form-control" value="{{ Auth::guard('buyer')->user()->full_name }}" readonly>
             </div>
 
             <div class="form-group">
                 <label for="email">Your Email</label>
-                <input type="email" class="form-control" value="{{ Auth::user()->email }}" readonly>
+                <input type="email" class="form-control" value="{{ Auth::guard('buyer')->user()->email }}" readonly>
             </div>
 
             <div class="form-group">
