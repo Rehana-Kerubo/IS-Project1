@@ -48,6 +48,9 @@ Route::middleware(['auth:buyer'])->group(function () {
 });
 
 
+Route::get('/vendor/v-landing', function() {
+    return view('/vendor/v-landing');
+});
 Route::get('/vendor/dashboard', function() {
     return view('/vendor/dashboard');
 });
