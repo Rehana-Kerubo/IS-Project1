@@ -10,23 +10,23 @@
     <!-- Custom CSS styling -->
     <style>
         body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f5fafa;
             display: flex;
-            min-height: 100vh;
-            margin: 0;
         }
 
         aside {
-            width: 250px;
-            background-color: #343a40;
-            color: white;
+            width: 220px;
+            height: 100vh;
+            background: #07BEB8;
             padding: 20px;
+            color: white;
+            position: fixed;
         }
 
         aside h2 {
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 30px;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
         }
 
         aside nav ul {
@@ -34,24 +34,85 @@
             padding: 0;
         }
 
+        aside nav ul li {
+            margin: 15px 0;
+        }
+
         aside nav ul li a {
             color: white;
             text-decoration: none;
-            display: block;
-            padding: 10px 0;
-            transition: 0.3s;
+            font-weight: 500;
         }
 
         aside nav ul li a:hover {
             text-decoration: underline;
-            color: #0d6efd; /* Bootstrap primary color */
         }
 
         main {
-            flex-grow: 1;
-            background-color: #f8f9fa;
+            margin-left: 240px;
             padding: 40px;
+            flex-grow: 1;
         }
+
+        .account-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .edit-btn {
+            background-color: #07BEB8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .edit-btn:hover {
+            background-color: #3DCCC7;
+        }
+        .card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card-title {
+    color: #07BEB8;
+    font-weight: 600;
+}
+
+.btn-danger {
+    background-color: #FF6B6B;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #ff4c4c;
+}
+.badge-success {
+    background-color: #07BEB8;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+}
+
+.badge-warning {
+    background-color: #FFC107;
+    color: black;
+    padding: 6px 14px;
+    border-radius: 20px;
+}
     </style>
 </head>
 <body>
