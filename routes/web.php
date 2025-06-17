@@ -72,3 +72,9 @@ Route::middleware(['auth:buyer'])->group(function () {
     Route::get('/vendor/add-product', [ProductController::class, 'create'])->name('vendor.products.create');
     Route::post('/vendor/add-product', [ProductController::class, 'store'])->name('vendor.products.store');
 });
+Route::middleware(['auth:buyer'])->group(function () {
+    Route::get('/vendor/products', [ProductController::class, 'index'])->name('vendor.products');
+    Route::get('/vendor/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/vendor/products/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/vendor/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+});

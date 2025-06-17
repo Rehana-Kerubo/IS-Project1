@@ -7,32 +7,6 @@
 <!-- Add Product Button -->
 <a href="/vendor/add-product" class="btn btn-primary mb-4">Add Product</a>
 
-@php
-    $products = [
-        (object)[
-            'id' => 1,
-            'name' => 'Red T-shirt',
-            'price' => 20,
-            'stock' => 50,
-            'image' => 'https://via.placeholder.com/300x200.png?text=Red+T-shirt'
-        ],
-        (object)[
-            'id' => 2,
-            'name' => 'Blue Jeans',
-            'price' => 40,
-            'stock' => 30,
-            'image' => 'https://via.placeholder.com/300x200.png?text=Blue+Jeans'
-        ],
-        (object)[
-            'id' => 3,
-            'name' => 'Sneakers',
-            'price' => 60,
-            'stock' => 15,
-            'image' => 'https://via.placeholder.com/300x200.png?text=Sneakers'
-        ],
-    ];
-@endphp
-
 <!-- Products Grid -->
 <div class="row">
     @if(session('success'))
@@ -55,9 +29,9 @@
                     </p>
                     <!-- Edit Button -->
                     <div class="d-flex gap-2 mt-auto">
-                        <a href=" " class="btn btn-sm btn-warning flex-grow-1">Edit</a>
+                        <a href="{{ route('products.edit', $product->product_id) }}" class="btn btn-sm btn-warning flex-grow-1">Edit</a>
 
-                        <form action=" " method="POST" class="flex-grow-1">
+                        <form action="{{ route('products.destroy', $product->product_id) }}" method="POST" class="flex-grow-1">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger w-100">Delete</button>
