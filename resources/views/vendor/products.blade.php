@@ -25,7 +25,7 @@
                     <h5 class="card-title">{{ $product->name }}</h5>
                     <p class="card-text mb-4">
                         <strong>Price:</strong> Ksh {{ number_format($product->price, 2) }} <br>
-                        <strong>Stock:</strong> {{ $product->stock }} units
+                        <strong>Stock:</strong> {{ $product->available_stock }} units
                     </p>
                     <!-- Edit Button -->
                     <div class="d-flex gap-2 mt-auto">
