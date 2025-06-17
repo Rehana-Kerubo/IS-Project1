@@ -6,6 +6,8 @@
 
     <!-- Bootstrap CSS (official CDN) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- LineIcons CSS for icons -->
+    <link rel="stylesheet" href="https://cdn.lineicons.com/3.0/lineicons.css">
 
     <!-- Custom CSS styling -->
     <style>
@@ -118,8 +120,12 @@
 <body>
 
     <aside>
-        <h2>Vendor Panel</h2>
-        <nav>
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+        <a href="{{ url('/vendor/v-landing') }}" style="color: white; text-decoration: none; font-size: 20px;" title="Back to Shop">
+        <i class="lni lni-arrow-left" style="margin-left: 10px;"></i>
+        </a>
+        <h2 style="margin: 0;">Hey {{ Auth::check() ? Auth::guard('buyer')->user()->full_name : 'Seller' }}🫶🏼</h2>
+    </div>    <nav>
             <ul>
                 <li><a href="{{ url('/vendor/v-landing') }}">Home</a></li> 
                 <li><a href="{{ url('/vendor/dashboard') }}">Dashboard</a></li>
