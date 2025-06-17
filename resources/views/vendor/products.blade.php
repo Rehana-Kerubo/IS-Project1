@@ -29,7 +29,7 @@
                     </p>
                     <!-- Edit Button -->
                     <div class="d-flex gap-2 mt-auto">
-                        <a href="{{ route('products.edit', $product->product_id) }}" class="btn btn-sm btn-warning flex-grow-1">Edit</a>
+                        <a href="{{ route('vendor.products.edit', $product->product_id) }}" class="btn btn-sm btn-warning flex-grow-1">Edit</a>
 
                         <form action="{{ route('products.destroy', $product->product_id) }}" method="POST" class="flex-grow-1">
                             @csrf

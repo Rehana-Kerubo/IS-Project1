@@ -70,7 +70,7 @@ public function update(Request $request, $id)
     $product = Product::findOrFail($id);
     $product->update($request->only('name', 'description', 'price', 'available_stock'));
 
-    return redirect()->route('vendor.products')->with('success', 'Product updated successfully!');
+    return redirect()->route('vendor.products.index')->with('success', 'Product updated successfully!');
 }
 
 public function destroy($id)
@@ -78,7 +78,7 @@ public function destroy($id)
     $product = Product::findOrFail($id);
     $product->delete();
 
-    return redirect()->route('vendor.products')->with('success', 'Product deleted successfully!');
+    return redirect()->route('vendor.products.index')->with('success', 'Product deleted successfully!');
 }
 
 }
