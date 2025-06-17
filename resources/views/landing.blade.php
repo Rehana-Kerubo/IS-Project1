@@ -65,7 +65,7 @@
               Book your flea market slots, showcase your products, and manage your sales – all in one place.
             </p>
             <div class="banner-btn">
-              <a href="/register" class="btn btn-common">Get Started</a>
+              <a href="{{ url('login-register')}}" class="btn btn-common">Get Started</a>
             </div>
           </div>
         </div>
