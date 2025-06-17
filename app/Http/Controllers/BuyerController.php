@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\Buyer;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
+
 
 class BuyerController extends Controller
 {
@@ -31,6 +33,11 @@ class BuyerController extends Controller
 
         return redirect('/buyer/view-acc')->with('success', 'Profile updated successfully!');
     }
+    public function landing()
+{
+    $products = Product::all(); // fetch all products from DB
+    return view('buyer.landing', compact('products'));
+}
 
     public function search(Request $request)
 {
