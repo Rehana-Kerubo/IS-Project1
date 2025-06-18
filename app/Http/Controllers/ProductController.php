@@ -64,13 +64,27 @@ public function update(Request $request, $id)
         'name' => 'required|string|max:255',
         'description' => 'nullable|string',
         'price' => 'required|numeric|min:0',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         'available_stock' => 'required|integer|min:1',
     ]);
 
     $product = Product::findOrFail($id);
-    $product->update($request->only('name', 'description', 'price', 'available_stock'));
 
-    return redirect()->route('vendor.products')->with('success', 'Product updated successfully!');
+    // Update image only if a new one is uploaded
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('products', 'public');
+        $product->image_url = $imagePath;
+    }
+
+    // Update other fields
+    $product->name = $request->name;
+    $product->description = $request->description;
+    $product->price = $request->price;
+    $product->available_stock = $request->available_stock;
+
+    $product->save();
+
+    return redirect()->route('vendor.products.index')->with('success', 'Product updated successfully!');
 }
 
 public function destroy($id)
@@ -78,7 +92,7 @@ public function destroy($id)
     $product = Product::findOrFail($id);
     $product->delete();
 
-    return redirect()->route('vendor.products')->with('success', 'Product deleted successfully!');
+    return redirect()->route('vendor.products.index')->with('success', 'Product deleted successfully!');
 }
 
 }

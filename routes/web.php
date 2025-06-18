@@ -73,8 +73,9 @@ Route::middleware(['auth:buyer'])->group(function () {
     Route::post('/vendor/add-product', [ProductController::class, 'store'])->name('vendor.products.store');
 });
 Route::middleware(['auth:buyer'])->group(function () {
-    Route::get('/vendor/products', [ProductController::class, 'index'])->name('vendor.products');
-    Route::get('/vendor/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
-    Route::put('/vendor/products/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::get('/vendor/products', [ProductController::class, 'index'])->name('vendor.products.index');
+    Route::get('/vendor/products/{product}/edit', [ProductController::class, 'edit'])->name('vendor.products.edit');
+    Route::put('/vendor/products/{id}', [ProductController::class, 'update'])->name('vendor.products.update');
+    Route::put('/vendor/products/{product}', [ProductController::class, 'update'])->name('vendor.products.update');
     Route::delete('/vendor/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 });

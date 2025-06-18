@@ -18,8 +18,8 @@
     @forelse ($products as $product)
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm h-100">
-                @if ($product->image)
-                    <img src="{{ $product->image }}" class="card-img-top" alt="{{ $product->name }}">
+                @if ($product->image_url)
+                    <img src="{{ asset('storage/' . $product->image_url) }}" alt="{{ $product->name }}">
                 @endif
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{ $product->name }}</h5>
@@ -29,7 +29,7 @@
                     </p>
                     <!-- Edit Button -->
                     <div class="d-flex gap-2 mt-auto">
-                        <a href="{{ route('products.edit', $product->product_id) }}" class="btn btn-sm btn-warning flex-grow-1">Edit</a>
+                        <a href="{{ route('vendor.products.edit', $product->product_id) }}" class="btn btn-sm btn-warning flex-grow-1">Edit</a>
 
                         <form action="{{ route('products.destroy', $product->product_id) }}" method="POST" class="flex-grow-1">
                             @csrf
