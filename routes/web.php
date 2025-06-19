@@ -31,6 +31,7 @@ Route::get('/buyer/be-vendor', function () {
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.redirect');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
+Route::get('/buyer/landing', [BuyerController::class, 'landing'])->name('buyer.landing');
 Route::put('/buyer/update-profile', [BuyerController::class, 'updateProfile'])->name('buyer.update-profile');
 Route::get('/buyer/search', [BuyerController::class, 'search'])->name('buyer.search');
 // GET: to show the form
@@ -68,6 +69,7 @@ Route::get('/vendor/add-product', function() {
     return view('/vendor/add-product');
 });
 Route::put('/vendor/dashboard/update', [VendorController::class, 'update'])->name('vendor.update');
+
 Route::middleware(['auth:buyer'])->group(function () {
     Route::get('/vendor/add-product', [ProductController::class, 'create'])->name('vendor.products.create');
     Route::post('/vendor/add-product', [ProductController::class, 'store'])->name('vendor.products.store');
@@ -79,3 +81,5 @@ Route::middleware(['auth:buyer'])->group(function () {
     Route::put('/vendor/products/{product}', [ProductController::class, 'update'])->name('vendor.products.update');
     Route::delete('/vendor/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 });
+Route::get('/vendor/landing', [VendorController::class, 'landing'])->name('vendor.landing');
+
