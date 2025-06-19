@@ -131,6 +131,7 @@
                 <li><a href="{{ url('/vendor/dashboard') }}">Dashboard</a></li>
                 <li><a href="{{ url('/vendor/products') }}">Products</a></li>
                 <li><a href="{{ url('/vendor/booked') }}">Bookings</a></li>
+                <li><a href="{{ url('/vendor/book-stall') }}">Book a Stall</a></li>
                 <li><a href="{{ url('/vendor/analytics') }}">Analytics</a></li>
                 <li><a href="{{ url('/') }}">Log Out</a></li>
             </ul>
