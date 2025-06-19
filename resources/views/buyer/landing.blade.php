@@ -150,10 +150,11 @@
       <p class="description">{{ $product->description }}</p>
 
       <div class="product-actions">
-        <form action="{{ route('buyer.checkout', $product->id) }}" method="POST">
-          @csrf
-          <button type="submit" class="btn buy-btn">Buy Now</button>
-        </form>
+      <form action="{{ route('buyer.checkout') }}" method="GET">
+        <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+        <button type="submit" class="btn buy-btn">Buy Now</button>
+      </form>
+
         <button class="btn wishlist-btn">Add to Wishlist</button>
       </div>
     </div>
