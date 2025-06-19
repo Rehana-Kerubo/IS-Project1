@@ -23,6 +23,7 @@
     /* color: #fff !important; White color for text on hover */
     background-image: linear-gradient(65deg, #07BEB8 0, #3DCCC7 100%) !important; /* Use your theme colors for hover */
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     outline: none;

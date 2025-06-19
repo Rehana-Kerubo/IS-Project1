@@ -132,28 +132,46 @@
 
 
     <!-- product Section Start -->
-    <section class="buyer-dashboard">
-  <h2 class="dashboard-title">Available Products</h2>
-  <div class="product-wrapper">
-  @foreach($products as $product)
-    <div class="product-card">
-      <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
-      <h4>{{ $product->name }}</h4>
-      <p class="price">KSh {{ number_format($product->price) }}</p>
-      <p class="description">{{ $product->description }}</p>
-
-      <div class="product-actions">
-        <form action="{{ route('buyer.checkout', $product->id) }}" method="POST">
-          @csrf
-          <button type="submit" class="btn buy-btn">Buy Now</button>
-        </form>
-        <button class="btn wishlist-btn">Add to Wishlist</button>
+    <section class="product-section">
+     <h2 class="section-title">Our Featured Products</h2>
+     <div class="product-wrapper">
+      <!-- Start of Product Cards -->
+     <div class="product-card">
+      <img src="path/to/product1.jpg" alt="Product 1">
+      <h4>Product 1</h4>
+      <p>Description for product 1.</p>
       </div>
-    </div>
-  @endforeach
-</div>
-
-</section>
+     <div class="product-card">
+      <img src="path/to/product2.jpg" alt="Product 2">
+      <h4>Product 2</h4>
+      <p>Description for product 2.</p>
+     </div>
+     <div class="product-card">
+      <img src="path/to/product3.jpg" alt="Product 3">
+      <h4>Product 3</h4>
+      <p>Description for product 3.</p>
+     </div>
+     <div class="product-card">
+      <img src="path/to/product4.jpg" alt="Product 4">
+      <h4>Product 4</h4>
+      <p>Description for product 4.</p>
+     </div>
+     <div class="product-card">
+      <img src="path/to/product5.jpg" alt="Product 5">
+      <h4>Product 5</h4>
+      <p>Description for product 5.</p>
+     </div>
+     <div class="product-card">
+      <img src="path/to/product6.jpg" alt="Product 6">
+      <h4>Product 6</h4>
+      <p>Description for product 6.</p>
+     </div>
+      <!-- End of Product Cards -->
+     </div>
+     <div id="cta-button" class="cta-button">
+     <a href="#" class="btn">Shop Now</a>
+     </div>
+    </section>
     <!-- product Section End -->
 
     <!-- Intro Section Start -->
