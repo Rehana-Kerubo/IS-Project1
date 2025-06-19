@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Vendor;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
+
 
 class VendorController extends Controller
 {
@@ -71,6 +75,11 @@ class VendorController extends Controller
             $vendor->save();
 
             return redirect()->back()->with('success', 'Shop details updated successfully!');
+        }
+        public function landing()
+        {
+            $products = Product::all(); // fetch all products from DB
+            return view('buyer.landing', compact('products'));
         }
 
 }

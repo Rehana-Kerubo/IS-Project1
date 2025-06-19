@@ -68,7 +68,10 @@
           <p class="description">A beautifully crafted item perfect for you!</p>
 
           <div class="product-actions">
-            <button class="btn buy-btn"><a href="{{ url('/buyer/checkout') }}">Buy Now</a></button>
+          <form action="{{ route('buyer.checkout') }}" method="GET">
+            <input type="hidden" name="id" value="{{ $product->id }}">
+            <button type="submit" class="btn buy-btn">Buy Now</button>
+          </form>
             <button class="btn wishlist-btn"><a href="">Add to Wishlist</a></button>
           </div>
         </div>

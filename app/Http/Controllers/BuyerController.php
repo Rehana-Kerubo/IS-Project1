@@ -7,6 +7,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Models\Buyer;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 
 
 class BuyerController extends Controller
@@ -42,43 +43,19 @@ class BuyerController extends Controller
     public function search(Request $request)
 {
     $query = strtolower($request->input('query'));
-
-    // Dummy product data (same as in your earlier example)
-    $allProducts = [
-        [
-            'name' => 'Red T-shirt',
-            'image' => 'https://via.placeholder.com/300x200.png?text=Red+T-shirt',
-            'price' => '500',
-        ],
-        [
-            'name' => 'Blue Jeans',
-            'image' => 'https://via.placeholder.com/300x200.png?text=Blue+Jeans',
-            'price' => '800',
-        ],
-        [
-            'name' => 'Green Hoodie',
-            'image' => 'https://via.placeholder.com/300x200.png?text=Green+Hoodie',
-            'price' => '950',
-        ],
-    ];
-
     // Filter based on search query
-    $results = array_filter($allProducts, function ($product) use ($query) {
-        return str_contains(strtolower($product['name']), $query);
-    });
+    $results = Product:: when($query, function ($q) use ($query) {
+        $q->where ('name', 'like', '%' . $query . '%')
+            ->orWhere('description', 'like', '%' . $query . '%');
+    })->get();
 
     return view('buyer.search', ['results' => $results]);
 }
 // Show the form
 public function checkout(Request $request)
 {
-    $product = (object)[
-        'id' => $request->id,
-        'name' => $request->name,
-        'price' => $request->price,
-        'image' => $request->image,
-    ];
-
+   
+    $product =  Product::findOrFail($request->input('product_id'));
     return view('buyer.checkout', compact('product'));
 }
 
@@ -86,10 +63,14 @@ public function checkout(Request $request)
 // Handle the form data and go to payment loader
 public function processCheckout(Request $request)
 {
+    $product = Product::findOrFail($request->product_id); // ✅ will now work
+    $quantity = $request->input('quantity', 1); // Default to 1 if not provided
+    $total = $product->price * $quantity;
+    // Store the checkout data in the session
     session([
-        'product_name' => 'Dummy Product',
-        'quantity' => $request->quantity,
-        'total' => 1500 * $request->quantity, // Or your own logic
+        'product_name' => $product->name,
+        'quantity' => $quantity,
+        'total' => $total, // Or your own logic
         'pickup_date' => now()->addDays(2)->toDateString(),
     ]);
 

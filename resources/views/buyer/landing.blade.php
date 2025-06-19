@@ -142,48 +142,25 @@
 <section class="buyer-dashboard">
   <h2 class="dashboard-title">Available Products</h2>
   <div class="product-wrapper">
-    
+  @foreach($products as $product)
     <div class="product-card">
-      <img src="path/to/product1.jpg" alt="Product 1">
-      <h4>Product 1</h4>
-      <p class="price">KSh 1,500</p>
-      <p class="description">A beautiful handmade item perfect for gifting.</p>
-      
+      <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+      <h4>{{ $product->name }}</h4>
+      <p class="price">KSh {{ number_format($product->price) }}</p>
+      <p class="description">{{ $product->description }}</p>
+
       <div class="product-actions">
-        <button class="btn buy-btn">Buy Now</button>
+      <form action="{{ route('buyer.checkout') }}" method="GET">
+        <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+        <button type="submit" class="btn buy-btn">Buy Now</button>
+      </form>
+
         <button class="btn wishlist-btn">Add to Wishlist</button>
       </div>
     </div>
+  @endforeach
+</div>
 
-    <div class="product-card">
-      <img src="path/to/product2.jpg" alt="Product 2">
-      <h4>Product 2</h4>
-      <p class="price">KSh 850</p>
-      <p class="description">Trendy accessory by Vendor X.</p>
-      
-      <div class="product-actions">
-        <button class="btn buy-btn">Buy Now</button>
-        <button class="btn wishlist-btn">Add to Wishlist</button>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="path/to/product3.jpg" alt="Product 3">
-      <h4>Product 3</h4>
-      <p class="price">KSh 2,000</p>
-      <p class="description">Stylish clothing item from Vendor Y.</p>
-      
-      <div class="product-actions">
-        <button class="btn buy-btn">Buy Now</button>
-        <button class="btn wishlist-btn">Add to Wishlist</button>
-      </div>
-    </div>
-    
-      
-
-    <!-- Add more product cards here -->
-    
-  </div>
 </section>
     <!-- product Section End -->
 

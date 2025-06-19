@@ -9,9 +9,13 @@
   <div class="checkout-card">
     <img src="{{ $product->image }}" alt="{{ $product->name }}" class="checkout-image">
 
+    <p>FORM ACTION URL: {{ route('buyer.checkout.process') }}</p>
+
+
     <form id="checkoutForm" method="POST" action="{{ route('buyer.checkout.process') }}">
       @csrf
       <input type="hidden" name="product_id" value="{{ $product->id }}">
+      
 
       <label>Price (per item):</label>
       <p>KSh <span id="price">{{ $product->price }}</span></p>
@@ -117,5 +121,28 @@ input {
 }
 </style>
 
+<script>
+  const payNowBtn = document.getElementById('payNowBtn');
+  const mpesaModal = document.getElementById('mpesaPrompt');
+  const confirmPinBtn = document.getElementById('confirmPinBtn');
+  const checkoutForm = document.getElementById('checkoutForm');
+
+  payNowBtn?.addEventListener('click', () => {
+    mpesaModal.style.display = 'flex';
+  });
+
+  confirmPinBtn?.addEventListener('click', () => {
+    const pin = document.getElementById('fakePin').value;
+   
+    if (pin.length < 4) {
+      alert("PIN must be at least 4 digits!");
+      return;
+    }
+
+    // Submit the form to simulate checkout
+    console.log('Form submitting to:', checkoutForm.action);
+    checkoutForm?.submit();
+  });
+</script>
 
 @endsection

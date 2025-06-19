@@ -33,16 +33,17 @@ Route::get('/buyer/be-vendor', function () {
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.redirect');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
+Route::get('/buyer/landing', [BuyerController::class, 'landing'])->name('buyer.landing');
 Route::put('/buyer/update-profile', [BuyerController::class, 'updateProfile'])->name('buyer.update-profile');
 Route::get('/buyer/search', [BuyerController::class, 'search'])->name('buyer.search');
 // GET: to show the form
 Route::get('/buyer/checkout', [BuyerController::class, 'checkout'])->name('buyer.checkout');
 
 // POST: to handle the form submission
-Route::post('/buyer/checkout', [BuyerController::class, 'processCheckout'])->name('buyer.checkout.process');
+Route::post('/buyer/process-checkout', [BuyerController::class, 'processCheckout'])->name('buyer.checkout.process');
 
 
-Route::get('/buyer/payment-loader', [BuyerController::class, 'paymentLoader'])->name('buyer.payment.loader');
+Route::get('/buyer/payment-loader', [BuyerController::class, 'paymentLoader'])->name('buyer.payment-loader');
 Route::get('/buyer/payment-success', [BuyerController::class, 'paymentSuccess'])->name('buyer.payment.success');
 
 Route::middleware(['auth:buyer'])->group(function () {
@@ -70,6 +71,7 @@ Route::get('/vendor/add-product', function() {
     return view('/vendor/add-product');
 });
 Route::put('/vendor/dashboard/update', [VendorController::class, 'update'])->name('vendor.update');
+
 Route::middleware(['auth:buyer'])->group(function () {
     Route::get('/vendor/add-product', [ProductController::class, 'create'])->name('vendor.products.create');
     Route::post('/vendor/add-product', [ProductController::class, 'store'])->name('vendor.products.store');
@@ -99,4 +101,5 @@ Route::get('/vendor/book-stall/{announcement_id}', [StallPaymentController::clas
 Route::post('/vendor/book-stall', [StallPaymentController::class, 'store'])->name('stall.store');
 
 
+Route::get('/vendor/landing', [VendorController::class, 'landing'])->name('vendor.landing');
 
