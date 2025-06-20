@@ -83,5 +83,30 @@ class VendorController extends Controller
             return view('vendor.v-landing', compact('products'));
         }
 
+        public function checkout(Request $request)
+        {
+            $product =  Product::findOrFail($request->input('product_id'));
+            return view('vendor.checkout', compact('product'));
+        }
+
+        public function paymentLoader(Request $request)
+{
+    $product = Product::findOrFail($request->product_id); // ✅ will now work
+    $quantity = $request->input('quantity', 1); // Default to 1 if not provided
+    $total = $product->price * $quantity;
+    // Store the checkout data in the session
+    session([
+        'product_name' => $product->name,
+        'quantity' => $quantity,
+        'total' => $total, // Or your own logic
+        'pickup_date' => now()->addDays(2)->toDateString(),
+    ]);
+    // Simulate a small delay before redirecting to the success page
+    return view('vendor.payment-loader');
+}
+public function paymentSuccess()
+{
+    return view('vendor.payment-success');
+}
 }
 

@@ -150,7 +150,7 @@
       <p class="description">{{ $product->description }}</p>
 
       <div class="product-actions">
-      <form action="{{ route('buyer.checkout') }}" method="GET">
+      <form action="{{ route('vendor.checkout') }}" method="GET">
         <input type="hidden" name="product_id" value="{{ $product->product_id }}">
         <button type="submit" class="btn buy-btn">Buy Now</button>
       </form>
