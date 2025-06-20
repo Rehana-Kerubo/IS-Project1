@@ -70,6 +70,8 @@ Route::get('/vendor/analytics', function() {
 Route::get('/vendor/add-product', function() {
     return view('/vendor/add-product');
 });
+Route::get('/vendor/landing', [VendorController::class, 'landing'])->name('vendor.landing');
+
 Route::put('/vendor/dashboard/update', [VendorController::class, 'update'])->name('vendor.update');
 
 Route::middleware(['auth:buyer'])->group(function () {
@@ -101,5 +103,4 @@ Route::get('/vendor/book-stall/{announcement_id}', [StallPaymentController::clas
 Route::post('/vendor/book-stall', [StallPaymentController::class, 'store'])->name('stall.store');
 
 
-Route::get('/vendor/landing', [VendorController::class, 'landing'])->name('vendor.landing');
 

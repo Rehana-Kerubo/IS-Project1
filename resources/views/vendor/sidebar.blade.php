@@ -121,13 +121,13 @@
 
     <aside>
     <div style="display: flex; align-items: center; justify-content: space-between;">
-        <a href="{{ url('/vendor/v-landing') }}" style="color: white; text-decoration: none; font-size: 20px;" title="Back to Shop">
+        <a href="{{ url('/vendor/landing') }}" style="color: white; text-decoration: none; font-size: 20px;" title="Back to Shop">
         <i class="lni lni-arrow-left" style="margin-left: 10px;"></i>
         </a>
         <h2 style="margin: 0;">Hey {{ Auth::check() ? Auth::guard('buyer')->user()->full_name : 'Seller' }}🫶🏼</h2>
     </div>    <nav>
             <ul>
-                <li><a href="{{ url('/vendor/v-landing') }}">Home</a></li> 
+                <li><a href="{{ url('/vendor/landing') }}">Home</a></li> 
                 <li><a href="{{ url('/vendor/dashboard') }}">Dashboard</a></li>
                 <li><a href="{{ url('/vendor/products') }}">Products</a></li>
                 <li><a href="{{ url('/vendor/booked') }}">Bookings</a></li>

@@ -1,3 +1,5 @@
+{{ dd($products) }}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -164,71 +166,7 @@
 </section>
     <!-- product Section End -->
 
-    <!-- Intro Section Start -->
-    <!-- <section id="intro" class="intro section-padding">
-      <div class="container">
-     <div class="row">
-      <div class="col-12">
-        <div class="section-title-header text-center">
-          <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Why You Should Join?</h2>
-          <p class="wow fadeInDown" data-wow-delay="0.2s">Discover the features and benefits of our web app, built to enhance your experience. Whether you are new to tech or a seasoned user, this app is designed for everyone!</p>
-        </div>
-      </div>
-     </div>
-     <div class="row intro-wrapper">
-      <div class="col-lg-4 col-md-6 col-xs-12">
-        <div class="single-intro-text mb-70">
-          <i class="lni-microphone"></i>
-          <h3>Seamless Communication</h3>
-          <p>Stay connected with easy-to-use chat features that make communication efficient and fun.</p>
-          <span class="count-number">01</span>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-xs-12">
-        <div class="single-intro-text">
-          <i class="lni-users"></i>
-          <h3>Interactive Community</h3>
-          <p>Join a growing community of like-minded individuals and collaborate on exciting projects.</p>
-          <span class="count-number">02</span>
-        </div>
-        <div class="border-shap left"></div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-xs-12">
-        <div class="single-intro-text mb-70">
-          <i class="lni-bullhorn"></i>
-          <h3>Stay Updated</h3>
-          <p>Get real-time notifications and stay updated with the latest trends and updates.</p>
-          <span class="count-number">03</span>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-xs-12">
-        <div class="single-intro-text mb-70">
-          <i class="lni-heart"></i>
-          <h3>Get Inspired</h3>
-          <p>Explore new ideas, share your vision, and get inspired by others in the community.</p>
-          <span class="count-number">04</span>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-xs-12">
-        <div class="single-intro-text mb-70">
-          <i class="lni-cup"></i>
-          <h3>Collaborate with Ease</h3>
-          <p>Our web app simplifies the collaboration process, making it easier for teams to work together.</p>
-          <span class="count-number">05</span>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-xs-12">
-        <div class="single-intro-text mb-70">
-          <i class="lni-gallery"></i>
-          <h3>Meet New Faces</h3>
-          <p>Expand your network by meeting new people and connecting with professionals worldwide.</p>
-          <span class="count-number">06</span>
-        </div>
-      </div>
-      </div>
-     </div>
-    </section> -->
-    <!-- Intro Section End -->
+
     
  <footer>
       <div class="container">

@@ -79,7 +79,8 @@ class VendorController extends Controller
         public function landing()
         {
             $products = Product::all(); // fetch all products from DB
-            return view('buyer.landing', compact('products'));
+            
+            return view('vendor.v-landing', compact('products'));
         }
 
 }
