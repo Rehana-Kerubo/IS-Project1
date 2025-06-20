@@ -9,12 +9,12 @@
   <div class="checkout-card">
     <img src="{{ $product->image }}" alt="{{ $product->name }}" class="checkout-image">
 
-    <p>FORM ACTION URL: {{ route('buyer.checkout.process') }}</p>
+   
 
 
-    <form id="checkoutForm" method="POST" action="{{ route('buyer.checkout.process') }}">
+    <form id="checkoutForm" method="POST" action="{{ route('buyer.payment-loader') }}">
       @csrf
-      <input type="hidden" name="product_id" value="{{ $product->id }}">
+      <input type="hidden" name="product_id" value="{{ $product->product_id }}">
       
 
       <label>Price (per item):</label>

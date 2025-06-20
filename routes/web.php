@@ -38,10 +38,10 @@ Route::get('/buyer/search', [BuyerController::class, 'search'])->name('buyer.sea
 Route::get('/buyer/checkout', [BuyerController::class, 'checkout'])->name('buyer.checkout');
 
 // POST: to handle the form submission
-Route::post('/buyer/process-checkout', [BuyerController::class, 'processCheckout'])->name('buyer.checkout.process');
 
 
-Route::get('/buyer/payment-loader', [BuyerController::class, 'paymentLoader'])->name('buyer.payment-loader');
+
+Route::post('/buyer/payment-loader', [BuyerController::class, 'paymentLoader'])->name('buyer.payment-loader');
 Route::get('/buyer/payment-success', [BuyerController::class, 'paymentSuccess'])->name('buyer.payment.success');
 
 Route::middleware(['auth:buyer'])->group(function () {
