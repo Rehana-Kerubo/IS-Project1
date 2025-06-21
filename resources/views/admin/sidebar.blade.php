@@ -81,7 +81,7 @@
         <div class="menu-section">
             <div class="menu-title">System</div>
             <a href="{{ url('/admin/profile') }}" class="menu-link">Profile</a>
-            <a href="{{ url('/') }}" class="menu-link">Logout</a>
+            <a href="{{ url('/admin/login') }}" class="menu-link">Logout</a>
         </div>
     </aside>
 
