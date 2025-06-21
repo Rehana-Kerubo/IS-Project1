@@ -47,7 +47,11 @@ return [
             'vendor' => [
             'driver' => 'session',
             'provider' => 'vendors',
-    ],
+        ],
+        'admin' => [
+        'driver' => 'session',
+        'provider' => 'admins',
+        ],
     ],
     
 
@@ -76,6 +80,10 @@ return [
         'vendors' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_VENDOR_MODEL', App\Models\Vendor::class),
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [
