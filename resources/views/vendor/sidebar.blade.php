@@ -25,6 +25,17 @@
         color: white;
         position: fixed;
     }
+    aside a {
+        color: white;
+        text-decoration: none !important;
+        display: block;
+        padding: 10px 15px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+    aside a:hover {
+        background-color: #3DCCC7;
+    }
 
     aside h2 {
         font-size: 1.3rem;
@@ -128,7 +139,6 @@
     </div>    
     <nav>
             <ul>
-                <li><a href="{{ url('/vendor/landing') }}">Home</a></li> 
                 <li><a href="{{ url('/vendor/dashboard') }}">Dashboard</a></li>
                 <li><a href="{{ url('/vendor/products') }}">Products</a></li>
                 <li><a href="{{ url('/vendor/booked') }}">Bookings</a></li>

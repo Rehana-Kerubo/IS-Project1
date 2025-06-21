@@ -11,53 +11,64 @@
 {{-- Add Inventory Form --}}
 <div class="d-flex justify-content-center">
     <div class="form-container" style="width: 100%; max-width: 500px;">
-        <form method="POST" action="{{ route('vendor.pos.inventory.store') }}">
-            @csrf
+        <form action="{{ route('vendor.pos.storeInventory') }}" method="POST">
+    @csrf
 
-            <div class="mb-3">
-                <label>Product</label>
-                <select name="product_id" class="form-control" required>
-                    @foreach($products as $product)
-                        <option value="{{ $product->id }}">{{ $product->name }} ({{ $product->price }} KSh)</option>
-                    @endforeach
-                </select>
-            </div>
+    {{-- Product Dropdown --}}
+    <div class="mb-3">
+        <label for="product_id">Product</label>
+        <select name="product_id" id="product_id" class="form-control" required onchange="fillProductDetails(this)">
+            <option value="" disabled selected>Select a product</option>
+            @foreach($products as $product)
+                <option 
+                    value="{{ $product->id }}"
+                    data-price="{{ $product->price }}"
+                    data-stock="{{ $product->available_stock }}"
+                >
+                    {{ $product->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
 
-            <div class="mb-3">
-                <label>Stock Quantity</label>
-                <input type="number" name="stock_quantity" class="form-control" required>
-            </div>
+    {{-- Auto-filled Selling Price --}}
+    <div class="mb-3">
+        <label for="selling_price">Selling Price (KSh)</label>
+        <input type="text" name="selling_price" id="selling_price" class="form-control" readonly>
+    </div>
 
-            <div class="mb-3">
-                <label>Buying Price (KSh)</label>
-                <input type="number" step="0.01" name="buying_price" class="form-control" required>
-            </div>
+    {{-- Auto-filled Stock Quantity --}}
+    <div class="mb-3">
+        <label for="stock_quantity">Stock Quantity</label>
+        <input type="number" name="stock_quantity" id="stock_quantity" class="form-control" readonly>
+    </div>
 
-            <div class="mb-3">
-                <label>Selling Price (KSh)</label>
-                <input type="number" step="0.01" name="selling_price" class="form-control" required>
-            </div>
+    {{-- Buying Price (manual) --}}
+    <div class="mb-3">
+        <label for="buying_price">Buying Price (KSh)</label>
+        <input type="number" name="buying_price" class="form-control" required>
+    </div>
 
-            <div class="mb-3">
-                <label>Low Stock Threshold</label>
-                <input type="number" name="low_stock_threshold" class="form-control" value="5">
-            </div>
+    {{-- Submit --}}
+    <div class="text-end">
+        <button type="submit" class="btn btn-primary">Add to Inventory</button>
+    </div>
+</form>
 
-            <button type="submit" class="btn btn-custom w-100">Add Inventory</button>
-        </form>
     </div>
 </div>
 
 
 {{-- Existing Inventory --}}
-<div class="table-container">
-    <h4>Current Inventory</h4>
-    <table class="table table-bordered rounded">
-        <thead class="table-light">
+@if($inventory->count())
+    <h5 class="mt-4">Current Inventory</h5>
+    <table class="table table-bordered">
+        <thead>
             <tr>
                 <th>Product</th>
-                <th>Stock</th>
-                <th>Selling Price</th>
+                <th>Stock Quantity</th>
+                <th>Buying Price (KSh)</th>
+                <th>Selling Price (KSh)</th>
             </tr>
         </thead>
         <tbody>
@@ -65,10 +76,26 @@
                 <tr>
                     <td>{{ $item->product->name }}</td>
                     <td>{{ $item->stock_quantity }}</td>
-                    <td>{{ number_format($item->selling_price, 2) }} KSh</td>
+                    <td>{{ number_format($item->buying_price, 2) }}</td>
+                    <td>{{ number_format($item->selling_price, 2) }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-</div>
+@else
+    <p class="text-muted mt-4">No inventory added yet.</p>
+@endif
+
+
+<script>
+    function fillProductDetails(selectElement) {
+        const selectedOption = selectElement.options[selectElement.selectedIndex];
+        const price = selectedOption.getAttribute('data-price');
+        const stock = selectedOption.getAttribute('data-stock');
+
+        document.getElementById('selling_price').value = price;
+        document.getElementById('stock_quantity').value = stock;
+    }
+</script>
+
 @endsection

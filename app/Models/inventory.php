@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class inventory extends Model
 {
     protected $fillable = [
-        'vendor_id',
-        'product_name',
-        'stock_quantity',
-        'price',
-        'low_stock_threshold',
-    ];
+    'product_id',
+    'vendor_id',
+    'stock_quantity',
+    'buying_price',
+    'selling_price',
+    'low_stock_threshold',
+];
+
 
     public function vendor()
     {

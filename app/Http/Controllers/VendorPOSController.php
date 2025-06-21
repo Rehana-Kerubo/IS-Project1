@@ -49,12 +49,20 @@ public function index(Request $request) {
 }
 
 
-public function inventoryPage() {
-    $products = Product::where('vendor_id', auth()->id())->get();
-    $inventory = Inventory::where('vendor_id', auth()->id())->with('product')->get();
+public function inventoryPage()
+{
+    $vendorId = auth('buyer')->id();
+
+
+    // Get only this vendor’s products
+    $products = \App\Models\Product::where('vendor_id', $vendorId)->get();
+    // dd($products);
+    // Also show current inventory
+    $inventory = \App\Models\Inventory::where('vendor_id', $vendorId)->with('product')->get();
 
     return view('vendor.pos.inventory', compact('products', 'inventory'));
 }
+
 
 public function storeInventory(Request $request) {
     $request->validate([
@@ -62,17 +70,18 @@ public function storeInventory(Request $request) {
         'stock_quantity' => 'required|integer|min:1',
         'buying_price' => 'required|numeric|min:0',
         'selling_price' => 'required|numeric|min:0',
-        'low_stock_threshold' => 'nullable|integer|min:0'
+        // 'low_stock_threshold' => 'nullable|integer|min:0'
     ]);
 
     Inventory::create([
-        'vendor_id' => auth()->id(),
-        'product_id' => $request->product_id,
-        'stock_quantity' => $request->stock_quantity,
-        'buying_price' => $request->buying_price,
-        'selling_price' => $request->selling_price,
-        'low_stock_threshold' => $request->low_stock_threshold ?? 5,
-    ]);
+    'vendor_id' => auth()->id(),
+    'product_id' => $request->product_id,
+    'stock_quantity' => $request->stock_quantity,
+    'buying_price' => $request->buying_price,
+    'selling_price' => $request->selling_price, // readonly but passed
+    'low_stock_threshold' => 5, // or whatever default
+]);
+
 
     return back()->with('success', 'Inventory added successfully!');
 }
