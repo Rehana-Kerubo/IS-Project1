@@ -1,4 +1,4 @@
-@extends('vendor.sidebar')
+@extends('vendor.pos.sidebar')
 
 @section('content')
 <div class="container">
