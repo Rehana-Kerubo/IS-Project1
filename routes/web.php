@@ -110,14 +110,15 @@ Route::post('/vendor/payment-loader', [VendorController::class, 'paymentLoader']
 Route::get('/vendor/payment-success', [VendorController::class, 'paymentSuccess'])->name('buyer.payment.success');
 
 
-//pos routes
+// POS pages
 Route::get('/vendor/pos', [VendorPOSController::class, 'index'])->name('vendor.pos');
 Route::post('/vendor/pos/sell', [VendorPOSController::class, 'recordSale'])->name('vendor.pos.sell');
 
+// Inventory management
 Route::get('/vendor/pos/inventory', [VendorPOSController::class, 'inventoryPage'])->name('vendor.pos.inventory');
-Route::post('/vendor/pos/inventory', [VendorPOSController::class, 'storeInventory'])->name('vendor.pos.inventory.store');
 Route::post('/vendor/pos/add-inventory', [VendorPOSController::class, 'storeInventory'])->name('vendor.pos.storeInventory');
 
+// Analytics (optional)
 Route::get('/vendor/pos/analytics', function () {
-    return view('vendor.pos.analytics'); // placeholder for now
+    return view('vendor.pos.analytics');
 })->name('vendor.pos.analytics');

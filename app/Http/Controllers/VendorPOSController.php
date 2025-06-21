@@ -51,8 +51,7 @@ public function index(Request $request) {
 
 public function inventoryPage()
 {
-    $vendorId = auth('buyer')->id();
-
+    $vendorId = auth()->guard('buyer')->user()->vendor->vendor_id;
 
     // Get only this vendor’s products
     $products = \App\Models\Product::where('vendor_id', $vendorId)->get();
@@ -66,15 +65,16 @@ public function inventoryPage()
 
 public function storeInventory(Request $request) {
     $request->validate([
-        'product_id' => 'required|exists:products,id',
+        'product_id' => 'required|exists:products,product_id',
         'stock_quantity' => 'required|integer|min:1',
         'buying_price' => 'required|numeric|min:0',
         'selling_price' => 'required|numeric|min:0',
-        // 'low_stock_threshold' => 'nullable|integer|min:0'
+        
     ]);
+    // dd($request->all());
 
     Inventory::create([
-    'vendor_id' => auth()->id(),
+    'vendor_id' => auth()->guard('buyer')->user()->vendor->vendor_id,
     'product_id' => $request->product_id,
     'stock_quantity' => $request->stock_quantity,
     'buying_price' => $request->buying_price,
