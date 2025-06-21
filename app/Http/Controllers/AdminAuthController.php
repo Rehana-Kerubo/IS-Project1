@@ -21,7 +21,14 @@ class AdminAuthController extends Controller
             return redirect()->intended('/admin/profile');
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials.']);
+        if (!Admin::where('email', $request->email)->exists()) {
+            return back()->withErrors(['email' => 'Invalid Email.']);
+        }
+
+        if (!Auth::guard('admin')->attempt($request->only('email', 'password'))) {
+            return back()->withErrors(['password' => 'Incorrect Password.']);
+        }
+
     }
 
     public function logout()
