@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Inventory;
 use App\Models\Sale;
@@ -37,16 +38,21 @@ public function recordSale(Request $request) {
  
 
 public function index(Request $request) {
-    $query = Inventory::where('vendor_id', auth()->id());
+    $vendorId = Auth::guard('buyer')->id(); // FIXED ✅
+
+    $query = Inventory::with('product')->where('vendor_id', $vendorId);
 
     if ($request->has('search')) {
-        $query->where('product_name', 'like', '%' . $request->search . '%');
+        $query->whereHas('product', function ($q) use ($request) {
+            $q->where('name', 'like', '%' . $request->search . '%');
+        });
     }
 
     $inventories = $query->get();
-
+    //  dd($inventories);
     return view('vendor.pos.index', compact('inventories'));
 }
+
 
 
 public function inventoryPage()
