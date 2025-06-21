@@ -107,4 +107,6 @@ Route::post('/vendor/payment-loader', [VendorController::class, 'paymentLoader']
 Route::get('/vendor/payment-success', [VendorController::class, 'paymentSuccess'])->name('buyer.payment.success');
 
 
-
+//pos routes
+Route::get('/vendor/pos', [VendorPOSController::class, 'index'])->name('vendor.pos');
+Route::post('/vendor/pos/sell', [VendorPOSController::class, 'recordSale'])->name('vendor.pos.sell');

@@ -23,4 +23,11 @@ class inventory extends Model
     {
         return $this->hasMany(Sale::class);
     }
+    public function product() 
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+
+
 }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Inventory;
+use App\Models\Sale;
+use App\Models\Vendor;
 
 class VendorPOSController extends Controller
 {
@@ -30,12 +33,26 @@ public function recordSale(Request $request) {
     $inventory->save();
 
     Sale::create([
-        'inventory_id' => $inventory->id,
-        'quantity_sold' => $request->quantity_sold,
-        'total_price' => $inventory->price * $request->quantity_sold,
+    'inventory_id' => $inventory->id,
+    'quantity_sold' => $request->quantity_sold,
+    'total_price' => ($inventory->selling_price ?? $inventory->product->price) * $request->quantity_sold,
     ]);
 
+
     return back()->with('success', 'Sale recorded!');
+}
+ 
+
+public function index(Request $request) {
+    $query = Inventory::where('vendor_id', auth()->id());
+
+    if ($request->has('search')) {
+        $query->where('product_name', 'like', '%' . $request->search . '%');
+    }
+
+    $inventories = $query->get();
+
+    return view('vendor.pos.index', compact('inventories'));
 }
 
 }
