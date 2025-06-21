@@ -6,6 +6,7 @@ use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StallPaymentController;
+use App\Http\Controllers\AdminAuthController;
 
 
 Route::get('/', function () {
@@ -110,3 +111,16 @@ Route::get('/vendor/payment-success', [VendorController::class, 'paymentSuccess'
 //pos routes
 Route::get('/vendor/pos', [VendorPOSController::class, 'index'])->name('vendor.pos');
 Route::post('/vendor/pos/sell', [VendorPOSController::class, 'recordSale'])->name('vendor.pos.sell');
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('/login', [AdminAuthController::class, 'login']);
+    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+
+    Route::middleware(['auth:admin'])->group(function () {
+        Route::get('/profile', function () {
+            return view('admin/profile'); // make this view too
+        })->name('admin.profile');
+    });
+});
