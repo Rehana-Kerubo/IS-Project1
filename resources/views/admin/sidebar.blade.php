@@ -67,9 +67,8 @@
 
         <div class="menu-section">
             <div class="menu-title">User Management</div>
-            <a href="{{ url('/admin/buyers') }}" class="menu-link">Buyers</a>
-            <a href="{{ url('/admin/vendors') }}" class="menu-link">Vendors</a>
-            <a href="{{ url('/admin/admins') }}" class="menu-link">Admins</a>
+            <a href="{{ route('admin.analytics.buyers') }}" class="menu-link">Buyers</a>
+            <a href="{{ route('admin.analytics.vendors') }}" class="menu-link">Vendors</a>
         </div>
 
         <div class="menu-section">
