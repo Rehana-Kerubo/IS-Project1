@@ -25,6 +25,17 @@
         color: white;
         position: fixed;
     }
+    aside a {
+        color: white;
+        text-decoration: none !important;
+        display: block;
+        padding: 10px 15px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+    aside a:hover {
+        background-color: #3DCCC7;
+    }
 
     aside h2 {
         font-size: 1.3rem;
@@ -125,13 +136,14 @@
         <i class="lni lni-arrow-left" style="margin-left: 10px;"></i>
         </a>
         <h2 style="margin: 0;">Hey {{ Auth::check() ? Auth::guard('buyer')->user()->full_name : 'Seller' }}🫶🏼</h2>
-    </div>    <nav>
+    </div>    
+    <nav>
             <ul>
-                <li><a href="{{ url('/vendor/landing') }}">Home</a></li> 
                 <li><a href="{{ url('/vendor/dashboard') }}">Dashboard</a></li>
                 <li><a href="{{ url('/vendor/products') }}">Products</a></li>
                 <li><a href="{{ url('/vendor/booked') }}">Bookings</a></li>
                 <li><a href="{{ url('/vendor/book-stall') }}">Book a Stall</a></li>
+                <li><a href="{{ url('/vendor/pos') }}">POS</a></li>
                 <li><a href="{{ url('/vendor/analytics') }}">Analytics</a></li>
                 <li><a href="{{ url('/') }}">Log Out</a></li>
             </ul>

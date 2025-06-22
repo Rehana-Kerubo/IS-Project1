@@ -1,4 +1,4 @@
-@extends('vendor.sidebar')
+@extends('vendor.pos.sidebar')
 
 @section('content')
 <div class="container">
@@ -31,7 +31,8 @@
             <tr>
                 <td>{{ $item->product->name }}</td>
                 <td>{{ $item->stock_quantity }}</td>
-                <td>{{ number_format($item->price, 2) }}</td>
+                <td>{{ number_format($item->selling_price ?? $item->product->price, 2) }}</td> <!-- ✅ fix -->
+
                 <td>
                     <!-- Button to trigger modal -->
                     <button class="btn btn-sm btn-primary" 
