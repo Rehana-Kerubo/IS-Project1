@@ -118,9 +118,8 @@ Route::post('/vendor/pos/sell', [VendorPOSController::class, 'recordSale'])->nam
 
 Route::get('/vendor/pos/inventory', [VendorPOSController::class, 'inventoryPage'])->name('vendor.pos.inventory');
 Route::post('/vendor/pos/inventory', [VendorPOSController::class, 'storeInventory'])->name('vendor.pos.inventory.store');
-Route::get('/vendor/pos/analytics', function () {
-    return view('vendor.pos.analytics'); // placeholder for now
-})->name('vendor.pos.analytics');
+Route::get('/vendor/pos/analytics', [VendorPOSController::class, 'analytics'])->name('vendor.pos.analytics');
+
 
 
 // Route::prefix('admin')->group(function () {

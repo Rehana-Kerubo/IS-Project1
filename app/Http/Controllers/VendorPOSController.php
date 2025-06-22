@@ -101,5 +101,36 @@ public function storeInventory(Request $request) {
     return back()->with('success', 'Inventory added successfully!');
 }
 
+public function analytics()
+{
+    $vendorId = auth()->guard('buyer')->user()->vendor->vendor_id;
+
+    $sales = Sale::whereHas('inventory', function ($q) use ($vendorId) {
+        $q->where('vendor_id', $vendorId);
+    })->with('inventory.product')->get();
+
+    $totalSales = $sales->sum('total_price');
+    $totalProfit = $sales->sum('profit');
+
+    $productSales = [];
+
+    foreach ($sales as $sale) {
+        $productName = $sale->inventory->product->name ?? 'Unknown';
+        if (!isset($productSales[$productName])) {
+            $productSales[$productName] = 0;
+        }
+        $productSales[$productName] += $sale->quantity_sold;
+    }
+
+    $mostSoldProduct = collect($productSales)->sortDesc()->keys()->first();
+    $labels = array_keys($productSales);
+    $data = array_values($productSales);
+
+    return view('vendor.pos.analytics', compact(
+        'totalSales', 'totalProfit', 'mostSoldProduct', 'labels', 'data'
+    ));
+}
+
+
 
 }
