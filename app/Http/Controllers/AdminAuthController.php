@@ -14,22 +14,26 @@ class AdminAuthController extends Controller
     }
 
     public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
+{
+    $credentials = $request->only('email', 'password');
 
-        if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->intended('/admin/profile');
+    if (Auth::guard('admin')->attempt($credentials)) {
+        $admin = Auth::guard('admin')->user();
+
+        if ($admin->must_change_password) {
+            return redirect()->route('admin.password.change');
         }
 
-        if (!Admin::where('email', $request->email)->exists()) {
-            return back()->withErrors(['email' => 'Invalid Email.']);
-        }
-
-        if (!Auth::guard('admin')->attempt($request->only('email', 'password'))) {
-            return back()->withErrors(['password' => 'Incorrect Password.']);
-        }
-
+        return redirect()->intended('/admin/profile');
     }
+
+    // Handle failed login
+    if (!Admin::where('email', $request->email)->exists()) {
+        return back()->withErrors(['email' => 'Invalid Email.']);
+    }
+
+    return back()->withErrors(['password' => 'Incorrect Password.']);
+}
 
     public function logout()
     {
