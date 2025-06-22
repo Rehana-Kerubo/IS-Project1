@@ -155,8 +155,14 @@
         <button type="submit" class="btn buy-btn">Buy Now</button>
       </form>
 
-        <button class="btn wishlist-btn">Add to Wishlist</button>
-      </div>
+      <form method="POST" action="{{ route('buyer.bookProduct') }}">
+    @csrf
+    <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+    <button type="submit" class="btn wishlist-btn">Add to Wishlist</button>
+</form>
+
+
+    </div>
     </div>
   @endforeach
 </div>
