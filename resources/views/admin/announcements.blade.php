@@ -1,0 +1,58 @@
+@extends('admin.sidebar')
+
+@section('content')
+<div class="container mt-4">
+    <h1 class="mb-4">Announcements</h1>
+
+    @if (session('status'))
+        <div class="alert alert-success">{{ session('status') }}</div>
+    @endif
+
+    <div class="mb-3 text-end">
+        <a href="{{ route('admin.announcements.create') }}" class="btn btn-primary">New Announcement</a>
+    </div>
+
+    @if ($announcements->isEmpty())
+        <div class="alert alert-info">No announcements have been posted yet.</div>
+    @else
+        <div class="card shadow">
+            <div class="card-body table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Posted On</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($announcements as $announcement)
+                            <tr>
+                                
+                                <td>{{ $announcement->title }}</td>
+                                <td>{{ Str::limit($announcement->description, 50) }}</td>
+                                <td>{{ $announcement->start_date }}</td>
+                                <td>{{ $announcement->end_date }}</td>
+                                <td>{{ $announcement->created_at->format('M d, Y') }}</td>
+                                <td>
+                                    <a href="{{ route('admin.announcements.edit', $announcement->announcement_id) }}" class="btn btn-sm btn-warning">Edit</a>
+
+                                    <form action="{{ route('admin.announcements.destroy', $announcement->announcement_id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Delete this announcement?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    @endif
+</div>
+@endsection
