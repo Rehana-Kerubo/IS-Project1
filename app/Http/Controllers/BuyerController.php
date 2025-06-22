@@ -60,22 +60,7 @@ public function checkout(Request $request)
 }
 
 
-// Handle the form data and go to payment loader
-// public function processCheckout(Request $request)
-// {
-//     $product = Product::findOrFail($request->product_id); // ✅ will now work
-//     $quantity = $request->input('quantity', 1); // Default to 1 if not provided
-//     $total = $product->price * $quantity;
-//     // Store the checkout data in the session
-//     session([
-//         'product_name' => $product->name,
-//         'quantity' => $quantity,
-//         'total' => $total, // Or your own logic
-//         'pickup_date' => now()->addDays(2)->toDateString(),
-//     ]);
 
-//     return redirect()->route('buyer.payment-loader');
-// }
 
 
 public function paymentLoader(Request $request)
