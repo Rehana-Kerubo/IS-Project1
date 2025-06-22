@@ -7,7 +7,9 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StallPaymentController;
 use App\Http\Controllers\AdminAuthController;
-
+use App\Http\Controllers\AdminPasswordController;
+use App\Http\Controllers\AdminAnalyticsController;
+use App\Http\Controllers\AnnouncementController;
 
 Route::get('/', function () {
     return view('landing');
@@ -120,7 +122,24 @@ Route::prefix('admin')->group(function () {
 
     Route::middleware(['auth:admin'])->group(function () {
         Route::get('/profile', function () {
-            return view('admin/profile'); // make this view too
+            return view('admin/profile'); 
         })->name('admin.profile');
+        Route::get('/admin/change-password', [AdminPasswordController::class, 'showChangeForm'])->name('admin.password.change');
+        Route::post('/admin/change-password', [AdminPasswordController::class, 'updatePassword'])->name('admin.password.update');
+
     });
+    Route::get('/admin/vendor-analytics', [AdminAnalyticsController::class, 'vendorAnalytics'])->name('admin.analytics.vendors');
+    Route::get('/admin/buyer-analytics', [AdminAnalyticsController::class, 'buyerAnalytics'])->name('admin.analytics.buyers');
+
 });
+
+
+Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
+    Route::get('/announcements', [AnnouncementController::class, 'index'])->name('announcements.index');
+    Route::get('/announcements/create', [AnnouncementController::class, 'create'])->name('announcements.create');
+    Route::post('/announcements', [AnnouncementController::class, 'store'])->name('announcements.store');
+    Route::get('/announcements/{id}/edit', [AnnouncementController::class, 'edit'])->name('announcements.edit');
+    Route::put('/announcements/{id}', [AnnouncementController::class, 'update'])->name('announcements.update');
+    Route::delete('/announcements/{id}', [AnnouncementController::class, 'destroy'])->name('announcements.destroy');
+});
+
