@@ -56,8 +56,8 @@ Route::middleware(['auth:buyer'])->group(function () {
     Route::post('/buyer/be-vendor', [VendorController::class, 'store'])->name('buyer.be-vendor.submit');
 });
 
-Route::post('/buyer/book', [BuyerController::class, 'bookProduct'])->name('buyer.book');
-Route::post('/buyer/wishlist', [BuyerController::class, 'addToWishlist'])->name('buyer.wishlist.store');
+Route::post('/buyer/bookProduct', [BuyerController::class, 'bookProduct'])->name('buyer.bookProduct');
+
 
 
 

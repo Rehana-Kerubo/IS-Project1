@@ -65,24 +65,52 @@ public function checkout(Request $request)
 
 public function paymentLoader(Request $request)
 {
-    $product = Product::findOrFail($request->product_id); // ✅ will now work
-    $quantity = $request->input('quantity', 1); // Default to 1 if not provided
-    $total = $product->price * $quantity;
-    // Store the checkout data in the session
+    $product = Product::findOrFail($request->product_id);
+    $quantity = $request->input('quantity', 1);
+    $type = $request->input('type', 'purchase'); // default to normal purchase
+
+    $fullTotal = $product->price * $quantity;
+
+    // Calculate fee based on type
+    $fee = match ($type) {
+        'booking' => $fullTotal * 0.2,
+        'cancellation' => $fullTotal * 0.1,
+        default => $fullTotal,
+    };
+
+    // Store data in session
     session([
+        'type' => $type,
+        'product_id' => $product->product_id,
         'product_name' => $product->name,
         'quantity' => $quantity,
-        'total' => $total, // Or your own logic
+        'total' => round($fee),
         'pickup_date' => now()->addDays(2)->toDateString(),
     ]);
-    // Simulate a small delay before redirecting to the success page
+
     return view('buyer.payment-loader');
 }
 
 public function paymentSuccess()
 {
+    $type = session('type');
+    $buyer = auth('buyer')->user();
+
+    if ($type === 'booking') {
+        \App\Models\Booking::create([
+            'buyer_id' => $buyer->buyer_id,
+            'product_id' => session('product_id'),
+            'quantity' => session('quantity'),
+            'status' => 'booked',
+            'commitment_fee_paid' => true,
+        ]);
+    }
+
+    // You can add similar logic later for 'cancellation'
+
     return view('buyer.payment-success');
 }
+
 
 
 public function bookProduct(Request $request)
@@ -92,12 +120,9 @@ public function bookProduct(Request $request)
     ]);
 
     $product = Product::findOrFail($request->product_id);
-
-    return view('buyer.checkout', [
-        'product' => $product,
-        'type' => 'booking'
-    ]);
+    return view('buyer.booking-checkout', compact('product'));
 }
+
 
 
 
