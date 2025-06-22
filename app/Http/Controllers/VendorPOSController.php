@@ -17,6 +17,11 @@ class VendorPOSController extends Controller
 
 // Record sale
 public function recordSale(Request $request) {
+    $request->validate([
+        'inventory_id' => 'required|exists:inventories,id',
+        'quantity_sold' => 'required|integer|min:1',
+    ]);
+
     $inventory = Inventory::findOrFail($request->inventory_id);
 
     if ($inventory->stock_quantity < $request->quantity_sold) {
@@ -25,16 +30,20 @@ public function recordSale(Request $request) {
 
     $inventory->stock_quantity -= $request->quantity_sold;
     $inventory->save();
+    // dd($inventory->toArray());
+
+    $profit=($inventory->selling_price - $inventory->buying_price) * $request->quantity_sold;
 
     Sale::create([
-    'inventory_id' => $inventory->id,
-    'quantity_sold' => $request->quantity_sold,
-    'total_price' => ($inventory->selling_price ?? $inventory->product->price) * $request->quantity_sold,
+        'inventory_id' => $inventory->id,
+        'quantity_sold' => $request->quantity_sold,
+        'total_price' => $inventory->selling_price * $request->quantity_sold,
+        'profit' => $profit,
     ]);
-
 
     return back()->with('success', 'Sale recorded!');
 }
+
  
 
 public function index(Request $request) {

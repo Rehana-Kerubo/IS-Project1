@@ -22,7 +22,7 @@
 {{-- Add Inventory Form --}}
 <div class="d-flex justify-content-center">
     <div class="form-container" style="width: 100%; max-width: 500px;">
-       <form action="{{ route('vendor.pos.storeInventory') }}" method="POST">
+       <form action="{{ route('vendor.pos.inventory.store') }}" method="POST">
             @csrf
 
             {{-- Product Dropdown --}}

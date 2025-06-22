@@ -10,6 +10,7 @@ class sale extends Model
         'inventory_id',
         'quantity_sold',
         'total_price',
+        'profit',
     ];
 
     public function inventory()
