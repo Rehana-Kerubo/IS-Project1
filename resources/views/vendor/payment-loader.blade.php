@@ -1,12 +1,17 @@
 @extends('vendor.sidebar')
 
-
 @section('title', 'Processing Payment')
 
 @section('content')
 <div class="loader-screen">
   <div class="loader-circle"></div>
-  <p>Processing Payment... Please wait</p>
+  <p>
+    @if(session('type') === 'stall')
+      Booking Stall for {{ session('stall_shop') }}...
+    @else
+      Processing Payment... Please wait
+    @endif
+  </p>
 </div>
 
 <style>
@@ -35,7 +40,7 @@
 
 <script>
   setTimeout(() => {
-    window.location.href = "{{ route('buyer.payment.success') }}";
+    window.location.href = "{{ route('vendor.payment.success') }}";
   }, 3000);
 </script>
 @endsection

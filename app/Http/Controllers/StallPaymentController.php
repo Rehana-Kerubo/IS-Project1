@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\StallPayment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use App\Models\Announcement;
 use Carbon\Carbon;
 use App\Models\Vendor;
@@ -82,5 +83,36 @@ class StallPaymentController extends Controller
 
         return back()->with('success', 'Expired vendor verifications revoked.');
     }
+
+    public function paymentLoader(Request $request)
+{
+    // This comes from the form
+    $vendor = Auth::guard('buyer')->user()->vendor;
+
+    // Store info in session
+    session([
+        'type' => 'stall',
+        'stall_shop' => $vendor->shop_name,
+        'announcement_id' => $request->announcement_id,
+        'vendor_id' => $vendor->vendor_id,
+        'total' => 600,
+    ]);
+
+    return view('vendor.payment-loader');
+}
+
+public function paymentSuccess()
+{
+    if (session('type') === 'stall') {
+        \App\Models\StallPayment::create([
+            'vendor_id' => session('vendor_id'),
+            'announcement_id' => session('announcement_id'),
+            'amount_paid' => session('total'),
+            'status' => 'paid',
+        ]);
+    }
+
+    return view('vendor.payment-success');
+}
 
 }

@@ -12,7 +12,7 @@
    
 
 
-    <form id="checkoutForm" method="POST" action="{{ route('buyer.payment-loader') }}">
+    <form id="checkoutForm" method="POST" action="{{ route('vendor.payment-loader') }}">
       @csrf
       <input type="hidden" name="product_id" value="{{ $product->product_id }}">
       

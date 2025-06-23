@@ -5,16 +5,28 @@
 @section('content')
 <div class="invoice">
   <h2>🎉 Payment Successful!</h2>
-  <p>Thank you for your purchase.</p>
+  <p>
+    @if(session('type') === 'stall')
+      Thank you for booking a stall, {{ session('stall_shop') }}!
+    @else
+      Thank you for your purchase.
+    @endif
+  </p>
 
   <div class="invoice-details">
-    <p><strong>Product:</strong> {{ session('product_name') }}</p>
-    <p><strong>Quantity:</strong> {{ session('quantity') }}</p>
-    <p><strong>Total Paid:</strong> KSh {{ session('total') }}</p>
-    <p><strong>Pickup Date:</strong> {{ session('pickup_date') }}</p>
+    @if(session('type') === 'stall')
+      <p><strong>Booking For:</strong> {{ session('stall_shop') }}</p>
+      <p><strong>Amount Paid:</strong> KSh {{ session('total') }}</p>
+      <p><strong>Booking Date:</strong> {{ \Carbon\Carbon::now()->toDateString() }}</p>
+    @else
+      <p><strong>Product:</strong> {{ session('product_name') }}</p>
+      <p><strong>Quantity:</strong> {{ session('quantity') }}</p>
+      <p><strong>Total Paid:</strong> KSh {{ session('total') }}</p>
+      <p><strong>Pickup Date:</strong> {{ session('pickup_date') }}</p>
+    @endif
   </div>
 
-  <a href="{{ url('/vendor/landing') }}" class="btn">Back to Shopping</a>
+  <a href="{{ url('/vendor/v-landing') }}" class="btn">Back to Dashboard</a>
 </div>
 
 <style>
