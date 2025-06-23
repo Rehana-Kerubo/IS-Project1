@@ -8,7 +8,8 @@
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span>
                     <strong>{{ $event->title }}</strong><br>
-                    {{ $event->start_date }} to {{ $event->end_date }}
+                    {{ $event->start_date }} to {{ $event->end_date }}<br>
+                    {{ $event->description }}
                 </span>
                 <a href="{{ route('stall.create', $event->announcement_id) }}" class="btn btn-primary">Book Stall</a>
             </li>

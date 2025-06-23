@@ -1,8 +1,9 @@
 @extends('vendor.sidebar')
 
 @section('content')
-    <h2>Book Stall for: {{ $event->title }}</h2>
-
+    <h2 class="text-center mb-4" style="color: #000000;">Book Stall for: {{ $event->title }}</h2>
+    <div class="d-flex justify-content-center align-items-center">
+    <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
     <form action="{{ route('stall.store') }}" method="POST">
         @csrf
         <div>
@@ -19,6 +20,10 @@
             <input type="text" name="amount_paid" class="form-control" value="Ksh. 600.00" readonly>
         </div>
 
-        <button type="submit" class="btn btn-success">Make Payment</button>
+        <button type="submit" class="btn btn-success" style="background-color:rgb(7, 117, 82); border-color:rgb(7, 117, 82); text-align: center; width: 100%;">
+            Make Payment
+        </button>
     </form>
+    </div>
+    </div>
 @endsection
