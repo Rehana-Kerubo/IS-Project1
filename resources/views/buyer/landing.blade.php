@@ -90,9 +90,9 @@
        <div class="row justify-content-center">
       <div class="col-10">
         <div class="count-wrapper text-center">
-          <h2 class="flea-market-heading">Flea Market Countdown</h2>
+          <h2 class="flea-market-heading">{{ $announcement->title }} Flea Market Countdown</h2>
           <div class="time-countdown">
-            <div id="clock" class="time-count"></div>
+            <div id="clock" data-start="{{ \Carbon\Carbon::parse($announcement->start_date)->format('Y/m/d H:i:s') }}"></div>
           </div>
         </div>
       </div>
@@ -116,7 +116,7 @@
       <div class="col-lg-3 col-md-6 col-xs-12">
         <ul>
           <li><i class="lni-calendar"></i></li>
-          <li><span><b>Date & Time</b> 9AM - 5PM, May 21st</span></li> <!-- updated -->
+          <li><span><b>Date</b> {{ \Carbon\Carbon::parse($announcement->start_date)->format('F jS, Y') }}</span></li> <!-- updated -->
         </ul>
       </div>
       <div class="col-lg-3 col-md-6 col-xs-12">

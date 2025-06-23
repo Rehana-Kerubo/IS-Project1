@@ -14,16 +14,20 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\AdminPasswordController;
 use App\Http\Controllers\AdminAnalyticsController;
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\BookedProductsController;
+use App\Http\Controllers\LandingController;
+use App\Http\Controllers\BuyerLandingController;
 
-Route::get('/', function () {
-    return view('landing');
-});
+Route::get('/', [LandingController::class, 'landing'])->name('landing');
+
 Route::get('/login-register', function () {
     return view('login-register');
 });
 Route::get('/buyer/landing', function () {
     return view('buyer/landing');
 });
+
+
 
 Route::get('/buyer/view-acc', function () {
     return view('buyer/view-acc');
@@ -85,7 +89,13 @@ Route::get('/vendor/add-product', function() {
     return view('/vendor/add-product');
 });
 Route::get('/vendor/landing', [VendorController::class, 'landing'])->name('vendor.landing');
-
+Route::put('/vendor/update-profile', [VendorController::class, 'updateProfile'])->name('vendor.update-profile');
+Route::get('/vendor/profile', function() {
+    return view('/vendor/profile');
+});
+Route::get('/vendor/edit', function() {
+    return view('/vendor/edit');
+});
 Route::put('/vendor/dashboard/update', [VendorController::class, 'update'])->name('vendor.update');
 
 Route::middleware(['auth:buyer'])->group(function () {
@@ -128,6 +138,11 @@ Route::post('/vendor/pos/sell', [VendorPOSController::class, 'recordSale'])->nam
 Route::get('/vendor/pos/inventory', [VendorPOSController::class, 'inventoryPage'])->name('vendor.pos.inventory');
 Route::post('/vendor/pos/inventory', [VendorPOSController::class, 'storeInventory'])->name('vendor.pos.inventory.store');
 Route::get('/vendor/pos/analytics', [VendorPOSController::class, 'analytics'])->name('vendor.pos.analytics');
+
+// Booked Products
+Route::get('/vendor/booked', [BookedProductsController::class, 'index'])->name('vendor.booked.index');
+Route::get('/vendor/booked-product/{product_id}', [BookedProductsController::class, 'show'])->name('vendor.booked-product.show');
+Route::put('/vendor/booked-product/{id}/mark-paid', [BookedProductsController::class, 'markCommitmentPaid'])->name('vendor.markCommitmentPaid');
 
 
 

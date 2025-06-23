@@ -37,6 +37,7 @@
             color: #adb5bd;
             margin-bottom: 10px;
             font-weight: bold;
+            border-bottom: 1px solidrgb(166, 173, 181);
         }
 
         .menu-link {

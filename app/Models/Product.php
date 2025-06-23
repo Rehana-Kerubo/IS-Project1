@@ -24,4 +24,12 @@ class Product extends Model
     {
         return $this->belongsTo(Vendor::class);
     }
+    public function booking()
+    {
+        return $this->hasMany(Booking::class, 'product_id');
+    }
+    public function getBookingCountAttribute()
+    {
+        return $this->booking()->count();
+    }
 }

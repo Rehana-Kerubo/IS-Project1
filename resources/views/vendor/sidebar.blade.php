@@ -7,7 +7,6 @@
     <!-- Bootstrap + Lineicons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.lineicons.com/3.0/lineicons.css">
-
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -31,33 +30,6 @@
             margin: 0;
             font-weight: 600;
         }
-
-        aside nav ul {
-            list-style: none;
-            padding: 0;
-            margin-top: 30px;
-        }
-
-        aside nav ul li {
-            margin: 20px 0;
-            padding: 8px 0;
-        }
-
-        aside nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            transition: all 0.2s;
-        }
-
-        aside nav ul li a:hover {
-            text-decoration: none;
-            color: #FDFDFD;
-            transform: translateX(5px);
-        }
-
         main {
             margin-left: 240px;
             padding: 50px 40px;
@@ -135,10 +107,39 @@
             align-items: center;
             justify-content: space-between;
         }
-
         .sidebar-header i {
             font-size: 1.3rem;
         }
+        .menu-section {
+            margin-top: 30px;
+        }
+        .menu-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            color: #e0f7f6;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 5px;
+        }
+
+        aside a {
+            color: white;
+            text-decoration: none !important;
+            display: flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease-in-out;
+            font-size: 0.95rem;
+            margin: 5px 0;
+        }
+
+        aside a:hover {
+            background-color: #3DCCC7;
+        }
+
     </style>
 </head>
 <body>
@@ -151,19 +152,36 @@
         <h2>Hey {{ Auth::guard('buyer')->check() ? Auth::guard('buyer')->user()->full_name : 'Seller' }}🫶🏼</h2>
     </div>
 
-    <nav>
-            <div class="menu-section">
-                <div class="menu-title">Details</div>
-                    <a href="{{ url('/vendor/dashboard') }}">Dashboard</a></li>
-                    <a href="{{ url('/vendor/products') }}">Products</a></li>
-            <li><a href="{{ url('/vendor/products') }}">Products</a></li>
-            <li><a href="{{ url('/vendor/booked') }}">Bookings</a></li>
-            <li><a href="{{ url('/vendor/book-stall') }}">Book a Stall</a></li>
-            <li><a href="{{ url('/vendor/pos') }}">POS</a></li>
-            <li><a href="{{ url('/vendor/analytics') }}">Analytics</a></li>
-            <li><a href="{{ url('/') }}">Log Out</a></li>
-        </ul>
-    </nav>
+    <div class="menu-section">
+        <div class="menu-title">Details</div>
+        <a href="{{ url('/vendor/dashboard') }}">Shop Dashboard</a>
+        <a href="{{ url('/vendor/profile') }}">Profile</a>
+    </div>
+
+    <div class="menu-section">
+        <div class="menu-title">Manage Shop</div>
+        <a href="{{ url('/vendor/products') }}">Products</a>
+        <a href="{{ url('/vendor/booked') }}">Bookings</a>
+        
+    </div>
+
+    @if(Auth::guard('buyer')->user()->vendor->status === 'verified')
+    <div class="menu-section">
+        <div class="menu-title">Flea Market</div>
+        <a href="{{ url('/vendor/pos') }}">POS</a>
+        
+    </div>
+    @else
+    <div class="menu-section">
+        <div class="menu-title">Flea Market</div>
+        <a href="{{ url('/vendor/book-stall') }}">Book a Stall</a>
+    </div>
+    @endif
+
+    <div class="menu-section">
+        <div class="menu-title">System</div>
+        <a href="{{ url('/') }}">Log Out</a>
+    </div>
 </aside>
 
 <main>
