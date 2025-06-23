@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\StallPayment;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Announcement;
-
+use Carbon\Carbon;
+use App\Models\Vendor;
 
 class StallPaymentController extends Controller
 {
@@ -41,4 +42,45 @@ class StallPaymentController extends Controller
 
         return redirect('/vendor/book-stall')->with('success', 'Stall booked successfully!');
     }
+    public function admin_index()
+    {
+        $events = Announcement::latest()->get(); // flea market events
+
+        return view('admin.stall-bookings', compact('events'));
+    }
+
+    public function show(Announcement $announcement)
+{
+    $stallPayments = StallPayment::with('vendor')
+        ->where('announcement_id', $announcement->announcement_id)
+        ->get();
+
+    // Get expired vendors for this announcement only
+    $expiredVendors = Vendor::where('status', 'verified')
+        ->where('verified_until', '<', Carbon::now())
+        ->whereIn('vendor_id', $stallPayments->pluck('vendor_id'))
+        ->get();
+
+    return view('admin.show-stall-bookings', compact('announcement', 'stallPayments', 'expiredVendors'));
+}
+    public function verifyVendor(Request $request, Vendor $vendor)
+    {
+        $vendor->status = 'verified';
+
+        // Optional: store end date for revoking access later
+        $vendor->verified_until = Carbon::parse($request->announcement_end_date);
+
+        $vendor->save();
+
+        return back()->with('success', 'Vendor has been verified until the end of the event.');
+    }
+    public function unverifyExpiredVendors()
+    {
+        Vendor::where('status', 'verified')
+            ->where('verified_until', '<', Carbon::now())
+            ->update(['status' => 'unverified']);
+
+        return back()->with('success', 'Expired vendor verifications revoked.');
+    }
+
 }
