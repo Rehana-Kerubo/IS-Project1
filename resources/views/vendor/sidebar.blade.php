@@ -4,158 +4,173 @@
     <meta charset="UTF-8">
     <title>Vendor Dashboard</title>
 
-    <!-- Bootstrap CSS (official CDN) -->
+    <!-- Bootstrap + Lineicons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- LineIcons CSS for icons -->
     <link rel="stylesheet" href="https://cdn.lineicons.com/3.0/lineicons.css">
 
-    <!-- Custom CSS styling -->
-<style>
-    body {
-        font-family: 'Segoe UI', sans-serif;
-        background-color: #f5fafa;
-        display: flex;
-    }
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f5fafa;
+            display: flex;
+            margin: 0;
+        }
 
-    aside {
-        width: 220px;
-        height: 100vh;
-        background: #07BEB8;
-        padding: 20px;
-        color: white;
-        position: fixed;
-    }
-    aside a {
-        color: white;
-        text-decoration: none !important;
-        display: block;
-        padding: 10px 15px;
-        border-radius: 8px;
-        transition: background-color 0.3s ease;
-    }
-    aside a:hover {
-        background-color: #3DCCC7;
-    }
+        aside {
+            width: 240px;
+            height: 100vh;
+            background: #07BEB8;
+            padding: 25px 20px;
+            color: white;
+            position: fixed;
+            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.05);
+        }
 
-    aside h2 {
-        font-size: 1.3rem;
-        margin-bottom: 20px;
-    }
+        aside h2 {
+            font-size: 1.2rem;
+            margin: 0;
+            font-weight: 600;
+        }
 
-    aside nav ul {
-        list-style: none;
-        padding: 0;
-    }
+        aside nav ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 30px;
+        }
 
-    aside nav ul li {
-        margin: 15px 0;
-    }
+        aside nav ul li {
+            margin: 20px 0;
+            padding: 8px 0;
+        }
 
-    aside nav ul li a {
-        color: white;
-        text-decoration: none;
-        font-weight: 500;
-    }
+        aside nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s;
+        }
 
-    aside nav ul li a:hover {
-        text-decoration: underline;
-    }
+        aside nav ul li a:hover {
+            text-decoration: none;
+            color: #FDFDFD;
+            transform: translateX(5px);
+        }
 
-    main {
-        margin-left: 240px;
-        padding: 40px;
-        flex-grow: 1;
-    }
+        main {
+            margin-left: 240px;
+            padding: 50px 40px;
+            flex-grow: 1;
+        }
 
-    .account-card {
-        background: white;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        max-width: 600px;
-    }
+        .account-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            max-width: 600px;
+        }
 
-    .profile-pic {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 20px;
-    }
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 3px solid #07BEB8;
+        }
 
-    .edit-btn {
-        background-color: #07BEB8;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 8px;
-        margin-top: 20px;
-    }
+        .edit-btn {
+            background-color: #07BEB8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
 
-    .edit-btn:hover {
-        background-color: #3DCCC7;
-    }
+        .edit-btn:hover {
+            background-color: #3DCCC7;
+        }
+
         .card {
-    border-radius: 15px;
-    overflow: hidden;
-    }
+            border-radius: 15px;
+            overflow: hidden;
+        }
 
-    .card-title {
-        color: #07BEB8;
-        font-weight: 600;
-    }
+        .card-title {
+            color: #07BEB8;
+            font-weight: 600;
+        }
 
-    .btn-danger {
-        background-color: #FF6B6B;
-        border: none;
-    }
+        .btn-danger {
+            background-color: #FF6B6B;
+            border: none;
+        }
 
-    .btn-danger:hover {
-        background-color: #ff4c4c;
-    }
-    .badge-success {
-        background-color: #07BEB8;
-        color: white;
-        padding: 6px 14px;
-        border-radius: 20px;
-    }
+        .btn-danger:hover {
+            background-color: #ff4c4c;
+        }
 
-    .badge-warning {
-        background-color: #FFC107;
-        color: black;
-        padding: 6px 14px;
-        border-radius: 20px;
-    }
-</style>
+        .badge-success {
+            background-color: #07BEB8;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .badge-warning {
+            background-color: #FFC107;
+            color: black;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sidebar-header i {
+            font-size: 1.3rem;
+        }
+    </style>
 </head>
 <body>
 
-    <aside>
-    <div style="display: flex; align-items: center; justify-content: space-between;">
-        <a href="{{ url('/vendor/landing') }}" style="color: white; text-decoration: none; font-size: 20px;" title="Back to Shop">
-        <i class="lni lni-arrow-left" style="margin-left: 10px;"></i>
+<aside>
+    <div class="sidebar-header">
+        <a href="{{ url('/vendor/landing') }}" style="color: white; text-decoration: none;" title="Back to Shop">
+            <i class="lni lni-arrow-left"></i>
         </a>
-        <h2 style="margin: 0;">Hey {{ Auth::check() ? Auth::guard('buyer')->user()->full_name : 'Seller' }}🫶🏼</h2>
-    </div>    
+        <h2>Hey {{ Auth::guard('buyer')->check() ? Auth::guard('buyer')->user()->full_name : 'Seller' }}🫶🏼</h2>
+    </div>
+
     <nav>
-            <ul>
-                <li><a href="{{ url('/vendor/dashboard') }}">Dashboard</a></li>
-                <li><a href="{{ url('/vendor/products') }}">Products</a></li>
-                <li><a href="{{ url('/vendor/booked') }}">Bookings</a></li>
-                <li><a href="{{ url('/vendor/book-stall') }}">Book a Stall</a></li>
-                <li><a href="{{ url('/vendor/pos') }}">POS</a></li>
-                <li><a href="{{ url('/vendor/analytics') }}">Analytics</a></li>
-                <li><a href="{{ url('/') }}">Log Out</a></li>
-            </ul>
-        </nav>
-    </aside>
+            <div class="menu-section">
+                <div class="menu-title">Details</div>
+                    <a href="{{ url('/vendor/dashboard') }}">Dashboard</a></li>
+                    <a href="{{ url('/vendor/products') }}">Products</a></li>
+            <li><a href="{{ url('/vendor/products') }}">Products</a></li>
+            <li><a href="{{ url('/vendor/booked') }}">Bookings</a></li>
+            <li><a href="{{ url('/vendor/book-stall') }}">Book a Stall</a></li>
+            <li><a href="{{ url('/vendor/pos') }}">POS</a></li>
+            <li><a href="{{ url('/vendor/analytics') }}">Analytics</a></li>
+            <li><a href="{{ url('/') }}">Log Out</a></li>
+        </ul>
+    </nav>
+</aside>
 
-    <main>
-        @yield('content')
-    </main>
+<main>
+    @yield('content')
+</main>
 
-    <!-- Bootstrap JS (optional, for dropdowns, etc.) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 @yield('scripts')
 </body>
 </html>
