@@ -19,6 +19,7 @@ class Buyer extends Authenticatable
         'full_name',
         'email',
         'phone_number',
+        'profile_pic',
     ];
 
     protected $table = 'buyers'; // Make sure Laravel knows which table
