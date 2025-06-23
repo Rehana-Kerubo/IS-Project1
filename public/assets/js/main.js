@@ -20,13 +20,19 @@
     /* ==========================================================================
        countdown timer
        ========================================================================== */
-     jQuery('#clock').countdown('2025/06/22',function(event){
-      var $this=jQuery(this).html(event.strftime(''
-      +'<div class="time-entry days"><span>%-D</span> <b>:</b> Days</div> '
-      +'<div class="time-entry hours"><span>%H</span> <b>:</b> Hours</div> '
-      +'<div class="time-entry minutes"><span>%M</span> <b>:</b> Minutes</div> '
-      +'<div class="time-entry seconds"><span>%S</span> Seconds</div> '));
-    });
+       var startDate = $('#clock').data('start');
+      if (startDate) {
+          $('#clock').countdown(startDate, function(event) {
+              $(this).html(event.strftime(
+                  '<div class="time-entry days"><span>%-D</span> <b>:</b> Days</div> ' +
+                  '<div class="time-entry hours"><span>%H</span> <b>:</b> Hours</div> ' +
+                  '<div class="time-entry minutes"><span>%M</span> <b>:</b> Minutes</div> ' +
+                  '<div class="time-entry seconds"><span>%S</span> Seconds</div>'
+              ));
+          });
+}
+
+       
 
     /* Auto Close Responsive Navbar on Click
     ========================================================*/
