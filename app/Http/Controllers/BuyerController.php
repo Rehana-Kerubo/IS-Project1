@@ -72,11 +72,7 @@ public function checkout(Request $request)
 
 public function paymentLoader(Request $request)
 {
-    dd([
-    'auth_default' => auth()->user(),
-    'auth_buyer' => auth('buyer')->user(),
-    'auth_vendor' => auth('vendor')->user(),
-]);
+//    
 
     $product = Product::findOrFail($request->product_id);
     $quantity = $request->input('quantity', 1);

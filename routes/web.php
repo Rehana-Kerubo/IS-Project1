@@ -126,9 +126,9 @@ Route::get('/vendor/book-stall/{announcement_id}', [StallPaymentController::clas
 // Store the booking/payment
 Route::post('/vendor/book-stall', [StallPaymentController::class, 'store'])->name('stall.store');
 
-Route::get('/vendor/checkout', [VendorController::class, 'checkout'])->name('vendor.checkout');
-Route::post('/vendor/payment-loader', [VendorController::class, 'paymentLoader'])->name('buyer.payment-loader');
-Route::get('/vendor/payment-success', [VendorController::class, 'paymentSuccess'])->name('buyer.payment.success');
+// Route::get('/vendor/checkout', [VendorController::class, 'checkout'])->name('vendor.checkout');
+// Route::post('/vendor/payment-loader', [VendorController::class, 'paymentLoader'])->name('buyer.payment-loader');
+// Route::get('/vendor/payment-success', [VendorController::class, 'paymentSuccess'])->name('buyer.payment.success');
 
 
 // POS pages
