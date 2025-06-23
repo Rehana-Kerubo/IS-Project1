@@ -104,15 +104,26 @@ class StallPaymentController extends Controller
 public function paymentSuccess()
 {
     if (session('type') === 'stall') {
+        // Save the payment
         \App\Models\StallPayment::create([
             'vendor_id' => session('vendor_id'),
             'announcement_id' => session('announcement_id'),
             'amount_paid' => session('total'),
             'status' => 'paid',
         ]);
+
+        // ✅ Update the vendor's status
+        $vendor = \App\Models\Vendor::find(session('vendor_id'));
+        if ($vendor) {
+            $vendor->status = 'verified';
+            // $vendor->verified_until = now()->addDays(7); // Or based on event
+            $vendor->save();
+        }
     }
 
     return view('vendor.payment-success');
 }
+
+
 
 }

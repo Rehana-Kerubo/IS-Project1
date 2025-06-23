@@ -122,16 +122,16 @@ Route::get('/vendor/book-stall', [StallPaymentController::class, 'index'])->name
 
 // Show form with selected flea market
 Route::get('/vendor/book-stall/{announcement_id}', [StallPaymentController::class, 'create'])->name('stall.create');
-Route::post('/vendor/payment-loader', [StallPaymentController::class, 'paymentLoader'])->name('vendor.payment.loader');
-Route::get('/vendor/payment-success', [StallPaymentController::class, 'paymentSuccess'])->name('vendor.payment.success');
+Route::post('/vendor/stall-payment-loader', [StallPaymentController::class, 'paymentLoader'])->name('vendor.payment.loader');
+Route::get('/vendor/stall-payment-success', [StallPaymentController::class, 'paymentSuccess'])->name('vendor.payment.success');
 
 
 // Store the booking/payment
 Route::post('/vendor/book-stall', [StallPaymentController::class, 'store'])->name('stall.store');
 
 Route::get('/vendor/checkout', [VendorController::class, 'checkout'])->name('vendor.checkout');
-// Route::post('/vendor/payment-loader', [VendorController::class, 'paymentLoader'])->name('vendor.payment-loader');
-// Route::get('/vendor/payment-success', [VendorController::class, 'paymentSuccess'])->name('vendor.payment.success');
+Route::post('/vendor/payment-loader', [VendorController::class, 'paymentLoader'])->name('vendor.payment-loader');
+Route::get('/vendor/payment-success', [VendorController::class, 'paymentSuccess'])->name('vendor.payment.success');
 
 
 // POS pages
