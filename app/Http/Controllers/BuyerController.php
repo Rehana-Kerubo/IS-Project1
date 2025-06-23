@@ -8,6 +8,8 @@ use App\Models\Buyer;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Announcement;
+use Carbon\Carbon;
 
 
 class BuyerController extends Controller
@@ -35,10 +37,15 @@ class BuyerController extends Controller
         return redirect('/buyer/view-acc')->with('success', 'Profile updated successfully!');
     }
     public function landing()
-{
-    $products = Product::all(); // fetch all products from DB
-    return view('buyer.landing', compact('products'));
-}
+    {
+        $announcement = Announcement::where('start_date', '>', Carbon::now())
+            ->orderBy('start_date', 'asc')
+            ->first();
+
+        $products = Product::all(); // so the products also load
+
+        return view('buyer.landing', compact('announcement', 'products'));
+    }
 
     public function search(Request $request)
 {
