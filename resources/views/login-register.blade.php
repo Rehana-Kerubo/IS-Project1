@@ -24,9 +24,32 @@
         <input type="text" placeholder="Name" />
         <input type="email" placeholder="Email" />
         <input type="password" placeholder="Password" />
-        <button>Sign Up</button>
-        <hr>
-        <button><a href="{{ route('google.redirect') }}" class="google">Use Google</a></button>
+        <button style="width: 100%; border-radius: 30px; text-decoration: none; text-align: center; justify-content: center; margin-top: 8px;">Sign Up</button>
+        <div style="text-align: center; margin-top: 10px; margin-bottom: 10px; background: #fff; width: fit-content; padding: 0 10px; margin-left: auto; margin-right: auto; color: #666;">
+          or
+      </div>
+        <a href="{{ route('google.redirect') }}"
+          style="
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              background-color: #ffffff;
+              color: #555555;
+              font-weight: 500;
+              border: 1px solid #dddddd;
+              border-radius: 8px;
+              padding: 10px 20px;
+              width: 100%;
+              text-decoration: none;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+              transition: background-color 0.2s ease, box-shadow 0.2s ease;   "
+              onmouseover="this.style.backgroundColor='#f5f5f5'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.15)';"
+              onmouseout="this.style.backgroundColor='#ffffff'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.1)';">
+              <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Icon"
+            style="width: 20px; height: 20px; margin-right: 12px;">
+          Continue with Google
+        </a>
+
       </form>
     </div>
 
@@ -36,9 +59,31 @@
         <h1>Sign In</h1>
         <input type="email" placeholder="Email" />
         <input type="password" placeholder="Password" />
-        <button>Sign In</button>
-        <hr>
-        <button><a href="{{ route('google.redirect') }}" class="google">Use Google</a></button>
+        <button style="width: 100%; border-radius: 30px; text-decoration: none; text-align: center; justify-content: center; margin-top: 8px;">Sign In</button>
+        <div style="text-align: center; margin-top: 10px; margin-bottom: 10px; background: #fff; width: fit-content; padding: 0 10px; margin-left: auto; margin-right: auto; color: #666;">
+          or
+      </div>
+        <a href="{{ route('google.redirect') }}"
+          style="
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              background-color: #ffffff;
+              color: #555555;
+              font-weight: 500;
+              border: 1px solid #dddddd;
+              border-radius: 8px;
+              padding: 10px 20px;
+              width: 100%;
+              text-decoration: none;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+              transition: background-color 0.2s ease, box-shadow 0.2s ease;   "
+              onmouseover="this.style.backgroundColor='#f5f5f5'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.15)';"
+              onmouseout="this.style.backgroundColor='#ffffff'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.1)';">
+              <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Icon"
+            style="width: 20px; height: 20px; margin-right: 12px;">
+          Continue with Google
+        </a>
       </form>
     </div>
 
