@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\Buyer;
@@ -17,24 +16,35 @@ class GoogleController extends Controller
 
     public function handleGoogleCallback()
     {
+        // ✅ Get user from Google
         $googleUser = Socialite::driver('google')->user();
 
-        $buyer = Buyer::updateOrCreate([
-            'email' => $googleUser->getEmail(),
-        ], [
-            'full_name' => $googleUser->getName(),
-            'profile_pic' => $googleUser->getAvatar(),
-            'role' => $buyer->role ?? 'buyer',
-        ]);
+        // ✅ Check if the user already exists
+        $existingBuyer = Buyer::where('email', $googleUser->getEmail())->first();
 
+        // ✅ Update or create the user
+        $buyer = Buyer::updateOrCreate(
+            ['email' => $googleUser->getEmail()],
+            [
+                'full_name' => $googleUser->getName(),
+                'profile_pic' => $googleUser->getAvatar(),
+                'role' => $existingBuyer->role ?? 'buyer',
+            ]
+        );
+
+        // ✅ Log them in
         Auth::guard('buyer')->login($buyer);
 
-        // Redirect based on role
+        // ✅ Route based on role
         if ($buyer->role === 'vendor') {
             return redirect('/vendor/dashboard')->with('success', 'Welcome back, Vendor!');
         }
 
-        return redirect('/buyer/landing')->with('success', 'Logged in successfully!');
-    }
+        // ✅ Ask for phone number if missing
+        if (is_null($buyer->phone_number)) {
+            return redirect('/buyer/edit-acc')->with('info', 'Please update your phone number to continue.');
+        }
 
+        return redirect('/buyer/view-acc')->with('success', 'Logged in successfully!');
+    }
 }
