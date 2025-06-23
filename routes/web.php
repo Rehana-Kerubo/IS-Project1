@@ -165,5 +165,11 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::get('/announcements/{id}/edit', [AnnouncementController::class, 'edit'])->name('announcements.edit');
     Route::put('/announcements/{id}', [AnnouncementController::class, 'update'])->name('announcements.update');
     Route::delete('/announcements/{id}', [AnnouncementController::class, 'destroy'])->name('announcements.destroy');
+    Route::get('/stall-bookings', [StallPaymentController::class, 'admin_index'])->name('stall-bookings.index');
+    Route::get('/show-stall-bookings/{announcement}', [StallPaymentController::class, 'show'])->name('show-stall-bookings.show');
+    Route::post('/verify-vendor/{vendor}', [StallPaymentController::class, 'verifyVendor'])->name('verifyVendor');
+    Route::post('/unverify-expired-vendors', [StallPaymentController::class, 'unverifyExpiredVendors'])->name('unverifyExpiredVendors');
+
+
 });
 
