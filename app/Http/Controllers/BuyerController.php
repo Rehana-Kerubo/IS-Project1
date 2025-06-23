@@ -25,10 +25,10 @@ class BuyerController extends Controller
         $buyer->full_name = $request->input('full_name');
         $buyer->phone_number = $request->input('phone_number');
 
-        // if ($request->hasFile('profile_pic')) {
-        //     $imagePath = $request->file('profile_pic')->store('profiles', 'public');
-        //     $buyer->profile_pic = $imagePath;
-        // }
+        if ($request->hasFile('profile_pic')) {
+            $imagePath = $request->file('profile_pic')->store('profiles', 'public');
+            $buyer->profile_pic = $imagePath;
+        }
 
         $buyer->save();
 
@@ -65,6 +65,12 @@ public function checkout(Request $request)
 
 public function paymentLoader(Request $request)
 {
+    dd([
+    'auth_default' => auth()->user(),
+    'auth_buyer' => auth('buyer')->user(),
+    'auth_vendor' => auth('vendor')->user(),
+]);
+
     $product = Product::findOrFail($request->product_id);
     $quantity = $request->input('quantity', 1);
     $type = $request->input('type', 'purchase'); // default to normal purchase
