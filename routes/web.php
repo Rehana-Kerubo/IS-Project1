@@ -8,6 +8,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StallPaymentController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\VendorPOSController;
+use App\Http\Controllers\BookingController;
+
 
 use App\Http\Controllers\AdminPasswordController;
 use App\Http\Controllers\AdminAnalyticsController;
@@ -33,9 +35,7 @@ Route::get('/buyer/view-acc', function () {
 Route::get('/buyer/edit', function () {
     return view('buyer/edit');
 });
-Route::get('/buyer/b-products', function () {
-    return view('buyer/b-products');
-});
+
 Route::get('/buyer/be-vendor', function () {
     return view('buyer/be-vendor');
 });
@@ -61,6 +61,10 @@ Route::middleware(['auth:buyer'])->group(function () {
 });
 
 Route::post('/buyer/bookProduct', [BuyerController::class, 'bookProduct'])->name('buyer.bookProduct');
+
+
+Route::get('/buyer/b-products', [BookingController::class, 'index'])->name('buyer.bookings');
+
 
 
 
