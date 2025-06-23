@@ -14,4 +14,9 @@ class Announcement extends Model
         'start_date',
         'end_date',
     ];
+
+    public function stallPayments()
+    {
+        return $this->hasMany(StallPayment::class, 'announcement_id');
+    }
 }
