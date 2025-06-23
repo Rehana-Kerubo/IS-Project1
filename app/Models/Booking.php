@@ -14,7 +14,6 @@ class Booking extends Model
         'quantity',
         'status',
         'commitment_fee_paid',
-        'cancellation_fee_paid',
     ];
 
     public function buyer()
