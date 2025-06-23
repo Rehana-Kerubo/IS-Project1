@@ -3,9 +3,10 @@
 @section('title', 'Become a Vendor')
 
 @section('content')
-    <h1 class="mb-4">Become a Vendor</h1>
+<h1 class="text-center mb-4" style="color: #000000;">Become a Vendor</h1>
 
-    <div class="card p-4 shadow-sm" style="max-width: 600px;">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card p-4 shadow-sm" style="width: 100%; max-width: 400px;">
         <form action="{{ route('buyer.be-vendor') }}" method="POST">
             @csrf
 
@@ -36,9 +37,10 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn" style="background-color: #07BEB8; color: white; border-radius: 8px; padding: 10px 20px;">
+            <button type="submit" class="btn btn-primary w-100" style="background-color: #07BEB8; border-color: #07BEB8;"">
                 Apply
             </button>
         </form>
+        </div>
     </div>
 @endsection
