@@ -14,7 +14,7 @@ class BuyerController extends Controller
 {
     public function updateProfile(Request $request)
     {
-        $buyer = Auth::user(); // This assumes you're using the default guard
+        $buyer = Auth::guard('buyer')->user(); // This assumes you're using the default guard
 
         $request->validate([
             'full_name' => 'required|string|max:255',
@@ -25,10 +25,10 @@ class BuyerController extends Controller
         $buyer->full_name = $request->input('full_name');
         $buyer->phone_number = $request->input('phone_number');
 
-        if ($request->hasFile('profile_pic')) {
-            $imagePath = $request->file('profile_pic')->store('profiles', 'public');
-            $buyer->profile_pic = $imagePath;
-        }
+        // if ($request->hasFile('profile_pic')) {
+        //     $imagePath = $request->file('profile_pic')->store('profiles', 'public');
+        //     $buyer->profile_pic = $imagePath;
+        // }
 
         $buyer->save();
 
