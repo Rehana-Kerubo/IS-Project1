@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
     $table->id();
-    $table->foreignId('buyer_id')->constrained('buyers')->onDelete('cascade');
-    $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
+    $table->foreignId('buyer_id')->constrained('buyers','buyer_id')->onDelete('cascade');
+    $table->foreignId('product_id')->constrained('products','product_id')->onDelete('cascade');
     $table->integer('quantity')->default(1);
     $table->enum('status', ['booked', 'cancelled'])->default('booked');
     $table->boolean('commitment_fee_paid')->default(false);
