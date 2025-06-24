@@ -18,7 +18,7 @@
       <label for="phone">M-Pesa Phone Number:</label>
       <input type="text" name="phone" placeholder="07XXXXXXXX" required>
 
-      <button type="button" class="pay-btn" id="payNowBtn">Simulate Payment</button>
+      <button type="button" class="pay-btn" id="payNowBtn">Pay</button>
 
       <!-- M-Pesa Modal -->
       <div id="mpesaPrompt" class="mpesa-modal">
