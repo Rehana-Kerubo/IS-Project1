@@ -65,14 +65,18 @@
           <img src="{{ $product['image'] }}" alt="{{ $product['name'] }}">
           <h4>{{ $product['name'] }}</h4>
           <p class="price">KSh {{ $product['price'] }}</p>
-          <p class="description">A beautifully crafted item perfect for you!</p>
+          <p class="description">{{ $product['description'] }}</p>
 
           <div class="product-actions">
           <form action="{{ route('buyer.checkout') }}" method="GET">
             <input type="hidden" name="id" value="{{ $product->id }}">
             <button type="submit" class="btn buy-btn">Buy Now</button>
           </form>
-            <button class="btn wishlist-btn"><a href="">Add to Wishlist</a></button>
+            <form method="POST" action="{{ route('buyer.bookProduct') }}">
+    @csrf
+    <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+    <button type="submit" class="btn wishlist-btn">Add to Wishlist</button>
+</form>
           </div>
         </div>
       @endforeach
