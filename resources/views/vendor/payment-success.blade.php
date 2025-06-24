@@ -18,6 +18,8 @@
       <p><strong>Booking For:</strong> {{ session('stall_shop') }}</p>
       <p><strong>Amount Paid:</strong> KSh {{ session('total') }}</p>
       <p><strong>Booking Date:</strong> {{ \Carbon\Carbon::now()->toDateString() }}</p>
+      <p>Please wait for the Admins to confirm your booking.You will be verified soon.</p>
+      <p>Thank you for your Patience</p>
     @else
       <p><strong>Product:</strong> {{ session('product_name') }}</p>
       <p><strong>Quantity:</strong> {{ session('quantity') }}</p>
@@ -26,7 +28,7 @@
     @endif
   </div>
 
-  <a href="{{ url('/vendor/v-landing') }}" class="btn">Back to Dashboard</a>
+  <a href="{{ url('/vendor/dashboard') }}" class="btn">Back to Dashboard</a>
 </div>
 
 <style>

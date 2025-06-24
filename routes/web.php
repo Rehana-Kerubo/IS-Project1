@@ -120,14 +120,16 @@ Route::middleware(['auth:buyer'])->group(function () {
 // Show available flea markets (announcements)
 Route::get('/vendor/book-stall', [StallPaymentController::class, 'index'])->name('stall.select');
 
+// Store the booking/payment
+Route::post('/vendor/book-stall', [StallPaymentController::class, 'store'])->name('stall.store');
+
 // Show form with selected flea market
 Route::get('/vendor/book-stall/{announcement_id}', [StallPaymentController::class, 'create'])->name('stall.create');
 Route::post('/vendor/stall-payment-loader', [StallPaymentController::class, 'paymentLoader'])->name('vendor.payment.loader');
 Route::get('/vendor/stall-payment-success', [StallPaymentController::class, 'paymentSuccess'])->name('vendor.payment.success');
 
 
-// Store the booking/payment
-Route::post('/vendor/book-stall', [StallPaymentController::class, 'store'])->name('stall.store');
+
 
 Route::get('/vendor/checkout', [VendorController::class, 'checkout'])->name('vendor.checkout');
 Route::post('/vendor/payment-loader', [VendorController::class, 'paymentLoader'])->name('vendor.payment-loader');
