@@ -45,11 +45,15 @@
 
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
+          <a class="nav-link" href="{{ url('/buyer/explore-products') }}">
+            <i class="lni-cart-full"></i> Explore Flea Market
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="{{ url('/buyer/view-acc') }}">
             <i class="lni-user"></i> Account
           </a>
         </li>
-
         <li class="nav-item">
           <a class="nav-link" href="{{ url('/') }}">
             <i class="lni-exit"></i> Logout
@@ -90,8 +94,9 @@
        <div class="row justify-content-center">
       <div class="col-10">
         <div class="count-wrapper text-center">
-          <h2 class="flea-market-heading">Flea Market Countdown</h2>
+          <h2 class="flea-market-heading">{{ $announcement->title }} Flea Market Countdown</h2>
           <div class="time-countdown">
+          <div id="clock" data-start="{{ \Carbon\Carbon::parse($announcement->start_date)->format('Y/m/d H:i:s') }}"></div>
           </div>
         </div>
       </div>
@@ -115,6 +120,7 @@
       <div class="col-lg-3 col-md-6 col-xs-12">
         <ul>
           <li><i class="lni-calendar"></i></li>
+          <li><span><b>Date</b> {{ \Carbon\Carbon::parse($announcement->start_date)->format('F jS, Y') }}</span></li> <!-- updated -->
         </ul>
       </div>
       <div class="col-lg-3 col-md-6 col-xs-12">
@@ -142,7 +148,10 @@
   <div class="product-wrapper">
   @foreach($products as $product)
     <div class="product-card">
-      <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+      @if ($product->image_url)
+        <img src="{{ asset('storage/' . $product->image_url) }}" alt="{{ $product->name }}" class="product-img">
+      @endif
+
       <h4>{{ $product->name }}</h4>
       <p class="price">KSh {{ number_format($product->price) }}</p>
       <p class="description">{{ $product->description }}</p>
