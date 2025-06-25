@@ -33,7 +33,7 @@
                 <input type="password" name="current_password" id="current_password" class="form-control pe-5" required>
                 <span class="position-absolute top-50" 
                     style="right: 10px; cursor: pointer;" 
-                    onclick="togglePassword('new_password_confirmation', this)">
+                    onclick="togglePassword('current_password', this)">
                     Show
                 </span>
             </div>
@@ -43,7 +43,7 @@
                 <input type="password" name="new_password" id="new_password" class="form-control pe-5" required>
                 <span class="position-absolute top-50" 
                     style="right: 10px; cursor: pointer;" 
-                    onclick="togglePassword('new_password_confirmation', this)">
+                    onclick="togglePassword('new_password', this)">
                     Show
                 </span>
             </div>
