@@ -22,8 +22,10 @@ class StallPaymentController extends Controller
     {
         $event = Announcement::findOrFail($announcement_id);
         $vendor = Auth::guard('buyer')->user()->vendor;
+        $buyer = Auth::guard('buyer')->user();
 
-        return view('vendor.book-stall', compact('event', 'vendor'));
+
+        return view('vendor.book-stall', compact('event', 'vendor' , 'buyer'));
     }
 
     public function store(Request $request)
@@ -103,7 +105,9 @@ class StallPaymentController extends Controller
 
 public function paymentSuccess()
 {
-    dd(session('type'));
+    // dd(session('type'));
+    logger('paymentSuccess hit ✅');
+    logger(session()->all());
 
     if (session('type') === 'stall') {
         // Save the payment

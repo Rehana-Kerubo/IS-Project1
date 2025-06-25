@@ -63,7 +63,7 @@ Route::middleware(['auth:buyer'])->group(function () {
 Route::post('/buyer/bookProduct', [BuyerController::class, 'bookProduct'])->name('buyer.bookProduct');
 
 
-Route::get('/buyer/b-products', [BookingController::class, 'index'])->name('buyer.bookings');
+Route::get('/buyer/b-products', [BookingController::class, 'index'])->name('buyer.b-products.index');
 
 
 
@@ -96,6 +96,9 @@ Route::get('/vendor/profile', function() {
 Route::get('/vendor/edit', function() {
     return view('/vendor/edit');
 });
+
+Route::get('/vendor/search', [VendorController::class, 'search'])->name('vendor.search');
+
 Route::put('/vendor/dashboard/update', [VendorController::class, 'update'])->name('vendor.update');
 
 Route::middleware(['auth:buyer'])->group(function () {
@@ -125,8 +128,8 @@ Route::post('/vendor/book-stall', [StallPaymentController::class, 'store'])->nam
 
 // Show form with selected flea market
 Route::get('/vendor/book-stall/{announcement_id}', [StallPaymentController::class, 'create'])->name('stall.create');
-Route::post('/vendor/stall-payment-loader', [StallPaymentController::class, 'paymentLoader'])->name('vendor.payment.loader');
-Route::get('/vendor/stall-payment-success', [StallPaymentController::class, 'paymentSuccess'])->name('vendor.payment.success');
+Route::post('/vendor/stall-payment-loader', [StallPaymentController::class, 'paymentLoader'])->name('vendor.stall.payment.loader');
+Route::get('/vendor/stall-payment-success', [StallPaymentController::class, 'paymentSuccess'])->name('vendor.stall.payment.success');
 
 
 
