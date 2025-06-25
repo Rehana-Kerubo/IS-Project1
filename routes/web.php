@@ -17,6 +17,7 @@ use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\BookedProductsController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\BuyerLandingController;
+use App\Http\Controllers\ExploreProductsController;
 
 Route::get('/', [LandingController::class, 'landing'])->name('landing');
 
@@ -65,6 +66,7 @@ Route::post('/buyer/bookProduct', [BuyerController::class, 'bookProduct'])->name
 
 Route::get('/buyer/b-products', [BookingController::class, 'index'])->name('buyer.bookings');
 
+Route::get('/buyer/explore-products', [ExploreProductsController::class, 'index'])->name('buyer.explore-products');
 
 
 
