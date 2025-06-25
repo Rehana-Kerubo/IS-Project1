@@ -5,7 +5,7 @@
   <h2 class="text-center mb-4">Book Stall for: {{ $event->title }}</h2>
 
   <div class="checkout-card">
-    <form id="stallBookingForm" method="POST" action="{{ route('vendor.payment.loader') }}">
+    <form id="stallBookingForm" method="POST" action="{{ route('vendor.stall.payment.loader') }}">
       @csrf
       <input type="hidden" name="vendor_id" value="{{ $vendor->vendor_id }}">
       <input type="hidden" name="announcement_id" value="{{ $event->announcement_id }}">
@@ -16,9 +16,9 @@
       <p>KSh 600</p>
 
       <label for="phone">M-Pesa Phone Number:</label>
-      <input type="text" name="phone" placeholder="07XXXXXXXX" required>
+      <input type="text" name="phone" placeholder="07XXXXXXXX" value="{{ old('phone', $buyer->phone_number ?? '') }}" required>
 
-      <button type="button" class="pay-btn" id="payNowBtn">Simulate Payment</button>
+      <button type="button" class="pay-btn" id="payNowBtn">Pay</button>
 
       <!-- M-Pesa Modal -->
       <div id="mpesaPrompt" class="mpesa-modal">

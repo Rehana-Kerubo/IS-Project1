@@ -110,6 +110,7 @@
         <ul>
           <li><i class="lni-calendar"></i></li>
           <li><span><b>Date</b> {{ \Carbon\Carbon::parse($announcement->start_date)->format('F jS, Y') }}</span></li> <!-- updated -->
+
         </ul>
       </div>
       <div class="col-lg-3 col-md-6 col-xs-12">

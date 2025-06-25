@@ -40,7 +40,7 @@
 
 <script>
   setTimeout(() => {
-    window.location.href = "{{ route('vendor.payment.success') }}";
+    window.location.href = "{{ route('vendor.stall.payment.success') }}";
   }, 3000);
 </script>
 @endsection

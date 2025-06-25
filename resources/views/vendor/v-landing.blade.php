@@ -38,10 +38,10 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <form action="{{ url('/buyer/search') }}" method="GET" class="form-inline my-2 my-lg-0 mx-auto">
+      <!-- <form action="{{ url('/buyer/search') }}" method="GET" class="form-inline my-2 my-lg-0 mx-auto">
         <input class="form-control mr-sm-2" type="search" name="query" placeholder="Search products..." aria-label="Search" required>
         <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      </form> -->
 
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
@@ -157,7 +157,7 @@
         <button type="submit" class="btn buy-btn">Buy Now</button>
       </form>
 
-        <button class="btn wishlist-btn">Add to Wishlist</button>
+        <!-- <button class="btn wishlist-btn">Add to Wishlist</button> -->
       </div>
     </div>
   @endforeach

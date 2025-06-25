@@ -61,10 +61,12 @@ class BuyerController extends Controller
 // Show the form
 public function checkout(Request $request)
 {
-   
-    $product =  Product::findOrFail($request->input('product_id'));
-    return view('buyer.checkout', compact('product'));
+    $product = Product::findOrFail($request->input('product_id'));
+    $buyer = Auth::guard('buyer')->user();
+
+    return view('buyer.checkout', compact('product', 'buyer'));
 }
+
 
 
 
@@ -129,8 +131,11 @@ public function bookProduct(Request $request)
     ]);
 
     $product = Product::findOrFail($request->product_id);
-    return view('buyer.booking-checkout', compact('product'));
+    $buyer = Auth::guard('buyer')->user();
+
+    return view('buyer.booking-checkout', compact('product', 'buyer'));
 }
+
 
 
 

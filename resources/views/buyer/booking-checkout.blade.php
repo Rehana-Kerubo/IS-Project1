@@ -24,7 +24,7 @@
       <p>KSh <span id="total">{{ round($product->price * 0.2) }}</span></p>
 
       <label for="phone">M-Pesa Phone Number:</label>
-      <input type="text" name="phone" placeholder="07XXXXXXXX" required>
+      <input type="text" name="phone" placeholder="07XXXXXXXX" value="{{ old('phone', $buyer->phone_number ?? '') }}">
 
       <button type="button" class="pay-btn" id="payNowBtn">Pay Now</button>
 
