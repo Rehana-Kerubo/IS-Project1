@@ -9,7 +9,7 @@ class StallPayment extends Model
 {
     use HasFactory;
 
-    protected $table = 'stall_payments';
+    protected $table = 'stall-payments';
 
     protected $primaryKey = 'booking_id';
 

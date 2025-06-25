@@ -19,4 +19,10 @@ class Announcement extends Model
     {
         return $this->hasMany(StallPayment::class, 'announcement_id');
     }
+
+    public function getStallCountAttribute()
+    {
+        return $this->stallPayments()->count();
+    }
+
 }
