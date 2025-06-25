@@ -103,7 +103,9 @@ class StallPaymentController extends Controller
 
 public function paymentSuccess()
 {
-    dd(session('type'));
+    // dd(session('type'));
+    logger('paymentSuccess hit ✅');
+    logger(session()->all());
 
     if (session('type') === 'stall') {
         // Save the payment
