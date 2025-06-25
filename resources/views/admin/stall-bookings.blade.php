@@ -16,11 +16,15 @@
                             <div class="card h-100 border-0 shadow-sm">
                                 <div class="card-body">
                                     <h4 class="card-title">{{ $event->title }}</h4>
-                                    <p class="card-text text-muted">
+                                    <p class="card-text" style="color: #000000;">
                                         {{ \Carbon\Carbon::parse($event->start_date)->format('d M Y') }}
                                         -
                                         {{ \Carbon\Carbon::parse($event->end_date)->format('d M Y') }}
                                     </p>
+                                    <p class="card-text mb-4" style="color: #000000;">
+                                        {{ $event->stall_count }} Stall{{ $event->stall_count !== 1 ? 's' : '' }}
+                                    </p>
+                                    <p>Total Made: KSh {{ number_format($event->stall_payments_sum_amount_paid) }}</p>
                                     <a href="{{ route('admin.show-stall-bookings.show', $event->announcement_id) }}"
                                     class="btn btn-sm btn-primary mt-3">
                                         View Stall Bookings
