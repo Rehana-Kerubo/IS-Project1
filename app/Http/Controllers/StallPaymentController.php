@@ -46,11 +46,16 @@ class StallPaymentController extends Controller
         return redirect('/vendor/book-stall')->with('success', 'Stall booked successfully!');
     }
     public function admin_index()
-    {
-        $events = Announcement::latest()->get(); // flea market events
+{
+    $events = Announcement::withCount('stallPayments')
+                ->withSum('stallPayments', 'amount_paid') // sum of all payments for each event
+                ->orderBy('start_date', 'desc')
+                ->get();
 
-        return view('admin.stall-bookings', compact('events'));
-    }
+    return view('admin.stall-bookings', compact('events'));
+}
+
+
 
     public function show(Announcement $announcement)
 {

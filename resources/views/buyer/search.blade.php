@@ -27,7 +27,7 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-inverse fixed-top scrolling-navbar custom-gradient-navbar">
   <div class="container">
-    <a href="/" class="navbar-brand">Flea Market</a>
+    <a href="/buyer/landing" class="navbar-brand">Flea Market</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
       <i class="lni-menu"></i>
     </button>
@@ -62,10 +62,13 @@
     <div class="product-wrapper">
       @foreach($results as $product)
         <div class="product-card">
-          <img src="{{ $product['image'] }}" alt="{{ $product['name'] }}">
-          <h4>{{ $product['name'] }}</h4>
-          <p class="price">KSh {{ $product['price'] }}</p>
-          <p class="description">{{ $product['description'] }}</p>
+          @if ($product->image_url)
+            <img src="{{ asset('storage/' . $product->image_url) }}" alt="{{ $product->name }}" class="product-img">
+          @endif
+          <h4>{{ $product->name }}</h4>
+          <h6>Vendor: {{ $product->vendor->shop_name }}</h6>
+          <p class="price">KSh {{ $product->price }}</p>
+          <p class="description">{{ $product->description }}</p>
 
           <div class="product-actions">
           <form action="{{ route('buyer.checkout') }}" method="GET">

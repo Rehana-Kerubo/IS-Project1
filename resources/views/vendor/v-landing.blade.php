@@ -144,7 +144,9 @@
   <div class="product-wrapper">
   @foreach($products as $product)
     <div class="product-card">
-      <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+      @if ($product->image_url)
+        <img src="{{ asset('storage/' . $product->image_url) }}" alt="{{ $product->name }}" class="product-img">
+      @endif
       <h4>{{ $product->name }}</h4>
       <p class="price">KSh {{ number_format($product->price) }}</p>
       <p class="description">{{ $product->description }}</p>
