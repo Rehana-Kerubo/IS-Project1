@@ -69,7 +69,7 @@
 
           <div class="product-actions">
           <form action="{{ route('buyer.checkout') }}" method="GET">
-            <input type="hidden" name="id" value="{{ $product->id }}">
+            <input type="hidden" name="product_id" value="{{ $product->product_id }}">
             <button type="submit" class="btn buy-btn">Buy Now</button>
           </form>
             <form method="POST" action="{{ route('buyer.bookProduct') }}">
