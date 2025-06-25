@@ -13,7 +13,7 @@ class BookingController extends Controller
     {
         $buyer = Auth::guard('buyer')->user(); // assuming buyer is authenticated normally
         $bookedProducts = Booking::with('product')
-            ->where('buyer_id', $buyer->buyerId)
+        ->where('buyer_id', $buyer->buyer_id)
             ->get();
 
         return view('buyer.b-products', compact('bookedProducts'));
