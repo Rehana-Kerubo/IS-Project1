@@ -154,7 +154,7 @@
     <nav>
         <ul>
             <li><a href="{{ url('/buyer/view-acc') }}"><i class="lni lni-user mr-2"></i>View Account</a></li>
-            <li><a href="{{ url('/buyer/b-products') }}"><i class="lni lni-package mr-2"></i>Booked Products</a></li>
+            <li><a href="{{ url('/buyer/b-products') }}"><i class="lni lni-package mr-2"></i>Wishlist</a></li>
             <li><a href="{{ url('/buyer/be-vendor') }}"><i class="lni lni-briefcase mr-2"></i>Become a Vendor</a></li>
             <li><a href="{{ url('/') }}"><i class="lni lni-exit mr-2"></i>Log Out</a></li>
         </ul>

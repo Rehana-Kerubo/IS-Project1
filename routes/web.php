@@ -63,7 +63,7 @@ Route::middleware(['auth:buyer'])->group(function () {
 Route::post('/buyer/bookProduct', [BuyerController::class, 'bookProduct'])->name('buyer.bookProduct');
 
 
-Route::get('/buyer/b-products', [BookingController::class, 'index'])->name('buyer.bookings');
+Route::get('/buyer/b-products', [BookingController::class, 'index'])->name('buyer.b-products.index');
 
 
 
@@ -96,6 +96,9 @@ Route::get('/vendor/profile', function() {
 Route::get('/vendor/edit', function() {
     return view('/vendor/edit');
 });
+
+Route::get('/vendor/search', [VendorController::class, 'search'])->name('vendor.search');
+
 Route::put('/vendor/dashboard/update', [VendorController::class, 'update'])->name('vendor.update');
 
 Route::middleware(['auth:buyer'])->group(function () {

@@ -20,6 +20,18 @@ class VendorController extends Controller
         return view('/buyer/be-vendor');
     }
 
+    public function search(Request $request)
+{
+    $query = strtolower($request->input('query'));
+    // Filter based on search query
+    $results = Product:: when($query, function ($q) use ($query) {
+        $q->where ('name', 'like', '%' . $query . '%')
+            ->orWhere('description', 'like', '%' . $query . '%');
+    })->get();
+
+    return view('vendor.search', ['results' => $results]);
+}
+
     public function store(Request $request)
     {
         // Validate incoming request
