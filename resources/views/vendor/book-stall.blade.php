@@ -16,7 +16,7 @@
       <p>KSh 600</p>
 
       <label for="phone">M-Pesa Phone Number:</label>
-      <input type="text" name="phone" placeholder="07XXXXXXXX" required>
+      <input type="text" name="phone" placeholder="07XXXXXXXX" value="{{ old('phone', $buyer->phone_number ?? '') }}" required>
 
       <button type="button" class="pay-btn" id="payNowBtn">Pay</button>
 

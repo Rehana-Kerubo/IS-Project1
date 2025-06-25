@@ -20,17 +20,17 @@ class VendorController extends Controller
         return view('/buyer/be-vendor');
     }
 
-    public function search(Request $request)
-{
-    $query = strtolower($request->input('query'));
-    // Filter based on search query
-    $results = Product:: when($query, function ($q) use ($query) {
-        $q->where ('name', 'like', '%' . $query . '%')
-            ->orWhere('description', 'like', '%' . $query . '%');
-    })->get();
+//     public function search(Request $request)
+// {
+//     $query = strtolower($request->input('query'));
+//     // Filter based on search query
+//     $results = Product:: when($query, function ($q) use ($query) {
+//         $q->where ('name', 'like', '%' . $query . '%')
+//             ->orWhere('description', 'like', '%' . $query . '%');
+//     })->get();
 
-    return view('vendor.search', ['results' => $results]);
-}
+//     return view('vendor.search', ['results' => $results]);
+// }
 
     public function store(Request $request)
     {
@@ -104,7 +104,8 @@ class VendorController extends Controller
     public function checkout(Request $request)
     {
         $product =  Product::findOrFail($request->input('product_id'));
-        return view('vendor.checkout', compact('product'));
+        $buyer = Auth::guard('buyer')->user();
+        return view('vendor.checkout', compact('product', 'buyer'));
     }
 
     public function paymentLoader(Request $request)
