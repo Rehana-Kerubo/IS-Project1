@@ -112,17 +112,7 @@ ul li, ol li {
   margin-bottom: 10px;
 }
 
-.section-title:before {
-  content: "[";
-  color: #ff4a67;
-  padding-right: 10px;
-}
 
-.section-title:after {
-  content: "]";
-  color: #ff4a67;
-  padding-left: 10px;
-}
 
 .section-subcontent {
   font-size: 16px;

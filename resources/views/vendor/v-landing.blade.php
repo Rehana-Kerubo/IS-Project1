@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
     <!-- custom-style -->
     <link rel="stylesheet" type="text/css" href="../assets/css/custom.css">
+    
 
 
   </head>
@@ -44,6 +45,11 @@
       </form> -->
 
       <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url('/vendor/schedules') }}">
+            <i class="lni-bullhorn"></i> Market Schedules
+          </a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ url('/vendor/dashboard') }}">
             <i class="lni-user"></i> Account
@@ -110,7 +116,7 @@
       <div class="col-lg-3 col-md-6 col-xs-12">
         <ul>
           <li><i class="lni-map-marker"></i></li>
-          <li><span><b>Venue</b> Strathmore University</span></li> <!-- updated -->
+          <li><span><b>Venue</b> {{$announcement->venue}}</span></li> <!-- updated -->
         </ul>
       </div>
       <div class="col-lg-3 col-md-6 col-xs-12">
