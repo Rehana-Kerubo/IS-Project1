@@ -24,7 +24,7 @@
             max-width: 400px;
         }
 
-        .login-container h2 {
+        .login-container h2 ,h1{
             text-align: center;
             margin-bottom: 30px;
             color: #1d3557;
@@ -75,6 +75,7 @@
 </head>
 <body>
     <div class="login-container">
+        <h1><a href="/" style="text-decoration: none; color:rgb(0, 255, 242);">Flea Market</a></h1>
         <h2>Admin Login</h2>
 
         @if(session('error'))
