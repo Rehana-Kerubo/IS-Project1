@@ -24,6 +24,7 @@
                         
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Phone</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +32,7 @@
                         <tr>
                             <td>{{ $buyer->full_name }}</td>
                             <td>{{ $buyer->email }}</td>
+                            <td>{{ $buyer->phone_number }}</td>
                         </tr>
                     @endforeach
                 </tbody>

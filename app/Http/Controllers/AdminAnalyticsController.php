@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
+
 class AdminAnalyticsController extends Controller
 {
     public function vendorAnalytics()
@@ -20,6 +21,8 @@ class AdminAnalyticsController extends Controller
         ->select(
             'vendors.vendor_id',
             'vendors.shop_name',
+            'buyers.email',
+            'buyers.phone_number',
             'vendors.shop_category',
             'vendors.status',
             'buyers.full_name as buyer_name',
@@ -28,6 +31,8 @@ class AdminAnalyticsController extends Controller
         ->groupBy(
             'vendors.vendor_id',
             'vendors.shop_name',
+            'buyers.email',
+            'buyers.phone_number',
             'vendors.shop_category',
             'vendors.status',
             'buyers.full_name'
@@ -37,19 +42,17 @@ class AdminAnalyticsController extends Controller
         return view('admin.vendor-analytics', compact('totalRevenue', 'vendorCount', 'vendors'));
     }
     public function buyerAnalytics()
-{
-    $buyerCount = DB::table('buyers')
-        ->where('role', 'buyer')
-        ->count();
+    {
+        $buyerCount = DB::table('buyers')
+            ->where('role', 'buyer')
+            ->count();
 
-    $buyers = DB::table('buyers')
-        ->where('role', 'buyer')
-        ->select('buyer_id', 'full_name', 'email')
-        ->orderBy('full_name')
-        ->get();
+        $buyers = DB::table('buyers')
+            ->where('role', 'buyer')
+            ->select('buyer_id', 'full_name', 'email', 'phone_number')
+            ->orderBy('full_name')
+            ->get();
 
-    return view('admin.buyer-analytics', compact('buyerCount', 'buyers'));
-}
-
-
+        return view('admin.buyer-analytics', compact('buyerCount', 'buyers'));
+    }
 }
