@@ -6,14 +6,22 @@
 <div class="container mt-5">
     <h1 class="text-center mb-4" style="color: #000000;">Booked Products</h1>
     
-
+<style>
+    .product-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+</style>
 
 <!-- @if ($bookedProducts->count()) -->
     @forelse ($bookedProducts as $booking)
         <div class="card mb-4 shadow-sm">
             <div class="row no-gutters">
                 <div class="col-md-4">
-                    <img src="{{ $booking->product->image }}" alt="{{ $booking->product->name }}" class="img-fluid rounded-start">
+                @if ($booking->product->image_url)
+                    <img src="{{ asset('storage/' . $booking->product->image_url) }}" alt="{{ $booking->product->name }}" class="product-img">
+                @endif                
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">

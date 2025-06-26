@@ -3,12 +3,20 @@
 @section('title', 'Checkout')
 
 @section('content')
+<style>
+  .product-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+</style>
 <div class="checkout-container">
   <h2>Checkout - {{ $product->name }}</h2>
 
   <div class="checkout-card">
-    <img src="{{ $product->image }}" alt="{{ $product->name }}" class="checkout-image">
-
+  @if ($product->image_url)
+                    <img src="{{ asset('storage/' . $product->image_url) }}" alt="{{ $product->name }}" class="product-img">
+                @endif
    
 
 
