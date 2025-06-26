@@ -18,9 +18,10 @@ use App\Http\Controllers\BookedProductsController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\BuyerLandingController;
 use App\Http\Controllers\ExploreProductsController;
+use App\Http\Controllers\SchedulesController;
 
 Route::get('/', [LandingController::class, 'landing'])->name('landing');
-
+Route::get('/schedules', [SchedulesController::class, 'index'])->name('schedules');
 Route::get('/login-register', function () {
     return view('login-register');
 });
@@ -68,16 +69,14 @@ Route::get('/buyer/b-products', [BookingController::class, 'index'])->name('buye
 
 Route::get('/buyer/explore-products', [ExploreProductsController::class, 'index'])->name('buyer.explore-products');
 
+Route::get('/buyer/schedules', [BuyerController::class, 'schedules'])->name('buyer.schedules');
 
-
-
-
-Route::get('/vendor/v-landing', function() {
-    return view('/vendor/v-landing');
-});
+Route::get('/vendor/schedules', [VendorController::class, 'schedules'])->name('vendor.schedules');
+Route::get('/vendor/v-landing', [VendorController::class, 'landing'])->name('vendor.landing');
 Route::get('/vendor/dashboard', function() {
     return view('/vendor/dashboard');
 });
+
 Route::get('/vendor/products', function() {
     return view('/vendor/products');
 });
