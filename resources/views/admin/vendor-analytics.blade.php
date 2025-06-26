@@ -1,9 +1,14 @@
 @extends('admin.sidebar')
 
 @section('content')
+
 <div class="container mt-4">
     <h1 class="mb-4">Vendor Analytics Dashboard</h1>
-
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="row mb-4">
         <div class="col-md-4">
             <div class="card shadow p-3">
@@ -29,6 +34,8 @@
         <tr>
             
             <th>Vendor Name</th>
+            <th>Email</th>
+            <th>Phone</th>
             <th>Shop Name</th>
             <th>Category</th>
             <th>Status</th>
@@ -40,6 +47,8 @@
             <tr>
                 
                 <td>{{ $vendor->buyer_name }}</td>
+                <td>{{ $vendor->email }}</td>
+                <td>{{ $vendor->phone_number }}</td>
                 <td>{{ $vendor->shop_name }}</td>
                 <td>{{ $vendor->shop_category }}</td>
                 <td>

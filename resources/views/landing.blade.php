@@ -38,8 +38,8 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto w-100 justify-content-end">
             <li class="nav-item active"><a class="nav-link" href="#header-wrap">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
-            <li class="nav-item"><a class="nav-link" href="#schedules">Schedules</a></li>
+            <li class="nav-item"><a class="nav-link" href="#intro">About Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url('schedules')}}">Schedules</a></li>
             <!-- <li class="nav-item"><a class="nav-link" href="#google-map-area">Contact Us</a></li> -->
             <!-- <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li> -->
             <li class="nav-item"><a class="nav-link" href="{{ url('login-register')}}">Login</a></li>
@@ -103,7 +103,7 @@
       <div class="col-lg-3 col-md-6 col-xs-12">
         <ul>
           <li><i class="lni-map-marker"></i></li>
-          <li><span><b>Venue</b> Strathmore University</span></li> <!-- updated -->
+          <li><span><b>Venue</b> {{$announcement->venue}}</span></li> <!-- updated -->
         </ul>
       </div>
       <div class="col-lg-3 col-md-6 col-xs-12">
@@ -134,43 +134,21 @@
 
     <!-- product Section Start -->
     <section class="product-section">
-     <h2 class="section-title">Our Featured Products</h2>
-     <div class="product-wrapper">
-      <!-- Start of Product Cards -->
-     <div class="product-card">
-      <img src="path/to/product1.jpg" alt="Product 1">
-      <h4>Product 1</h4>
-      <p>Description for product 1.</p>
-      </div>
-     <div class="product-card">
-      <img src="path/to/product2.jpg" alt="Product 2">
-      <h4>Product 2</h4>
-      <p>Description for product 2.</p>
-     </div>
-     <div class="product-card">
-      <img src="path/to/product3.jpg" alt="Product 3">
-      <h4>Product 3</h4>
-      <p>Description for product 3.</p>
-     </div>
-     <div class="product-card">
-      <img src="path/to/product4.jpg" alt="Product 4">
-      <h4>Product 4</h4>
-      <p>Description for product 4.</p>
-     </div>
-     <div class="product-card">
-      <img src="path/to/product5.jpg" alt="Product 5">
-      <h4>Product 5</h4>
-      <p>Description for product 5.</p>
-     </div>
-     <div class="product-card">
-      <img src="path/to/product6.jpg" alt="Product 6">
-      <h4>Product 6</h4>
-      <p>Description for product 6.</p>
-     </div>
+    <div class="product-wrapper">
+      @foreach($products as $product)
+        <div class="product-card">
+          @if ($product->image_url)
+            <img src="{{ asset('storage/' . $product->image_url) }}" alt="{{ $product->name }}" class="product-img">
+          @endif
+
+          <h4>{{ $product->name }}</h4>
+          <p class="price">KSh {{ number_format($product->price) }}</p>
+        </div>
+      @endforeach
       <!-- End of Product Cards -->
      </div>
      <div id="cta-button" class="cta-button">
-     <a href="#" class="btn">Shop Now</a>
+     <a href="{{ url('login-register')}}" class="btn">Shop Now</a>
      </div>
     </section>
     <!-- product Section End -->
@@ -182,24 +160,24 @@
       <div class="col-12">
         <div class="section-title-header text-center">
           <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Why You Should Join?</h2>
-          <p class="wow fadeInDown" data-wow-delay="0.2s">Discover the features and benefits of our web app, built to enhance your experience. Whether you are new to tech or a seasoned user, this app is designed for everyone!</p>
+          <p class="wow fadeInDown" data-wow-delay="0.2s">Discover the features and benefits of our web app, built to enhance your experience. Whether you are a vendor or a buyer, this app is designed for everyone!</p>
         </div>
       </div>
      </div>
      <div class="row intro-wrapper">
       <div class="col-lg-4 col-md-6 col-xs-12">
         <div class="single-intro-text mb-70">
-          <i class="lni-microphone"></i>
-          <h3>Seamless Communication</h3>
-          <p>Stay connected with easy-to-use chat features that make communication efficient and fun.</p>
+          <i class="lni-shopping-basket"></i>
+          <h3>Effortless Campus Shopping</h3>
+          <p>No more endless browsing or walking stall to stall — our digital marketplace brings all the best products to your fingertips, anytime you need them.</p>
           <span class="count-number">01</span>
         </div>
       </div>
       <div class="col-lg-4 col-md-6 col-xs-12">
         <div class="single-intro-text">
           <i class="lni-users"></i>
-          <h3>Interactive Community</h3>
-          <p>Join a growing community of like-minded individuals and collaborate on exciting projects.</p>
+          <h3>Level Up Your Hustle</h3>
+          <p>Are you a vendor? Manage your stall, track sales, and showcase your shop to hundreds of students with just a few clicks — no technical skills needed.</p>
           <span class="count-number">02</span>
         </div>
         <div class="border-shap left"></div>
@@ -207,32 +185,32 @@
       <div class="col-lg-4 col-md-6 col-xs-12">
         <div class="single-intro-text mb-70">
           <i class="lni-bullhorn"></i>
-          <h3>Stay Updated</h3>
-          <p>Get real-time notifications and stay updated with the latest trends and updates.</p>
+          <h3>Real-Time Event Access</h3>
+          <p>Never miss a pop-up event again! Get live updates, countdowns, and exclusive access to upcoming flea markets — all in one sleek interface.</p>
           <span class="count-number">03</span>
         </div>
       </div>
       <div class="col-lg-4 col-md-6 col-xs-12">
         <div class="single-intro-text mb-70">
           <i class="lni-heart"></i>
-          <h3>Get Inspired</h3>
-          <p>Explore new ideas, share your vision, and get inspired by others in the community.</p>
+          <h3>Reservations</h3>
+          <p>See something you love? Reserve it and pick it up at your convenience during the event.</p>
           <span class="count-number">04</span>
         </div>
       </div>
       <div class="col-lg-4 col-md-6 col-xs-12">
         <div class="single-intro-text mb-70">
-          <i class="lni-cup"></i>
-          <h3>Collaborate with Ease</h3>
-          <p>Our web app simplifies the collaboration process, making it easier for teams to work together.</p>
+          <i class="lni-bar-chart"></i>
+          <h3>Analytics That Work for You</h3>
+          <p>Track your sales, inventory, and customer engagement in real-time. Data-driven decisions just got simple.</p>
           <span class="count-number">05</span>
         </div>
       </div>
       <div class="col-lg-4 col-md-6 col-xs-12">
         <div class="single-intro-text mb-70">
-          <i class="lni-gallery"></i>
-          <h3>Meet New Faces</h3>
-          <p>Expand your network by meeting new people and connecting with professionals worldwide.</p>
+          <i class="lni-dashboard"></i>
+          <h3>All in One Dashboard</h3>
+          <p>Access your inventory, sales, and bookings all from one clean, intuitive dashboard — whether you're a buyer or vendor.</p>
           <span class="count-number">06</span>
         </div>
       </div>

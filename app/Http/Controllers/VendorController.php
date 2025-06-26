@@ -10,6 +10,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Announcement;
 use Carbon\Carbon;
+use App\Models\Booking;
 
 
 class VendorController extends Controller
@@ -150,5 +151,11 @@ class VendorController extends Controller
 
         return redirect('/vendor/profile')->with('success', 'Profile updated successfully!');
     }
+    public function schedules()
+    {
+        $announcements = Announcement::orderBy('start_date', 'asc')->get();
+        return view('vendor.schedules', compact('announcements'));
+    }
+    
 }
 

@@ -46,7 +46,12 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link" href="{{ url('/buyer/explore-products') }}">
-            <i class="lni-cart-full"></i> Explore Flea Market
+            <i class="lni-cart-full"></i> Explore Products
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url('/buyer/schedules') }}">
+            <i class="lni-bullhorn"></i>Market Schedules
           </a>
         </li>
         <li class="nav-item">
@@ -114,7 +119,7 @@
       <div class="col-lg-3 col-md-6 col-xs-12">
         <ul>
           <li><i class="lni-map-marker"></i></li>
-          <li><span><b>Venue</b> Strathmore University</span></li> <!-- updated -->
+          <li><span><b>Venue</b> {{$announcement->venue}}</span></li> <!-- updated -->
         </ul>
       </div>
       <div class="col-lg-3 col-md-6 col-xs-12">

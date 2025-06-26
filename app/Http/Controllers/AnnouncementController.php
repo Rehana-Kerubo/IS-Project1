@@ -24,6 +24,9 @@ class AnnouncementController extends Controller
             'description' => 'nullable|string',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
+            'venue' => 'required|string|max:100',
+            'time' => 'required|string|max:100',
+            'end_time' => 'required|string|max:100',
         ]);
 
         Announcement::create($request->all());
@@ -50,6 +53,9 @@ class AnnouncementController extends Controller
             'description' => 'nullable|string',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
+            'venue' => 'required|string|max:100',
+            'time' => 'required|string|max:100',
+            'end_time' => 'required|string|max:100',
         ]);
 
         $announcement = Announcement::findOrFail($id);

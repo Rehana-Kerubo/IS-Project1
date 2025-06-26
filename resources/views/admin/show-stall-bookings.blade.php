@@ -8,7 +8,7 @@
         <h2 class="mb-0" style="color:rgb(3, 110, 198);">{{ $announcement->title }} Flea Market</h2>
         <p class="card-text text-muted">{{ $announcement->start_date }} to {{ $announcement->end_date }}</p>
         </div>
-            @if($expiredVendors->count() > 0)
+        @if($stallPayments->count() > 0)
             <form action="{{ route('admin.unverifyExpiredVendors') }}" method="POST">
                 @csrf
                 <button class="btn btn-warning">Unverify All</button>
@@ -18,7 +18,7 @@
          @endif
         </div>
 
-    <div class="card shadow">
+    <div class="card shadow" style="width: 900px; margin: 0 auto;">
         <div class="card-body table-responsive">
         <table class="table table-striped mb-0">
                         <thead class="table-light">

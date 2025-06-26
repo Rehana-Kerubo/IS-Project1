@@ -27,7 +27,8 @@
                             <th>Description</th>
                             <th>Start Date</th>
                             <th>End Date</th>
-                            <th>Posted On</th>
+                            <th>Venue</th>
+                            <th>Time</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -39,7 +40,9 @@
                                 <td>{{ Str::limit($announcement->description, 50) }}</td>
                                 <td>{{ $announcement->start_date }}</td>
                                 <td>{{ $announcement->end_date }}</td>
-                                <td>{{ $announcement->created_at->format('M d, Y') }}</td>
+                                <td>{{ $announcement->venue }}</td>
+                                <td>{{ $announcement->time }} - {{ $announcement->end_time }}</td>
+                                
                                 <td>
                                     <a href="{{ route('admin.announcements.edit', $announcement->announcement_id) }}" class="btn btn-sm btn-warning">Edit</a>
 

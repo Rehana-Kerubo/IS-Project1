@@ -63,13 +63,7 @@ class StallPaymentController extends Controller
         ->where('announcement_id', $announcement->announcement_id)
         ->get();
 
-    // Get expired vendors for this announcement only
-    $expiredVendors = Vendor::where('status', 'verified')
-        ->where('verified_until', '<', Carbon::now())
-        ->whereIn('vendor_id', $stallPayments->pluck('vendor_id'))
-        ->get();
-
-    return view('admin.show-stall-bookings', compact('announcement', 'stallPayments', 'expiredVendors'));
+    return view('admin.show-stall-bookings', compact('announcement', 'stallPayments'));
 }
     public function verifyVendor(Request $request, Vendor $vendor)
     {
@@ -85,7 +79,6 @@ class StallPaymentController extends Controller
     public function unverifyExpiredVendors()
     {
         Vendor::where('status', 'verified')
-            ->where('verified_until', '<', Carbon::now())
             ->update(['status' => 'unverified']);
 
         return back()->with('success', 'Expired vendor verifications revoked.');

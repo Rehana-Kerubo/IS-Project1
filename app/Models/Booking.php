@@ -8,6 +8,9 @@ use App\Models\Product;
 
 class Booking extends Model
 {
+    protected $primaryKey = 'id';
+    protected $table = 'bookings';
+
     protected $fillable = [
         'buyer_id',
         'product_id',
@@ -25,4 +28,9 @@ class Booking extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+    public function vendor()
+{
+    return $this->belongsTo(Vendor::class, 'vendor_id', 'vendor_id');
+}
+
 }
