@@ -25,6 +25,21 @@
         </div>
 
         <div class="mb-3">
+            <label for="venue" class="form-label">Venue <span class="text-danger">*</span></label>
+            <input type="text" name="venue" id="venue" maxlength="100" class="form-control" required value="{{ old('venue', $announcement->venue) }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="time" class="form-label">Start Time <span class="text-danger">*</span></label>
+            <input type="time" name="time" id="time" maxlength="100" class="form-control" required value="{{ old('time', $announcement->time) }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="end_time" class="form-label">End Time <span class="text-danger">*</span></label>
+            <input type="time" name="end_time" id="end_time" maxlength="100" class="form-control" required value="{{ old('end_time', $announcement->end_time) }}">
+        </div>
+
+        <div class="mb-3">
             <label for="description" class="form-label">Description (optional)</label>
             <textarea name="description" id="description" rows="4" class="form-control">{{ old('description', $announcement->description) }}</textarea>
         </div>
