@@ -13,6 +13,9 @@ class Announcement extends Model
         'description',
         'start_date',
         'end_date',
+        'venue',
+        'time',
+        'end_time',
     ];
 
     public function stallPayments()

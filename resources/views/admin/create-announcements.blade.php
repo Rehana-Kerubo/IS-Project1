@@ -28,6 +28,21 @@
             <textarea name="description" id="description" rows="4" class="form-control">{{ old('description') }}</textarea>
         </div>
 
+        <div class="mb-3">
+            <label for="venue" class="form-label">Venue <span class="text-danger">*</span></label>
+            <input type="text" name="venue" id="venue" maxlength="100" class="form-control" required value="{{ old('venue') }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="time" class="form-label">Start Time <span class="text-danger">*</span></label>
+            <input type="time" name="time" id="time" maxlength="100" class="form-control" required value="{{ old('time') }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="end_time" class="form-label">End Time <span class="text-danger">*</span></label>
+            <input type="time" name="end_time" id="end_time" maxlength="100" class="form-control" required value="{{ old('end_time') }}">
+        </div>
+
         @php
             $today = date('Y-m-d');
         @endphp
@@ -42,6 +57,8 @@
                 <input type="date" name="end_date" id="end_date" class="form-control" required min="{{ $today }}" required value="{{ old('end_date') }}">
             </div>
         </div>
+
+        
         
         <div class="d-flex justify-content-between">
             <a href="{{ route('admin.announcements.index') }}" class="btn btn-secondary">Cancel</a>
