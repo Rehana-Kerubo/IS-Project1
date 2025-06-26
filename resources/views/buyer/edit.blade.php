@@ -37,7 +37,7 @@
                 <input type="text" name="phone_number" class="form-control" placeholder="Enter your phone number" value="{{ Auth::guard('buyer')->user()->phone_number }}">
             </div>
 
-            <button type="submit" class="edit-btn">Save Changes</button>
+            <button type="submit" class="edit-btn" style="width: 100%;">Save Changes</button>
         </form>
         </div>
     </div>
