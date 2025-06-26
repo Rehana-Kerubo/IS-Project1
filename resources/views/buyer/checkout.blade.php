@@ -135,6 +135,15 @@ input {
   const mpesaModal = document.getElementById('mpesaPrompt');
   const confirmPinBtn = document.getElementById('confirmPinBtn');
   const checkoutForm = document.getElementById('checkoutForm');
+  const quantityInput = document.getElementById('quantity');
+  const price = parseFloat(document.getElementById('price').innerText);
+  const totalDisplay = document.getElementById('total');
+
+  quantityInput?.addEventListener('input', () => {
+    const qty = parseInt(quantityInput.value) || 1;
+    const total = price * qty ;
+    totalDisplay.innerText = Math.round(total);
+  });
 
   payNowBtn?.addEventListener('click', () => {
     mpesaModal.style.display = 'flex';
