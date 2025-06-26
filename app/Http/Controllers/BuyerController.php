@@ -136,6 +136,11 @@ public function bookProduct(Request $request)
     return view('buyer.booking-checkout', compact('product', 'buyer'));
 }
 
+public function schedules()
+{
+    $announcements = Announcement::orderBy('start_date', 'asc')->get();
+    return view('buyer.schedules', compact('announcements'));
+}
 
 
 

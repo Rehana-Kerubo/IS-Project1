@@ -27,8 +27,8 @@ class ProductController extends Controller
 
         $buyer = Auth::user();
 
-// Check if buyer has vendor profile
-$vendor = Vendor::where('buyer_id', $buyer->buyer_id)->first();
+        // Check if buyer has vendor profile
+        $vendor = Vendor::where('buyer_id', $buyer->buyer_id)->first();
 
         // Upload image
         $imagePath = $request->file('image')->store('products', 'public');
