@@ -114,13 +114,7 @@ Route::middleware(['auth:buyer'])->group(function () {
     Route::delete('/vendor/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 });
 
-// Route::get('/vendor/book-stall', function() {
-//     return view('/vendor/book-stall');
-// });
-// Route::middleware(['auth:buyer'])->group(function () {
-//     Route::get('/vendor/book-stall', [StallPaymentController::class, 'create'])->name('vendor.book-stall');
-//     Route::post('/vendor/book-stall', [StallPaymentController::class, 'store'])->name('vendor.book-stall');
-// });
+
 // Show available flea markets (announcements)
 Route::get('/vendor/book-stall', [StallPaymentController::class, 'index'])->name('stall.select');
 
