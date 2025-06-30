@@ -12,6 +12,13 @@
         height: 200px;
         object-fit: cover;
     }
+    .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
 </style>
 
 <!-- @if ($bookedProducts->count()) -->
@@ -34,6 +41,18 @@
                                 {{ $booking->commitment_fee_paid ? 'Deposit Paid' : 'No Deposit Yet' }}
                             </span>
                         </p>
+                          
+                        <div class="mt-auto text-right">
+                            <form class="delete-booking-form" data-id="{{ $booking->id }}" method="POST">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-outline-danger btn-sm">
+        Delete Booking ❌
+    </button>
+</form>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -47,3 +66,57 @@
 <!-- @endif -->
 
 @endsection
+<!-- SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteForms = document.querySelectorAll('.delete-booking-form');
+
+        deleteForms.forEach(form => {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Stop normal form submit
+
+                const bookingId = form.getAttribute('data-id');
+                const actionUrl = `/buyer/bookings/${bookingId}`;
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to undo this booking deletion and no refunds will be administered!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#e3342f',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Yes, delete it!',
+                    customClass: {
+                        popup: 'rounded-xl',
+                        confirmButton: 'btn btn-danger',
+                        cancelButton: 'btn btn-secondary'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Create and submit the form manually
+                        const tempForm = document.createElement('form');
+                        tempForm.method = 'POST';
+                        tempForm.action = actionUrl;
+
+                        const csrfInput = document.createElement('input');
+                        csrfInput.type = 'hidden';
+                        csrfInput.name = '_token';
+                        csrfInput.value = '{{ csrf_token() }}';
+
+                        const methodInput = document.createElement('input');
+                        methodInput.type = 'hidden';
+                        methodInput.name = '_method';
+                        methodInput.value = 'DELETE';
+
+                        tempForm.appendChild(csrfInput);
+                        tempForm.appendChild(methodInput);
+                        document.body.appendChild(tempForm);
+                        tempForm.submit();
+                    }
+                });
+            });
+        });
+    });
+</script>
+
