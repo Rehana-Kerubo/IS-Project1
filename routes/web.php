@@ -66,6 +66,8 @@ Route::post('/buyer/bookProduct', [BuyerController::class, 'bookProduct'])->name
 
 
 Route::get('/buyer/b-products', [BookingController::class, 'index'])->name('buyer.b-products.index');
+Route::delete('/buyer/bookings/{id}', [BookingController::class, 'destroy'])->name('buyer.bookings.destroy');
+
 
 Route::get('/buyer/explore-products', [ExploreProductsController::class, 'index'])->name('buyer.explore-products');
 
