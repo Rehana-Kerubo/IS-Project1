@@ -133,6 +133,10 @@ Route::get('/vendor/checkout', [VendorController::class, 'checkout'])->name('ven
 Route::post('/vendor/payment-loader', [VendorController::class, 'paymentLoader'])->name('vendor.payment-loader');
 Route::get('/vendor/payment-success', [VendorController::class, 'paymentSuccess'])->name('vendor.payment.success');
 
+// DARAJA STK PUSH ROUTES
+Route::post('/vendor/stall-stk-initiate', [StallPaymentController::class, 'initiateStkPush'])->name('vendor.stall.stk.initiate');
+Route::post('/vendor/stall-stk-callback', [StallPaymentController::class, 'handleStkCallback'])->name('vendor.stall.stk.callback');
+
 
 // POS pages
 Route::get('/vendor/pos', [VendorPOSController::class, 'index'])->name('vendor.pos');
@@ -194,4 +198,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
 
 
 });
+
+Route::post('/mpesa/callback', [StallPaymentController::class, 'handleMpesaCallback']);
 

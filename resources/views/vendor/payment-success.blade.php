@@ -7,7 +7,7 @@
   <h2>🎉 Payment Successful!</h2>
   <p>
     @if(session('type') === 'stall')
-      Thank you for booking a stall, {{ session('stall_shop') }}!
+      Thank you for booking a stall, <strong>{{ $vendor -> shop_name }}!</strong>
     @else
       Thank you for your purchase.
     @endif
@@ -15,8 +15,8 @@
 
   <div class="invoice-details">
     @if(session('type') === 'stall')
-      <p><strong>Booking For:</strong> {{ session('stall_shop') }}</p>
-      <p><strong>Amount Paid:</strong> KSh {{ session('total') }}</p>
+      <p><strong>Booking For:</strong> {{ $announcement -> title }} Flea Market</p>
+      <p><strong>Amount Paid:</strong> KSh 1.00 </p>
       <p><strong>Booking Date:</strong> {{ \Carbon\Carbon::now()->toDateString() }}</p>
       <p>Please wait for the Admins to confirm your booking.You will be verified soon.</p>
       <p>Thank you for your Patience</p>
