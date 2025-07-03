@@ -110,7 +110,7 @@
         // Optionally poll for payment confirmation or redirect after a delay
         setTimeout(() => {
           window.location.href = "{{ route('vendor.stall.payment.success') }}";
-        }, 8000);
+        }, 10000);
       } else {
         mpesaStatus.innerText = data.error || 'Failed to initiate payment.';
         payNowBtn.disabled = false;
