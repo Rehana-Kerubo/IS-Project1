@@ -29,6 +29,38 @@
             {{ ucfirst(Auth::guard('buyer')->user()->vendor->status) }}
         </span>
     </div>
+    @php
+        use App\Models\StallPayment;
+        use App\Models\Announcement;
+
+        $vendor = Auth::guard('buyer')->user()->vendor;
+        $stallNumber = 'Not assigned';
+        $eventName = null;
+
+        if ($vendor) {
+            $payment = StallPayment::where('vendor_id', $vendor->vendor_id)
+                ->whereNotNull('stall_number')
+                ->latest('updated_at')
+                ->first();
+
+            if ($payment) {
+                $stallNumber = $payment->stall_number;
+                $eventName = $payment->announcement?->title;
+            }
+        }
+    @endphp
+
+<div class="mb-3">
+    <label class="block" style="font-weight: 600;">Shop Number</label><br>
+    <span class="badge {{ $stallNumber !== 'Not assigned' ? 'bg-success' : 'bg-warning' }}">
+        {{ $stallNumber }}
+    </span>
+    @if ($eventName)
+        <p class="block" style="font-weight: 600;"><small>For event: {{ $eventName }}</small></p>
+    @endif
+</div>
+
+
 
     <button type="submit" class="btn btn-primary px-4" style="background-color: #07BEB8; border-color: #07BEB8; width: 100%;">Update</button>
 </form>

@@ -41,6 +41,7 @@
                                         <form action="{{ route('admin.verifyVendor', $payment->vendor) }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="announcement_end_date" value="{{ $payment->announcement->end_date }}">
+                                            <input type="hidden" name="announcement_id" value="{{ $payment->announcement->announcement_id }}">
                                             <button type="submit" class="btn btn-success">Verify</button>
                                         </form>
                                     </td>

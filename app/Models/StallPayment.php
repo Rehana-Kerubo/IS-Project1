@@ -18,6 +18,7 @@ class StallPayment extends Model
         'announcement_id',
         'amount_paid',
         'status',
+        'stall_number',
     ];
 
     public function vendor()
