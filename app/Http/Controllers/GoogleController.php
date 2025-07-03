@@ -16,13 +16,13 @@ class GoogleController extends Controller
 
     public function handleGoogleCallback()
     {
-        // ✅ Get user from Google
+        // Get user from Google
         $googleUser = Socialite::driver('google')->user();
 
-        // ✅ Check if the user already exists
+        // Check if the user already exists
         $existingBuyer = Buyer::where('email', $googleUser->getEmail())->first();
 
-        // ✅ Update or create the user
+        // Update or create the user
         $buyer = Buyer::updateOrCreate(
             ['email' => $googleUser->getEmail()],
             [
@@ -32,19 +32,19 @@ class GoogleController extends Controller
             ]
         );
 
-        // ✅ Log them in
+        // Log them in
         Auth::guard('buyer')->login($buyer);
 
-        // ✅ Route based on role
+        // Route based on role
         if ($buyer->role === 'vendor') {
             return redirect('/vendor/dashboard')->with('success', 'Welcome back, Vendor!');
         }
 
-        // ✅ Ask for phone number if missing
+        //Ask for phone number if missing
         if (is_null($buyer->phone_number)) {
             return redirect('/buyer/edit')->with('info', 'Please update your phone number to continue.');
         }
 
-        return redirect('/buyer/view-acc')->with('success', 'Logged in successfully!');
+        return redirect('/buyer/landing')->with('success', 'Logged in successfully!');
     }
 }
