@@ -59,6 +59,8 @@ Route::get('/buyer/checkout', [BuyerController::class, 'checkout'])->name('buyer
 
 Route::post('/buyer/payment-loader', [BuyerController::class, 'paymentLoader'])->name('buyer.payment-loader');
 Route::get('/buyer/payment-success', [BuyerController::class, 'paymentSuccess'])->name('buyer.payment.success');
+Route::get('/buyer/download-receipt', [BuyerController::class, 'downloadReceipt'])->name('buyer.receipt.download');
+
 
 Route::middleware(['auth:buyer'])->group(function () {
     Route::get('/buyer/be-vendor', [VendorController::class, 'create'])->name('buyer.be-vendor');
