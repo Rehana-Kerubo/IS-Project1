@@ -5,16 +5,25 @@
 @section('content')
 <div class="invoice">
   <h2>🎉 Payment Successful!</h2>
-  <p>Thank you for your purchase.</p>
+  <p>Thank you for your {{ session('is_booking') ? 'booking' : 'purchase' }}.</p>
 
   <div class="invoice-details">
     <p><strong>Product:</strong> {{ session('product_name') }}</p>
     <p><strong>Quantity:</strong> {{ session('quantity') }}</p>
     <p><strong>Total Paid:</strong> KSh {{ session('total') }}</p>
-    <p><strong>Pickup Date:</strong> {{ session('pickup_date') }}</p>
+    <!-- <p><strong>Pickup Date:</strong> {{ session('pickup_date') }}</p> -->
+
+    @if(session('is_booking'))
+      <p><strong>Total Product Price:</strong> KSh {{ session('full_price') }}</p>
+      <p><strong>Remaining Balance:</strong> KSh {{ session('full_price') - session('total') }}</p>
+      <p><strong>Shop Name:</strong> {{ session('shop_name') }}</p>
+      <p><strong>Stall Number:</strong> {{ session('stall_number') }}</p>
+    @endif
   </div>
 
   <a href="{{ url('/buyer/landing') }}" class="btn">Back to Shopping</a>
+  <a href="{{ route('buyer.receipt.download') }}" class="btn" >Download Receipt</a>
+
 </div>
 
 <style>
