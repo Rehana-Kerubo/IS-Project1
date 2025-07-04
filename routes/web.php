@@ -19,12 +19,15 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\BuyerLandingController;
 use App\Http\Controllers\ExploreProductsController;
 use App\Http\Controllers\SchedulesController;
+use App\Http\Controllers\ManualAuthController;
 
 Route::get('/', [LandingController::class, 'landing'])->name('landing');
 Route::get('/schedules', [SchedulesController::class, 'index'])->name('schedules');
 Route::get('/login-register', function () {
     return view('login-register');
 });
+Route::post('/login', [ManualAuthController::class, 'login'])->name('login.submit');
+Route::post('/register', [ManualAuthController::class, 'register'])->name('register.submit');
 Route::get('/buyer/landing', function () {
     return view('buyer/landing');
 });
