@@ -10,7 +10,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Announcement;
 use Carbon\Carbon;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BuyerController extends Controller
 {
@@ -97,6 +97,8 @@ public function paymentLoader(Request $request)
         'quantity' => $quantity,
         'total' => round($fee),
         'pickup_date' => now()->addDays(2)->toDateString(),
+        'full_price' => $fullTotal,
+        'is_booking' => $type === 'booking',
     ]);
 
     return view('buyer.payment-loader');
@@ -108,14 +110,33 @@ public function paymentSuccess()
     $buyer = auth('buyer')->user();
 
     if ($type === 'booking') {
-        \App\Models\Booking::create([
-            'buyer_id' => $buyer->buyer_id,
-            'product_id' => session('product_id'),
-            'quantity' => session('quantity'),
-            'status' => 'booked',
-            'commitment_fee_paid' => true,
-        ]);
-    }
+    $booking = \App\Models\Booking::create([
+        'buyer_id' => $buyer->buyer_id,
+        'product_id' => session('product_id'),
+        'quantity' => session('quantity'),
+        'status' => 'booked',
+        'commitment_fee_paid' => true,
+    ]);
+
+    // 🧠 Get product + vendor
+    $product = \App\Models\Product::find(session('product_id'));
+    $vendor = $product->vendor;
+
+    // 🧠 Get latest announcement (or pick one however you like)
+    $announcement = \App\Models\Announcement::latest('start_date')->first();
+
+    // 🧠 Get matching stall payment for this vendor + announcement
+    $stallPayment = \App\Models\StallPayment::where('vendor_id', $vendor->vendor_id)
+        ->where('announcement_id', $announcement->id ?? 1) // fallback to 1 if none found
+        ->first();
+
+    // 💾 Save to session
+    session([
+        'is_booking' => true,
+        'shop_name' => $vendor->shop_name ?? 'N/A',
+        'stall_number' => $stallPayment->stall_number ?? 'TBD',
+    ]);
+}
 
     // You can add similar logic later for 'cancellation'
 
@@ -143,6 +164,13 @@ public function schedules()
 }
 
 
+
+
+public function downloadReceipt()
+{
+    $pdf = Pdf::loadView('buyer.receipt-pdf');
+    return $pdf->download('receipt.pdf');
+}
 
 
 }
