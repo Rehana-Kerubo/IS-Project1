@@ -132,6 +132,7 @@ public function paymentSuccess()
 
     // 💾 Save to session
     session([
+        'buyer_name' => $buyer->full_name,
         'is_booking' => true,
         'shop_name' => $vendor->shop_name ?? 'N/A',
         'stall_number' => $stallPayment->stall_number ?? 'TBD',
