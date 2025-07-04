@@ -16,6 +16,7 @@
 <body>
     <div class="invoice">
         <h2 class="title">🎉 Payment Receipt</h2>
+        <p class="field"><strong>Buyer Name:</strong> {{ session('buyer_name') }}</p>
         <p class="field"><strong>Product:</strong> {{ session('product_name') }}</p>
         <p class="field"><strong>Quantity:</strong> {{ session('quantity') }}</p>
         <p class="field"><strong>Total Paid:</strong> KSh {{ number_format(session('total')) }}</p>
