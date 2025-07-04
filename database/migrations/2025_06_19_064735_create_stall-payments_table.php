@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stall-payments', function (Blueprint $table) {
+        Schema::create('stall_payments', function (Blueprint $table) {
             $table->id('booking_id');
             $table->unsignedBigInteger('vendor_id');
             $table->unsignedBigInteger('announcement_id'); // the flea market event
