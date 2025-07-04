@@ -60,7 +60,7 @@
               <i class="lni-store"></i>
             </div>
             <p class="banner-info">Your One-Stop Campus Marketplace</p>
-            <h2 class="head-title">Welcome to MarketMate</h2>
+            <h2 class="head-title">Welcome to Flea Market</h2>
             <p class="banner-desc">
               Book your flea market slots, showcase your products, and manage your sales – all in one place.
             </p>
