@@ -19,11 +19,26 @@
 
     <!-- Sign Up Form -->
     <div class="form-container sign-up-container">
-      <form action="#" method="">
+      <form action="{{route('register.submit')}}" method="POST">
+        @csrf
+        @if ($errors->any())
+          <div style="background: #ffe6e6; padding: 10px; border: 1px solid #ff9999; border-radius: 8px; margin-bottom: 10px; color: #cc0000; font-weight: 500;">
+            <ul style="margin: 0; padding-left: 18px;">
+              @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+        @endif
+
+
         <h1>Create Account</h1>
-        <input type="text" placeholder="Name" />
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
+        <input type="text" name="full_name" placeholder="Name" required/>
+        <input type="email" name="email" placeholder="Email" required/>
+        <input type="password" name="password" placeholder="Password" required/>
+        <input type="password" name="password_confirmation" placeholder="Confirm Password" required/>
+        <input type="hidden" name="form_type" value="register">
+
         <button style="width: 100%; border-radius: 30px; text-decoration: none; text-align: center; justify-content: center; margin-top: 8px;">Sign Up</button>
         <div style="text-align: center; margin-top: 10px; margin-bottom: 10px; background: #fff; width: fit-content; padding: 0 10px; margin-left: auto; margin-right: auto; color: #666;">
           or
@@ -55,10 +70,24 @@
 
     <!-- Sign In Form -->
     <div class="form-container sign-in-container">
-      <form action="#" method="#">
+      <form action="{{route('login.submit')}}" method="POST">
+        @csrf
+        @if ($errors->login->any())
+          <div style="background: #ffe6e6; padding: 10px; border: 1px solid #ff9999; border-radius: 8px; margin-bottom: 10px; color: #cc0000; font-weight: 500;">
+            <ul style="margin: 0; padding-left: 18px;">
+              @foreach ($errors->login->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+        @endif
+
+
         <h1>Sign In</h1>
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
+        <input type="email" name="email" placeholder="Email" required/>
+        <input type="password" name="password" placeholder="Password" required/>
+        <input type="hidden" name="form_type" value="login">
+
         <button style="width: 100%; border-radius: 30px; text-decoration: none; text-align: center; justify-content: center; margin-top: 8px;">Sign In</button>
         <div style="text-align: center; margin-top: 10px; margin-bottom: 10px; background: #fff; width: fit-content; padding: 0 10px; margin-left: auto; margin-right: auto; color: #666;">
           or
@@ -107,7 +136,20 @@
 
   <!-- Link your JavaScript file -->
   <!-- <script src="login.js"></script> -->
-  <script src="assets/js/login-register.js"></script>      
+  <script src="assets/js/login-register.js"></script>   
+   <script>
+    window.onload = function () {
+        @if(session('form_type') == 'register')
+            document.getElementById('container').classList.add('right-panel-active');
+        @elseif(session('form_type') == 'login')
+            document.getElementById('container').classList.remove('right-panel-active');
+        @endif
+    };
+</script>
+
+  
+  
+
 
 
 </body>
