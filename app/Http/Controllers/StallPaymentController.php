@@ -69,17 +69,36 @@ class StallPaymentController extends Controller
     }
 
     public function verifyVendor(Request $request, Vendor $vendor)
-    {
-        $vendor->status = 'verified';
+{
+    $announcementId = $request->announcement_id;
 
-        // Optional: store end date for revoking access later
-        $vendor->verified_until = Carbon::parse($request->announcement_end_date);
+    // 1. Find the payment record FIRST
+    $payment = StallPayment::where('vendor_id', $vendor->vendor_id)
+        ->where('announcement_id', $announcementId)
+        ->first();
 
-        $vendor->save();
-
-        return back()->with('success', 'Vendor has been verified until the end of the event.');
+    if (!$payment) {
+        return back()->with('error', 'Vendor has not made a stall payment for this event.');
     }
 
+    // 2. Assign stall number (check for existing assigned ones in this event)
+    $lastStallNumber = StallPayment::where('announcement_id', $announcementId)
+        ->whereNotNull('stall_number')
+        ->max('stall_number');
+
+    $nextStallNumber = ($lastStallNumber ?? 0) + 1;
+
+    $payment->stall_number = $nextStallNumber;
+    $payment->save();
+
+    // 3. Only now verify the vendor
+    $vendor->status = 'verified';
+    $vendor->verified_until = Carbon::parse($request->announcement_end_date);
+    $vendor->save();
+
+    return back()->with('success', "Vendor verified and assigned Stall #{$nextStallNumber}.");
+}
+    
     public function unverifyExpiredVendors()
     {
         Vendor::where('status', 'verified')
@@ -129,7 +148,7 @@ class StallPaymentController extends Controller
 /**
  * Initiate Daraja STK Push
  */
-public function initiateStkPush(Request $request)
+    public function initiateStkPush(Request $request)
     {
         try {
             Log::info('STK Push Initiation Started', $request->all());
