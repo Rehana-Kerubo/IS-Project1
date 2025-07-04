@@ -190,7 +190,7 @@ class StallPaymentController extends Controller
                 'PartyA' => $phone,
                 'PartyB' => $shortcode,
                 'PhoneNumber' => $phone,
-                'CallBackURL' => "https://6e53-102-2-90-40.ngrok-free.app/mpesa/callback",
+                'CallBackURL' => "https://3a25-156-0-232-50.ngrok-free.app/mpesa/callback",
                 'AccountReference' => 'Stall Booking',
                 'TransactionDesc' => 'Flea Market Stall Booking'
             ]);
