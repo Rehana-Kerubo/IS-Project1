@@ -49,12 +49,28 @@ class StallPaymentController extends Controller
     }
     public function admin_index()
     {
-        $events = Announcement::withCount('stallPayments')
-                    ->withSum('stallPayments', 'amount_paid') // sum of all payments for each event
-                    ->orderBy('start_date', 'desc')
-                    ->get();
+        $today = now();
 
-        return view('admin.stall-bookings', compact('events'));
+        $upcomingEvents = Announcement::withSum('stallPayments', 'amount_paid')
+            ->withCount('stallPayments as stall_count')
+            ->where('start_date', '>=', $today)
+            ->orderBy('start_date')
+            ->get();
+    
+        $previousEvents = Announcement::withSum('stallPayments', 'amount_paid')
+            ->withCount('stallPayments as stall_count')
+            ->where('end_date', '<', $today)
+            ->orderByDesc('start_date')
+            ->get();
+
+        return view('admin.stall-bookings', compact('upcomingEvents', 'previousEvents'), [
+            'upcomingEvents' => $upcomingEvents,
+            'previousEvents' => $previousEvents,
+            'upcomingTitles' => $upcomingEvents->pluck('title'),
+            'upcomingTotals' => $upcomingEvents->pluck('stall_payments_sum_amount_paid'),
+            'previousTitles' => $previousEvents->pluck('title'),
+            'previousTotals' => $previousEvents->pluck('stall_payments_sum_amount_paid'),
+        ]);
     }
 
 

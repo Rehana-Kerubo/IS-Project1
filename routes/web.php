@@ -23,6 +23,8 @@ use App\Http\Controllers\ManualAuthController;
 
 Route::get('/', [LandingController::class, 'landing'])->name('landing');
 Route::get('/schedules', [SchedulesController::class, 'index'])->name('schedules');
+Route::get('/schedules/{announcement_id}', [SchedulesController::class, 'show'])->name('schedules.show');
+
 Route::get('/login-register', function () {
     return view('login-register');
 });
@@ -77,8 +79,10 @@ Route::delete('/buyer/bookings/{id}', [BookingController::class, 'destroy'])->na
 Route::get('/buyer/explore-products', [ExploreProductsController::class, 'index'])->name('buyer.explore-products');
 
 Route::get('/buyer/schedules', [BuyerController::class, 'schedules'])->name('buyer.schedules');
+Route::get('/buyer/show-schedules/{announcement_id}', [BuyerController::class, 'show'])->name('buyer.show-schedules');
 
 Route::get('/vendor/schedules', [VendorController::class, 'schedules'])->name('vendor.schedules');
+Route::get('/vendor/show-schedules/{announcement_id}', [VendorController::class, 'show'])->name('vendor.show-schedules');
 Route::get('/vendor/v-landing', [VendorController::class, 'landing'])->name('vendor.landing');
 Route::get('/vendor/dashboard', function() {
     return view('/vendor/dashboard');

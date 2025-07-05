@@ -130,6 +130,16 @@
 
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
+            <a class="nav-link" href="{{ url('/buyer/landing') }}">
+              <i class="lni-home"></i>Home
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('/buyer/schedules') }}">
+              <i class="lni-bullhorn"></i>Market Schedules
+            </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="{{ url('/buyer/view-acc') }}">
             <i class="lni-user"></i> Account
           </a>

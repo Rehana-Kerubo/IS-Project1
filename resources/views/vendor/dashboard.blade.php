@@ -49,16 +49,21 @@
             }
         }
     @endphp
+    @if (Auth::guard('buyer')->user()->vendor->status === 'verified')
+    <div class="mb-4">
+        <label class="fw-semibold d-block mb-1">Shop Number</label>
+        <span class="badge {{ $stallNumber !== 'Not assigned' ? 'bg-success' : 'bg-warning' }}">
+            {{ $stallNumber }}
+        </span>
 
-<div class="mb-3">
-    <label class="block" style="font-weight: 600;">Shop Number</label><br>
-    <span class="badge {{ $stallNumber !== 'Not assigned' ? 'bg-success' : 'bg-warning' }}">
-        {{ $stallNumber }}
-    </span>
-    @if ($eventName)
-        <p class="block" style="font-weight: 600;"><small>For event: {{ $eventName }}</small></p>
+        @if ($eventName)
+            <p class="mt-2 mb-0 text-muted" style="font-weight: 500;">
+                <small>For event: {{ $eventName }}</small>
+            </p>
+        @endif
+    </div>
     @endif
-</div>
+
 
 
 

@@ -145,7 +145,7 @@
 <body>
 <aside>
     <div class="sidebar-header">
-        <a href="{{ url('/buyer/landing') }}" style="color: white; text-decoration: none;" title="Back to Shop">
+        <a href="{{ url()->previous() }}" style="color: white; text-decoration: none;" title="Back to Shop">
             <i class="lni lni-arrow-left"></i>
         </a>
         <h2>Hey {{ Auth::check() ? Auth::user()->full_name : 'Customer' }}🫶🏼</h2>
