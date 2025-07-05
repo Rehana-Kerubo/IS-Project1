@@ -5,6 +5,7 @@
     <title>Admin Panel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.lineicons.com/3.0/lineicons.css">
+    <link rel="stylesheet" type="text/css" href="../assets/fonts/line-icons.css">
     <style>
         body {
             display: flex;
@@ -15,16 +16,10 @@
         aside {
             width: 250px;
             height: 100vh;
-            background-color: #343a40;
-            color: white;
+            background-color:rgb(60, 62, 150);
+            color: #f1f1f1;
             padding: 20px;
             position: fixed;
-        }
-
-        aside h2 {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            text-align: center;
         }
 
         .menu-section {
@@ -34,10 +29,10 @@
         .menu-title {
             font-size: 0.8rem;
             text-transform: uppercase;
-            color: #adb5bd;
+            color:rgb(192, 192, 192);
             margin-bottom: 10px;
             font-weight: bold;
-            border-bottom: 1px solidrgb(166, 173, 181);
+            border-bottom: 1px solid rgb(166, 173, 181);
         }
 
         .menu-link {
@@ -46,12 +41,12 @@
             text-decoration: none;
             padding: 8px 10px;
             border-radius: 6px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             transition: background 0.3s ease;
         }
 
         .menu-link:hover {
-            background-color: #495057;
+            background-color: rgb(72, 74, 180);
         }
 
         main {
@@ -59,12 +54,30 @@
             padding: 40px;
             flex-grow: 1;
         }
+        
+        .admin-header h2 {
+            font-size: 1.5rem;
+            margin: 0;
+            
+        }
+        .admin-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .admin-header i {
+            font-size: 28px;
+        }
     </style>
 </head>
 <body>
 
     <aside>
-        <h2>Admin Panel</h2>
+    <div class="admin-header d-flex align-items-center gap-2">
+    <i class="lni lni-stats-up"></i>
+    <h2>Admin Panel</h2>
+    </div>
 
         <div class="menu-section">
             <div class="menu-title">User Management</div>

@@ -24,9 +24,7 @@
                         <tr>
                             
                             <th>Title</th>
-                            <th>Description</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
+                            <th>Dates</th>
                             <th>Venue</th>
                             <th>Time</th>
                             <th>Actions</th>
@@ -37,9 +35,8 @@
                             <tr>
                                 
                                 <td>{{ $announcement->title }}</td>
-                                <td>{{ Str::limit($announcement->description, 50) }}</td>
-                                <td>{{ $announcement->start_date }}</td>
-                                <td>{{ $announcement->end_date }}</td>
+                                <td>{{ \Carbon\Carbon::parse($announcement->start_date)->format('d F') }} - 
+                                    {{ \Carbon\Carbon::parse($announcement->end_date)->format('d F') }}</td>
                                 <td>{{ $announcement->venue }}</td>
                                 <td>{{ $announcement->time }} - {{ $announcement->end_time }}</td>
                                 
