@@ -42,7 +42,7 @@ class GoogleController extends Controller
 
         //Ask for phone number if missing
         if (is_null($buyer->phone_number)) {
-            return redirect('/buyer/edit')->with('info', 'Please update your phone number to continue.');
+            return redirect('/buyer/landing')->with('info', 'Please visit your account and update your phone number.');
         }
 
         return redirect('/buyer/landing')->with('success', 'Logged in successfully!');
