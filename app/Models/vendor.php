@@ -25,4 +25,10 @@ class Vendor extends Model
     {
         return $this->belongsTo(Buyer::class, 'buyer_id');
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
 }

@@ -21,7 +21,16 @@
 
     <div class="mb-3">
         <label class="block" style="font-weight: 600;">Shop Category</label><br>
-        <input type="text" class="form-control" name="shop_category" value="{{ Auth::guard('buyer')->user()->vendor->shop_category }}">
+        <select name="category_id" class="form-control" required>
+    <option value="">Choose a Category</option>
+    @foreach ($categories as $category)
+        <option value="{{ $category->id }}"
+            {{ Auth::guard('buyer')->user()->vendor->category_id == $category->id ? 'selected' : '' }}>
+            {{ $category->name }}
+        </option>
+    @endforeach
+</select>
+
     </div>
     <div class="mb-3">
         <label class="block" style="font-weight: 600;">Status</label><br>

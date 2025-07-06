@@ -9,6 +9,9 @@ use App\Http\Controllers\StallPaymentController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\VendorPOSController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CategoryController;
+use App\Models\Category;
+
 
 
 use App\Http\Controllers\AdminPasswordController;
@@ -84,8 +87,11 @@ Route::get('/buyer/show-schedules/{announcement_id}', [BuyerController::class, '
 Route::get('/vendor/schedules', [VendorController::class, 'schedules'])->name('vendor.schedules');
 Route::get('/vendor/show-schedules/{announcement_id}', [VendorController::class, 'show'])->name('vendor.show-schedules');
 Route::get('/vendor/v-landing', [VendorController::class, 'landing'])->name('vendor.landing');
-Route::get('/vendor/dashboard', function() {
-    return view('/vendor/dashboard');
+Route::get('/vendor/dashboard', function () {
+    $vendor = Auth::guard('buyer')->user()->vendor;
+    $categories = Category::all(); // ✅ Add this line
+
+    return view('vendor.dashboard', compact('vendor', 'categories'));
 });
 
 Route::get('/vendor/products', function() {
@@ -189,9 +195,9 @@ Route::prefix('admin')->group(function () {
         Route::post('/admin/change-password', [AdminPasswordController::class, 'updatePassword'])->name('admin.password.update');
 
     });
-    Route::get('/admin/vendor-analytics', [AdminAnalyticsController::class, 'vendorAnalytics'])->name('admin.analytics.vendors');
-    Route::get('/admin/buyer-analytics', [AdminAnalyticsController::class, 'buyerAnalytics'])->name('admin.analytics.buyers');
-
+    Route::get('/admin/analytics', [AdminAnalyticsController::class, 'analytics'])->name('admin.analytics');
+    Route::get('/create-category', [CategoryController::class, 'create'])->name('admin.categories.create');
+    Route::post('/create-category', [CategoryController::class, 'store'])->name('admin.categories.store');
 });
 
 

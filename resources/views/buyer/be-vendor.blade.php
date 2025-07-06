@@ -26,15 +26,14 @@
             </div>
 
             <div class="form-group">
-                <label for="shop_category">Shop Category</label>
-                <select name="shop_category" class="form-control" required>
-                    <option value="">-- Select Category --</option>
-                    <option value="Clothing">Clothing</option>
-                    <option value="Accessories">Accessories</option>
-                    <option value="Makeup & Beauty">Makeup & Beauty</option>
-                    <option value="Footwear">Footwear</option>
-                    <option value="Crafts">Crafts</option>
+                <label for="shop_category">Shop Category</label><br>
+                <select for="shop_category" name="category_id" required>
+                    <option value="">Select Category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
                 </select>
+
             </div>
 
             <button type="submit" class="btn btn-primary w-100" style="background-color: #07BEB8; border-color: #07BEB8;"">

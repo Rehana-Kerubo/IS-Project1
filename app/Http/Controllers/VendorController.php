@@ -12,14 +12,16 @@ use App\Models\Announcement;
 use App\Models\AnnouncementImage;
 use Carbon\Carbon;
 use App\Models\Booking;
+use App\Models\Category;
 
 
 class VendorController extends Controller
 {
     public function create()
     {
+        $categories = Category::all();
         // Show the vendor registration form
-        return view('/buyer/be-vendor');
+        return view('/buyer/be-vendor', compact('categories'));
     }
 
 //     public function search(Request $request)
@@ -34,64 +36,58 @@ class VendorController extends Controller
 //     return view('vendor.search', ['results' => $results]);
 // }
 
-    public function store(Request $request)
-    {
-        // Validate incoming request
-        $request->validate([
-            'shop_name' => 'required|string|max:100',
-            'shop_category' => 'required|string|max:100',
-        ]);
-        
-        $user = Auth::guard('buyer')->user();
-        $user->role = 'vendor';
-        $user->save();
+public function store(Request $request)
+{
+    $request->validate([
+        'shop_name' => 'required|string|max:100',
+        'category_id' => 'required|exists:categories,id',
+    ]);
 
-        // Check if the buyer is already registered as a vendor
-        $existing = Vendor::where('buyer_id', Auth::id())->first();
+    $user = Auth::guard('buyer')->user();
+    $user->role = 'vendor';
+    $user->save();
 
-        if ($existing) {
-            return redirect()->back()->with('error', 'You have already registered as a vendor.');
-        }
-
-        // Create the vendor record
-        Vendor::create([
-            'buyer_id' => Auth::id(),
-            'shop_name' => $request->shop_name,
-            'shop_category' => $request->shop_category,
-            // status defaults to 'unverified'
-        ]);
-
-        return redirect('/vendor/dashboard')->with('success', 'Successfully registered as vendor!');
-        
+    // Check if the buyer is already registered as a vendor
+    if (Vendor::where('buyer_id', $user->buyer_id)->exists()) {
+        return redirect()->back()->with('error', 'You have already registered as a vendor.');
     }
+
+    Vendor::create([
+        'buyer_id' => $user->buyer_id,
+        'shop_name' => $request->shop_name,
+        'category_id' => $request->category_id,
+        // status defaults to 'unverified'
+    ]);
+
+    return redirect('/vendor/dashboard')->with('success', 'Successfully registered as vendor!');
+}
+
     //Update vendor details
     public function update(Request $request)
-    {
-        $request->validate([
-            'shop_name' => 'required|string|max:100',
-            'shop_category' => 'required|string|max:100',
-        ]);
+{
+    $request->validate([
+        'shop_name' => 'required|string|max:100',
+        'category_id' => 'required|exists:categories,id',
+    ]);
 
-        $user = Auth::guard('buyer')->user();
+    $user = Auth::guard('buyer')->user();
+    $user->role = 'vendor';
+    $user->save();
 
+    $vendor = $user->vendor;
 
-        // Update buyer's role
-        $user->role = 'vendor';
-        $user->save();
-
-        // Update vendor details
-        $vendor = $user->vendor;
-        
-        if (!$vendor) {
-            return redirect()->back()->with('error', 'You are not registered as a vendor.');
-        }
-
-        $vendor->shop_name = $request->shop_name;
-        $vendor->shop_category = $request->shop_category;
-        $vendor->save();
-
-        return redirect()->back()->with('success', 'Shop details updated successfully!');
+    if (!$vendor) {
+        return redirect()->back()->with('error', 'You are not registered as a vendor.');
     }
+
+    $vendor->shop_name = $request->shop_name;
+    $vendor->category_id = $request->category_id;
+    $vendor->save();
+
+    return redirect()->back()->with('success', 'Shop details updated successfully!');
+}
+
+
     public function landing()
     {
         $announcement = Announcement::where('start_date', '>', Carbon::now())
