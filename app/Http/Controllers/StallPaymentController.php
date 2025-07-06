@@ -11,6 +11,8 @@ use Carbon\Carbon;
 use App\Models\Vendor;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class StallPaymentController extends Controller
 {
@@ -280,5 +282,19 @@ class StallPaymentController extends Controller
 
         return response()->json(['ResultCode' => 0, 'ResultDesc' => 'OK']);
     }
+
+    public function downloadReceipt()
+{
+    $user = Auth::guard('buyer')->user();
+    $vendor = $user->vendor;
+
+    $announcement = session('type') === 'stall' ? Announcement::find(session('announcement_id')) : null;
+
+
+    return Pdf::loadView('vendor.receipt-pdf', [
+        'vendor' => $vendor,
+        'announcement' => $announcement
+    ])->setPaper('A4', 'portrait')->download('vendor-receipt.pdf');
+}
 
 }
