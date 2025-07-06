@@ -27,5 +27,11 @@ class Announcement extends Model
     {
         return $this->stallPayments()->count();
     }
+    public function images()
+{
+    return $this->hasMany(AnnouncementImage::class, 'announcement_id', 'announcement_id');
+}
+
+
 
 }

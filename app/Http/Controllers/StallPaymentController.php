@@ -11,6 +11,8 @@ use Carbon\Carbon;
 use App\Models\Vendor;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class StallPaymentController extends Controller
 {
@@ -49,12 +51,28 @@ class StallPaymentController extends Controller
     }
     public function admin_index()
     {
-        $events = Announcement::withCount('stallPayments')
-                    ->withSum('stallPayments', 'amount_paid') // sum of all payments for each event
-                    ->orderBy('start_date', 'desc')
-                    ->get();
+        $today = now();
 
-        return view('admin.stall-bookings', compact('events'));
+        $upcomingEvents = Announcement::withSum('stallPayments', 'amount_paid')
+            ->withCount('stallPayments as stall_count')
+            ->where('start_date', '>=', $today)
+            ->orderBy('start_date')
+            ->get();
+    
+        $previousEvents = Announcement::withSum('stallPayments', 'amount_paid')
+            ->withCount('stallPayments as stall_count')
+            ->where('end_date', '<', $today)
+            ->orderByDesc('start_date')
+            ->get();
+
+        return view('admin.stall-bookings', compact('upcomingEvents', 'previousEvents'), [
+            'upcomingEvents' => $upcomingEvents,
+            'previousEvents' => $previousEvents,
+            'upcomingTitles' => $upcomingEvents->pluck('title'),
+            'upcomingTotals' => $upcomingEvents->pluck('stall_payments_sum_amount_paid'),
+            'previousTitles' => $previousEvents->pluck('title'),
+            'previousTotals' => $previousEvents->pluck('stall_payments_sum_amount_paid'),
+        ]);
     }
 
 
@@ -264,5 +282,19 @@ class StallPaymentController extends Controller
 
         return response()->json(['ResultCode' => 0, 'ResultDesc' => 'OK']);
     }
+
+    public function downloadReceipt()
+{
+    $user = Auth::guard('buyer')->user();
+    $vendor = $user->vendor;
+
+    $announcement = session('type') === 'stall' ? Announcement::find(session('announcement_id')) : null;
+
+
+    return Pdf::loadView('vendor.receipt-pdf', [
+        'vendor' => $vendor,
+        'announcement' => $announcement
+    ])->setPaper('A4', 'portrait')->download('vendor-receipt.pdf');
+}
 
 }

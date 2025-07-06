@@ -31,50 +31,67 @@
             font-weight: bold;
         }
 
-        .product-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-            padding: 0 15px 50px;
-        }
+        .section-divider {
+          display: flex;
+          align-items: center;
+          text-align: center;
+          margin: 60px 0 30px;
+      }
+      .section-divider span {
+          font-size: 1.6rem;
+          font-weight: 600;
+          padding: 0 20px;
+          color: #004d40;
+          position: relative;
+          background-color: #fff;
+          z-index: 1;
+      }
+      .section-divider::before {
+          content: "";
+          flex-grow: 1;
+          height: 2px;
+          background-color: #07BEB8;
+          margin-right: 20px;
+      }
+      .section-divider::after {
+          content: "";
+          flex-grow: 1;
+          height: 2px;
+          background-color: #07BEB8;
+          margin-left: 20px;
+      }
 
-        #product-card {
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px #07BEB8;
-            padding: 20px;
-            max-width: 800px;
-            width: 100%;
-            max-height: 100%;
-        }
+      .flea-row {
+          padding: 20px 30px;
+          margin-bottom: 30px;
+          background-color: #fff;
+          border-left: 5px solid #07BEB8;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+          border-radius: 8px;
+      }
 
-        #product-card h5 {
-            color: #004d40;
-            margin-bottom: 8px;
-            font-size: 1.5rem;
-        }
-        #product-card h7 {
-            color: #004d40;
-            margin-bottom: 8px;
-            font-size: 1.25rem;
-        }
+      .row-info h5 {
+          color: #004d40;
+          margin-bottom: 10px;
+          font-size: 1.5rem;
+      }
+      .flea-row:hover{
+        background-color:rgba(100, 100, 100, 0.17);
+      }
 
-        #product-card .description {
-            color: #555;
-            font-size: 1rem;
-            margin-bottom: 15px;
-        }
-        .lni-bullhorn{
-          position: absolute;
-          z-index: 1000;
-          left: 25px;
-          top: 10px;
-          font-size: 55px;
-          color: #bababa;
-          rotate: -10deg;
+      .meta {
+          font-size: 1.1rem;
+          color: #004d40;
+          margin-bottom: 6px;
+          font-weight: 500;
+      }
 
-        }
+      .description {
+          font-size: 1rem;
+          color: #555;
+          margin-top: 10px;
+      }
+
 
 
     </style>
@@ -84,57 +101,76 @@
     <header id="header-wrap">
      <!-- Navbar Start -->
 <!-- Navbar -->
+<!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-inverse fixed-top scrolling-navbar custom-gradient-navbar">
-  <div class="container">
-    <a href="/buyer/landing" class="navbar-brand">Flea Market</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
-      <i class="lni-menu"></i>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <form action="{{ url('/buyer/search') }}" method="GET" class="form-inline my-2 my-lg-0 mx-auto">
-        <input class="form-control mr-sm-2" type="search" name="query" placeholder="Search products..." aria-label="Search" required>
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-      </form>
-
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url('/buyer/view-acc') }}">
-            <i class="lni-user"></i> Account
+      <div class="container">
+      <a href="/buyer/landing" class="navbar-brand">Flea Market</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+         <i class="lni-menu"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto w-100 justify-content-end">
+            <li class="nav-item active"><a class="nav-link" href="/buyer/landing"><i class="lni-home"></i>Home</a></li>
+            <!-- <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li> -->
+            <!-- <li class="nav-item"><a class="nav-link" href="#schedules">Schedules</a></li> -->
+            <!-- <li class="nav-item"><a class="nav-link" href="#google-map-area">Contact Us</a></li> -->
+            <!-- <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li> -->
+            <li class="nav-item">
+          <a class="nav-link" href="{{ url('/buyer/explore-products') }}">
+            <i class="lni-cart-full"></i> Explore Products
           </a>
         </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url('/') }}">
-            <i class="lni-exit"></i> Logout
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
+        </ul>
+      </div>
+     </div>
 </nav>
 <h2 class="explore-heading">Explore Flea Market Schedules</h2>
 
-<div class="product-grid">
-  @forelse($announcements as $announcement)
-  <div class="col-lg-4 col-md-6 col-xs-12">
-        <div id="product-card">
-        <i class="lni-bullhorn"></i>
-          <div style="position: relative;top: 30px;padding: 20px;">
-      <h5>{{ $announcement->title }} Flea Market</h5>
-      <h7>Date: {{ $announcement->start_date }} to {{ $announcement->end_date }}</h7>
-      <h7>Venue: {{ $announcement->venue }}</h7><br>
-      <h7>Time: {{ $announcement->time }} - {{ $announcement->end_time }}</h7>
-      <p class="description">{{ $announcement->description }}</p>
-      
-    </div>
-    </div>
+<div class="container mb-5">
+
+  {{-- Upcoming Events --}}
+  <div class="section-divider">
+    <span>Upcoming Flea Markets</span>
+  </div>
+  @forelse($upcomingAnnouncements as $announcement)
+    <div class="flea-row">
+    <a href="{{ route('buyer.show-schedules', $announcement->announcement_id) }}">
+      <div class="row-info">
+        <h5>{{ $announcement->title }} Flea Market</h5>
+        <p class="meta">📅 {{ \Carbon\Carbon::parse($announcement->start_date)->format('d F') }} </p>
+        <p class="meta">📍 {{ $announcement->venue }}</p>
+        <p class="meta">🕒 {{ \Carbon\Carbon::parse($announcement->time)->format('h:i A') }} – {{ \Carbon\Carbon::parse($announcement->end_time)->format('h:i A') }}</p>
+        <p class="description">{{ $announcement->description }}</p>
+      </div>
+    </a>
     </div>
   @empty
-    <p>No flea market schedules available at the moment. Please check back later.</p>
+    <p class="text-center">No upcoming flea markets.</p>
   @endforelse
-</div>
-</div>
+
+  {{-- Previous Events --}}
+  <div class="section-divider mt-5">
+    <span>Previous Flea Markets</span>
+  </div>
+  @forelse($previousAnnouncements as $announcement)
+  <div class="flea-row">
+  <a href="{{ route('buyer.show-schedules', $announcement->announcement_id) }}">
+    <div class="row-info">
+      <h5>{{ $announcement->title }} Flea Market</h5>
+      <p class="meta">📅 {{ \Carbon\Carbon::parse($announcement->start_date)->format('d F') }} – {{ \Carbon\Carbon::parse($announcement->end_date)->format('d F') }}</p>
+      <p class="meta">📍 {{ $announcement->venue }}</p>
+      <p class="meta">🕒 {{ \Carbon\Carbon::parse($announcement->time)->format('h:i A') }} – {{ \Carbon\Carbon::parse($announcement->end_time)->format('h:i A') }}</p>
+      <p class="description">{{ $announcement->description }}</p>
+
+    </div>
+  </a>
+  </div>
+
+
+  @empty
+    <p class="text-center">No previous flea markets.</p>
+  @endforelse
+
 </div>
 </body>
 </html>

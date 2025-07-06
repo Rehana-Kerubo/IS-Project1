@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.announcements.update', $announcement->announcement_id) }}" method="POST" class="p-4 bg-white shadow rounded">
+    <form action="{{ route('admin.announcements.update', $announcement->announcement_id) }}" method="POST" class="p-4 bg-white shadow rounded" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -52,15 +52,25 @@
             <div class="col-md-6 mb-3">
                 <label for="start_date" class="form-label">Start Date <span class="text-danger">*</span></label>
                 <input type="date" name="start_date" id="start_date" class="form-control"
-                    required min="{{ $today }}" value="{{ old('start_date', $announcement->start_date) }}">
+                    required  value="{{ old('start_date', $announcement->start_date) }}">
             </div>
 
             <div class="col-md-6 mb-3">
                 <label for="end_date" class="form-label">End Date <span class="text-danger">*</span></label>
                 <input type="date" name="end_date" id="end_date" class="form-control"
-                    required min="{{ $today }}" value="{{ old('end_date', $announcement->end_date) }}">
+                    required  value="{{ old('end_date', $announcement->end_date) }}">
             </div>
         </div>
+        <div class="mb-3">
+        <label for="images" class="form-label">Add Event Images</label>
+        <input type="file" id="image-input" name="images[]" multiple class="form-control"><br>
+        @foreach ($announcement->images as $image)
+            <img src="{{ asset('storage/' . $image->image_url) }}" alt="Announcement Image" class="img-fluid mb-2" style="max-height: 200px;">
+        @endforeach
+
+        </div>
+        
+        <div id="image-preview" class="d-flex flex-wrap gap-3 mt-3"></div>
 
 
         <div class="d-flex justify-content-between">
@@ -69,4 +79,32 @@
         </div>
     </form>
 </div>
+<script>
+    document.getElementById('image-input').addEventListener('change', function (e) {
+        const preview = document.getElementById('image-preview');
+        preview.innerHTML = ''; 
+
+        const files = e.target.files;
+
+        if (files.length === 0) return;
+
+        Array.from(files).forEach(file => {
+            if (!file.type.startsWith('image/')) return;
+
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const img = document.createElement('img');
+                img.src = event.target.result;
+                img.style.maxHeight = '150px';
+                img.style.marginRight = '10px';
+                img.classList.add('rounded', 'shadow-sm');
+                img.classList.add('img-thumbnail', 'me-2', 'mb-2');
+
+                preview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+</script>
+
 @endsection

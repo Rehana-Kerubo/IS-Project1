@@ -21,7 +21,16 @@
 
     <div class="mb-3">
         <label class="block" style="font-weight: 600;">Shop Category</label><br>
-        <input type="text" class="form-control" name="shop_category" value="{{ Auth::guard('buyer')->user()->vendor->shop_category }}">
+        <select name="category_id" class="form-control" required>
+    <option value="">Choose a Category</option>
+    @foreach ($categories as $category)
+        <option value="{{ $category->id }}"
+            {{ Auth::guard('buyer')->user()->vendor->category_id == $category->id ? 'selected' : '' }}>
+            {{ $category->name }}
+        </option>
+    @endforeach
+</select>
+
     </div>
     <div class="mb-3">
         <label class="block" style="font-weight: 600;">Status</label><br>
@@ -49,16 +58,21 @@
             }
         }
     @endphp
+    @if (Auth::guard('buyer')->user()->vendor->status === 'verified')
+    <div class="mb-4">
+        <label class="fw-semibold d-block mb-1">Shop Number</label>
+        <span class="badge {{ $stallNumber !== 'Not assigned' ? 'bg-success' : 'bg-warning' }}">
+            {{ $stallNumber }}
+        </span>
 
-<div class="mb-3">
-    <label class="block" style="font-weight: 600;">Shop Number</label><br>
-    <span class="badge {{ $stallNumber !== 'Not assigned' ? 'bg-success' : 'bg-warning' }}">
-        {{ $stallNumber }}
-    </span>
-    @if ($eventName)
-        <p class="block" style="font-weight: 600;"><small>For event: {{ $eventName }}</small></p>
+        @if ($eventName)
+            <p class="mt-2 mb-0 text-muted" style="font-weight: 500;">
+                <small>For event: {{ $eventName }}</small>
+            </p>
+        @endif
+    </div>
     @endif
-</div>
+
 
 
 

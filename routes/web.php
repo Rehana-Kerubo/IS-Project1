@@ -9,6 +9,9 @@ use App\Http\Controllers\StallPaymentController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\VendorPOSController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CategoryController;
+use App\Models\Category;
+
 
 
 use App\Http\Controllers\AdminPasswordController;
@@ -23,6 +26,8 @@ use App\Http\Controllers\ManualAuthController;
 
 Route::get('/', [LandingController::class, 'landing'])->name('landing');
 Route::get('/schedules', [SchedulesController::class, 'index'])->name('schedules');
+Route::get('/schedules/{announcement_id}', [SchedulesController::class, 'show'])->name('schedules.show');
+
 Route::get('/login-register', function () {
     return view('login-register');
 });
@@ -77,11 +82,16 @@ Route::delete('/buyer/bookings/{id}', [BookingController::class, 'destroy'])->na
 Route::get('/buyer/explore-products', [ExploreProductsController::class, 'index'])->name('buyer.explore-products');
 
 Route::get('/buyer/schedules', [BuyerController::class, 'schedules'])->name('buyer.schedules');
+Route::get('/buyer/show-schedules/{announcement_id}', [BuyerController::class, 'show'])->name('buyer.show-schedules');
 
 Route::get('/vendor/schedules', [VendorController::class, 'schedules'])->name('vendor.schedules');
+Route::get('/vendor/show-schedules/{announcement_id}', [VendorController::class, 'show'])->name('vendor.show-schedules');
 Route::get('/vendor/v-landing', [VendorController::class, 'landing'])->name('vendor.landing');
-Route::get('/vendor/dashboard', function() {
-    return view('/vendor/dashboard');
+Route::get('/vendor/dashboard', function () {
+    $vendor = Auth::guard('buyer')->user()->vendor;
+    $categories = Category::all(); // ✅ Add this line
+
+    return view('vendor.dashboard', compact('vendor', 'categories'));
 });
 
 Route::get('/vendor/products', function() {
@@ -140,9 +150,13 @@ Route::get('/vendor/checkout', [VendorController::class, 'checkout'])->name('ven
 Route::post('/vendor/payment-loader', [VendorController::class, 'paymentLoader'])->name('vendor.payment-loader');
 Route::get('/vendor/payment-success', [VendorController::class, 'paymentSuccess'])->name('vendor.payment.success');
 
+
 // DARAJA STK PUSH ROUTES
 Route::post('/vendor/stall-stk-initiate', [StallPaymentController::class, 'initiateStkPush'])->name('vendor.stall.stk.initiate');
 Route::post('/vendor/stall-stk-callback', [StallPaymentController::class, 'handleStkCallback'])->name('vendor.stall.stk.callback');
+
+Route::get('/vendor/download-receipt', [StallPaymentController::class, 'downloadReceipt'])->name('vendor.receipt.download');
+
 
 
 // POS pages
@@ -185,9 +199,9 @@ Route::prefix('admin')->group(function () {
         Route::post('/admin/change-password', [AdminPasswordController::class, 'updatePassword'])->name('admin.password.update');
 
     });
-    Route::get('/admin/vendor-analytics', [AdminAnalyticsController::class, 'vendorAnalytics'])->name('admin.analytics.vendors');
-    Route::get('/admin/buyer-analytics', [AdminAnalyticsController::class, 'buyerAnalytics'])->name('admin.analytics.buyers');
-
+    Route::get('/admin/analytics', [AdminAnalyticsController::class, 'analytics'])->name('admin.analytics');
+    Route::get('/create-category', [CategoryController::class, 'create'])->name('admin.categories.create');
+    Route::post('/create-category', [CategoryController::class, 'store'])->name('admin.categories.store');
 });
 
 

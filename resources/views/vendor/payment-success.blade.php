@@ -29,6 +29,7 @@
   </div>
 
   <a href="{{ url('/vendor/dashboard') }}" class="btn">Back to Dashboard</a>
+  <a href="{{ route('vendor.receipt.download') }}" class="btn" >Download Receipt</a>
 </div>
 
 <style>

@@ -12,7 +12,7 @@
     <div class="row mb-4">
         <div class="col-md-4">
             <div class="card shadow p-3">
-                <h5 class="text-muted">Total Revenue</h5>
+                <h5 class="text-muted">Total Vendor Revenue</h5>
                 <h3 class="text-success">KSh {{ number_format($totalRevenue, 2) }}</h3>
             </div>
         </div>
@@ -22,7 +22,14 @@
                 <h3 class="text-primary">{{ $vendorCount }}</h3>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="card shadow p-3">
+                <h5 class="text-muted">Total Buyers</h5>
+                <h3 class="text-primary">{{ $buyerCount }}</h3>
+            </div>
+        </div>
     </div>
+</div>
 
     <div class="card shadow">
         <div class="card-header">
@@ -50,7 +57,7 @@
                 <td>{{ $vendor->email }}</td>
                 <td>{{ $vendor->phone_number }}</td>
                 <td>{{ $vendor->shop_name }}</td>
-                <td>{{ $vendor->shop_category }}</td>
+                <td>{{ $vendor->category_name ?? 'Uncategorized' }}</td>
                 <td>
                     <span class="badge {{ $vendor->status === 'verified' ? 'bg-success' : 'bg-warning' }}">
                         {{ ucfirst($vendor->status) }}

@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.announcements.store') }}" method="POST" class="p-4 bg-white shadow rounded">
+    <form action="{{ route('admin.announcements.store') }}" method="POST" class="p-4 bg-white shadow rounded" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">
@@ -57,6 +57,14 @@
                 <input type="date" name="end_date" id="end_date" class="form-control" required min="{{ $today }}" required value="{{ old('end_date') }}">
             </div>
         </div>
+        <div class="mb-3">
+    <label for="images">Upload Event Venue</label>
+    <input type="file" id="image-input" name="images[]" multiple class="form-control">
+</div>
+
+<!-- Image Previews Will Go Here -->
+<div id="image-preview" class="d-flex flex-wrap gap-3 mt-3"></div>
+
 
         
         
@@ -66,4 +74,30 @@
         </div>
     </form>
 </div>
+<script>
+    document.getElementById('image-input').addEventListener('change', function (e) {
+        const preview = document.getElementById('image-preview');
+        preview.innerHTML = ''; // Clear previous previews
+
+        const files = e.target.files;
+
+        if (files.length === 0) return;
+
+        Array.from(files).forEach(file => {
+            if (!file.type.startsWith('image/')) return;
+
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const img = document.createElement('img');
+                img.src = event.target.result;
+                img.style.maxHeight = '150px';
+                img.style.marginRight = '10px';
+                img.classList.add('rounded', 'shadow-sm');
+                preview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+</script>
+
 @endsection

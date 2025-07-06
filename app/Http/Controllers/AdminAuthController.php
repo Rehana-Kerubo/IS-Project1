@@ -24,7 +24,7 @@ class AdminAuthController extends Controller
             return redirect()->route('admin.password.change');
         }
 
-        return redirect()->intended('/admin/profile');
+        return redirect()->route('admin.analytics');
     }
 
     // Handle failed login

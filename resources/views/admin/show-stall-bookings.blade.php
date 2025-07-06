@@ -23,6 +23,7 @@
         <table class="table table-striped mb-0">
                         <thead class="table-light">
                             <tr>
+                                <th>Stall Number</th>
                                 <th>Shop Name</th>
                                 <th>Amount Paid</th>
                                 <th>Paid On</th>
@@ -33,9 +34,10 @@
                         <tbody>
                             @foreach($stallPayments as $payment)
                                 <tr>
+                                    <td>{{ $payment->stall_number }}</td>
                                     <td>{{ $payment->vendor->shop_name }}</td>
                                     <td>KES {{ number_format($payment->amount_paid, 2) }}</td>
-                                    <td>{{ $payment->created_at->format('d M Y') }}</td>
+                                    <td>{{ $payment->created_at->format('d F') }}</td>
                                     <td>{{ $payment->vendor->status }}</td>
                                     <td>
                                         <form action="{{ route('admin.verifyVendor', $payment->vendor) }}" method="POST">
