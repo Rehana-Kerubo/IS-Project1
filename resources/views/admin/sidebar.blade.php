@@ -80,9 +80,9 @@
     </div>
 
         <div class="menu-section">
-            <div class="menu-title">User Management</div>
-            <a href="{{ route('admin.analytics.buyers') }}" class="menu-link">Buyers</a>
-            <a href="{{ route('admin.analytics.vendors') }}" class="menu-link">Vendors</a>
+            <div class="menu-title">Vendor Management</div>
+            <a href="{{ route('admin.analytics') }}" class="menu-link">Analytics</a>
+            <a href="{{ route('admin.categories.create') }}" class="menu-link">Categories</a>
         </div>
 
         <div class="menu-section">

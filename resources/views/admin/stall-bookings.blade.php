@@ -80,12 +80,12 @@
       datasets: [
         {
           label: 'Upcoming Events',
-          backgroundColor: 'rgb(199, 216, 7)',
+          backgroundColor: '#28a745',
           data: @json($upcomingTotals),
         },
         {
           label: 'Previous Events',
-          backgroundColor: 'rgb(59, 216, 7)',
+          backgroundColor: '#007bff',
           data: @json($previousTotals),
         }
       ]
